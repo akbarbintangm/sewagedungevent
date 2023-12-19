@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('histories', function (Blueprint $table) {
-            $table->bigInteger();
+            $table->bigIncrements('id');
             $table->bigInteger('id_transaction')->nullable();
             $table->string('name_history');
             $table->text('content_history');
