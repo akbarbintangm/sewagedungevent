@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+	<link href="{{ asset('/img/apple-icon.png') }}" rel="apple-touch-icon" sizes="76x76">
+	<link href="{{ asset('/img/favicon.png') }}" rel="icon" type="image/png">
+	<title>
+		@yield('title') - Sewa Gedung
+	</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<link href="{{ asset('/css/nucleo-icons.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/font-awesome.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/argon-design-system.css?v=1.2.2') }}" rel="stylesheet" />
+	@yield('meta-link')
+</head>
+
+<body class="landing-page">
+	@include('layouts.user.navbar')
+	<div class="wrapper">
+		@yield('content')
+		<br /><br />
+		@include('layouts.user.footer')
+	</div>
+	@yield('script')
+	<script src="{{ asset('/js/core/jquery.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/core/popper.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/bootstrap-switch.js') }}"></script>
+	<script src="{{ asset('/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/moment.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/datetimepicker.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}" type="text/javascript"></script>
+	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+</body>
+
+</html>
