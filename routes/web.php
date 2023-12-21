@@ -4,7 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
+Use App\Http\Controllers\HistoryController;
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\Facility;
+use App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -39,26 +44,175 @@ Route::controller(RegisterController::class)->group(function () {
 });
 /* User Page without Login */
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index')
-        ->name('landing')
-        ->middleware('guest');
+    Route::get('/', 'indexWithoutLoginPageUser')->name('landingWithoutLoginPage:user')->middleware('guest');
+    Route::get('/building', 'buildingWithoutLoginPageUser')->name('buildingWithoutLoginPage:user')->middleware('guest');
 });
-/* Unused */
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/dashboard', 'index')->name('dashboard');
-});
-
 /* Middleware */
 Route::middleware(['auth'])->group(function () {
+    /* Histories API for All User with their Login Info */
+    Route::controller(HistoryController::class)->group(function () {
+        Route::get('/notifications', 'notifications')->name('notifications');
+    });
     /* Admin Page */
-    /* Dashboard */
-    // Route::controller(HomeController::class)->group(function () {
-    //     Route::get('/dashboard', 'index')->name('dashboard');
-    // });
-
+    Route::group(['prefix' => 'admin'], function () {
+        /* Dashboard */
+        Route::controller(HomeController::class)->group(function () {
+            Route::get('/', 'dashboardPageAdmin')->name('dashboardPage:admin');
+        });
+        /* Master Building */
+        Route::controller(BuildingController::class)->group(function () {
+            /* Admin */
+            Route::get('/building', 'buildingPageAdmin')->name('buildingPage:admin');
+            Route::get('/building/dashboard', 'dashboardBuildingAdmin')->name('dashboardBuilding:admin');
+            Route::get('/building/list', 'listBuildingAdmin')->name('listBuilding:admin');
+            Route::get('/building/detail', 'detailBuildingAdmin')->name('detailBuilding:admin');
+            Route::post('/building/add', 'addBuildingAdmin')->name('addBuilding:admin');
+            Route::post('/building/update', 'updateBuildingAdmin')->name('updateBuilding:admin');
+            Route::get('/building/delete', 'deleteBuildingAdmin')->name('deleteBuilding:admin');
+            Route::get('/building/verify', 'verifyBuildingAdmin')->name('verifyBuilding:admin');
+        });
+        /* Master Facility */
+        Route::controller(FacilityController::class)->group(function () {
+            Route::get('/facility', 'facilityPageAdmin')->name('facilityPage:admin');
+            Route::get('/facility/dashboard', 'dashboardFacilityAdmin')->name('dashboardFacility:admin');
+            Route::get('/facility/list', 'listFacilityAdmin')->name('listFacility:admin');
+            Route::get('/facility/detail', 'detailFacilityAdmin')->name('detailFacility:admin');
+            Route::post('/facility/add', 'addFacilityAdmin')->name('addFacility:admin');
+            Route::post('/facility/update', 'updateFacilityAdmin')->name('updateFacility:admin');
+            Route::get('/facility/delete', 'deleteFacilityAdmin')->name('deleteFacility:admin');
+            Route::get('/facility/verify', 'verifyFacilityAdmin')->name('verifyFacility:admin');
+        });
+        /* Transaction */
+        Route::controller(TransactionController::class)->group(function () {
+            /* Order */
+            Route::get('/order', 'orderPageAdmin')->name('orderPage:admin');
+            Route::get('/order/{id}/detail', 'orderDetailPageAdmin')->name('orderDetailPage:admin');
+            Route::get('/order/dashboard', 'dashboardOrderAdmin')->name('dashboardOrder:admin');
+            Route::get('/order/list', 'listOrderAdmin')->name('listOrder:admin');
+            Route::get('/order/detail', 'detailOrderAdmin')->name('detailOrder:admin');
+            // Route::post('/order/add', 'addOrderAdmin')->name('addOrder:admin');
+            Route::post('/order/update', 'updateOrderAdmin')->name('updateOrder:admin');
+            Route::get('/order/delete', 'deleteOrderAdmin')->name('deleteOrder:admin');
+            /* Transaction History */
+            Route::get('/transaction', 'transactionPageAdmin')->name('transactionPage:admin');
+            Route::get('/transaction/{id}/detail', 'transactionDetailPageAdmin')->name('transactionDetailPage:admin');
+            Route::get('/transaction/dashboard', 'dashboardTransactionAdmin')->name('dashboardTransaction:admin');
+            Route::get('/transaction/list', 'listTransactionAdmin')->name('listTransaction:admin');
+            Route::get('/transaction/detail', 'detailTransactionAdmin')->name('detailTransaction:admin');
+            // Route::post('/transaction/add', 'addTransactionAdmin')->name('addTransaction:admin');
+            // Route::post('/transaction/update', 'updateTransactionAdmin')->name('updateTransaction:admin');
+            Route::get('/transaction/delete', 'deleteTransactionAdmin')->name('deleteTransaction:admin');
+        });
+        /* Master User */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/user', 'userPageAdmin')->name('userPage:admin');
+            Route::get('/user/dashboard', 'dashboardUserAdmin')->name('dashboardUser:admin');
+            Route::get('/user/list', 'listUserAdmin')->name('listUser:admin');
+            Route::get('/user/detail', 'detailUserAdmin')->name('detailUser:admin');
+            Route::post('/user/add', 'addUserAdmin')->name('addUser:admin');
+            Route::post('/user/update', 'updateUserAdmin')->name('updateUser:admin');
+            Route::get('/user/delete', 'deleteUserAdmin')->name('deleteUser:admin');
+            Route::get('/user/verify', 'verifyUserAdmin')->name('verifyUser:admin');
+        });
+        /* Profiling */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile', 'profilePageAdmin')->name('profilePage:admin');
+            Route::post('/profile/update', 'updateProfileAdmin')->name('updateProfile:admin');
+            Route::post('/profile/password', 'updatePasswordProfileAdmin')->name('updatePasswordProfile:admin');
+        });
+    });
+    /* Owner Page */
+    Route::group(['prefix' => 'owner'], function () {
+        /* Dashboard */
+        Route::controller(HomeController::class)->group(function () {
+            Route::get('/', 'dashboardPageOwner')->name('dashboardPage:owner');
+        });
+        /* Master Building */
+        Route::controller(BuildingController::class)->group(function () {
+            /* Owner */
+            Route::get('/building', 'buildingPageOwner')->name('buildingPage:owner');
+            Route::get('/building/dashboard', 'dashboardBuildingOwner')->name('dashboardBuilding:owner');
+            Route::get('/building/list', 'listBuildingOwner')->name('listBuilding:owner');
+            Route::get('/building/detail', 'detailBuildingOwner')->name('detailBuilding:owner');
+            Route::post('/building/add', 'addBuildingOwner')->name('addBuilding:owner');
+            Route::post('/building/update', 'updateBuildingOwner')->name('updateBuilding:owner');
+            Route::get('/building/delete', 'deleteBuildingOwner')->name('deleteBuilding:owner');
+            Route::get('/building/verify', 'verifyBuildingOwner')->name('verifyBuilding:owner');
+        });
+        /* Master Facility */
+        Route::controller(FacilityController::class)->group(function () {
+            Route::get('/facility', 'facilityPageOwner')->name('facilityPage:owner');
+            Route::get('/facility/dashboard', 'dashboardFacilityOwner')->name('dashboardFacility:owner');
+            Route::get('/facility/list', 'listFacilityOwner')->name('listFacility:owner');
+            Route::get('/facility/detail', 'detailFacilityOwner')->name('detailFacility:owner');
+            Route::post('/facility/add', 'addFacilityOwner')->name('addFacility:owner');
+            Route::post('/facility/update', 'updateFacilityOwner')->name('updateFacility:owner');
+            Route::get('/facility/delete', 'deleteFacilityOwner')->name('deleteFacility:owner');
+            Route::get('/facility/verify', 'verifyFacilityOwner')->name('verifyFacility:owner');
+        });
+        /* Transaction */
+        Route::controller(TransactionController::class)->group(function () {
+            /* Order */
+            Route::get('/order', 'orderPageOwner')->name('orderPage:owner');
+            Route::get('/order/{id}/detail', 'orderDetailPageOwner')->name('orderDetailPage:owner');
+            Route::get('/order/dashboard', 'dashboardOrderOwner')->name('dashboardOrder:owner');
+            Route::get('/order/list', 'listOrderOwner')->name('listOrder:owner');
+            Route::get('/order/detail', 'detailOrderOwner')->name('detailOrder:owner');
+            // Route::post('/order/add', 'addOrderOwner')->name('addOrder:owner');
+            Route::post('/order/update', 'updateOrderOwner')->name('updateOrder:owner');
+            // Route::get('/order/delete', 'deleteOrderOwner')->name('deleteOrder:owner');
+            /* Transaction History */
+            Route::get('/transaction', 'transactionPageOwner')->name('transactionPage:owner');
+            Route::get('/transaction/{id}/detail', 'transactionDetailPageOwner')->name('transactionPage:owner');
+            Route::get('/transaction/dashboard', 'dashboardTransactionOwner')->name('dashboardTransaction:owner');
+            Route::get('/transaction/list', 'listTransactionOwner')->name('listTransaction:owner');
+            Route::get('/transaction/detail', 'detailTransactionOwner')->name('detailTransaction:owner');
+            // Route::post('/transaction/add', 'addTransactionOwner')->name('addTransaction:owner');
+            // Route::post('/transaction/update', 'updateTransactionOwner')->name('updateTransaction:owner');
+            // Route::get('/transaction/delete', 'deleteTransactionOwner')->name('deleteTransaction:owner');
+        });
+        /* Profiling */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile', 'profilePageOwner')->name('profilePage:owner');
+            Route::post('/profile/update', 'updateProfileOwner')->name('updateProfile:owner');
+            Route::post('/profile/password', 'updatePasswordProfileOwner')->name('updatePasswordProfile:owner');
+        });
+    });
     /* User Page */
-    /* Home */
-    Route::controller(HomeController::class)->group(function () {
-        Route::get('/home', 'index')->name('home');
+    Route::group(['prefix' => 'user'], function () {
+        /* Home */
+        Route::controller(HomeController::class)->group(function () {
+            Route::get('/', 'indexPageUser')->name('homePage:user');
+        });
+        /* Building List */
+        Route::controller(BuildingController::class)->group(function () {
+            /* Page, Detail, and Lists */
+            Route::get('/building', 'buildingPageUser')->name('buildingPage:user');
+            Route::get('/building/{id}/detail', 'detailPageUser')->name('buildingDetailPage:user');
+            Route::get('/building/list', 'listBuildingUser')->name('listBuilding:user');
+            Route::get('/building/detail', 'detailBuildingUser')->name('detailBuilding:user');
+        });
+        /* Transaction History */
+        Route::controller(TransactionController::class)->group(function () {
+            /* Building Order */
+            Route::post('/building/detail/{id}/transaction/order', 'orderBuildingUser')->name('orderBuilding:user');
+            Route::get('/building/detail/{id}/transaction/order/{sid}', 'orderBuildingPageUser')->name('orderBuildingPage:user');
+            /* Payment */
+            Route::post('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
+            Route::get('/building/detail/{id}/transaction/payment/{sid}', 'paymentBuildingPageUser')->name('paymentBuildingPage:user');
+            /* Invoice Page */
+            Route::post('/building/detail/{id}/transaction/invoice', 'invoiceBuildingUser')->name('invoiceBuilding:user');
+            Route::get('/building/detail/{id}/transaction/invoice/{sid}', 'invoiceBuildingPageUser')->name('invoiceBuildingPage:user');
+            /* Transaction History */
+            Route::post('/transaction', 'transactionPageUser')->name('transactionPage:user');
+            Route::get('/transaction/{id}', 'transactionPageUser')->name('transactionDetailPage:user');
+            Route::get('/transaction/{id}/invoice', 'transactionInvoiceDownloadUser')->name('transactionInvoiceDownload:user');
+        });
+        /* Profiling */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile', 'profilePageUser')->name('profilePage:user');
+            Route::post('/profile/update', 'updateProfileUser')->name('updateProfile:user');
+            Route::post('/profile/password', 'updatePasswordProfileUser')->name('updatePasswordProfile:user');
+        });
     });
 });
