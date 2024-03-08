@@ -35,9 +35,6 @@
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
 
-<style>
-</style>
-
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
@@ -45,14 +42,14 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
         <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Rental Gedung</span>
+        <span class="ms-1 font-weight-bold">Argon Dashboard 2</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="../pages/dashboard.html">
+          <a class="nav-link " href="../pages/dashboard.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
@@ -60,7 +57,7 @@
           </a>
         </li>
         <!-- <li class="nav-item">
-          <a class="nav-link" href="../pages/tables.html">
+          <a class="nav-link " href="../pages/tables.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
@@ -68,7 +65,7 @@
           </a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link " href="../pages/penyewaan.html">
+          <a class="nav-link active" href="../pages/penyewaan.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-primary text-sm opacity-10"></i>
             </div>
@@ -76,13 +73,13 @@
           </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../pages/pembayaran.html">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Pembayaran</span>
-            </a>
-          </li>
+          <a class="nav-link" href="../pages/pembayaran.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Pembayaran</span>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link " href="../pages/daftar-ruangan.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -149,9 +146,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Ruangan</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Penyewaan</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Tambah Ruangan</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Penyewaan</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -261,69 +258,154 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Daftarkan Ruangan</h6>
+        <div class="col-md">
+          <div class="card">
+            <div class="card-header pb-0 px-3">
+              <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                  <h6 class="mb-0">Daftar Sewa Masuk</h6>
+                </div>
+                <!-- <div class="col text-end">
+                  <button class="btn btn-primary btn-sm mb-0">View All</button>
+                </div> -->
+              </div>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive container mt-3">
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Nama Ruangan</label>
-                        <input class="form-control" type="text" placeholder="" id="example-text-input">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Nama Pemilik</label>
-                        <input class="form-control" type="text" placeholder="" value="" id="example-text-input">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Email</label>
-                        <input class="form-control" type="email" placeholder="" value="" id="example-text-input">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Alamat</label>
-                        <input class="form-control" type="text" placeholder="" value="" id="example-text-input">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Harga</label>
-                        <input class="form-control" type="text" placeholder="" value="" id="example-text-input">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Upload Gambar</label>
-                        <input class="form-control" type="file" data-size="5120" value="" id="example-text-input" multiple name="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Deskripsi Ruangan</label>
-                        <textarea class="form-control" id="text-area" rows="8"></textarea>
-                      </div>
-                    </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <a class="btn btn-primary mb-0" href="">Simpan</a>
-                    </div>
-                  </div>
-                </form>
+            <div class="card-body pt-3 p-3">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama Penyewa</th>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tanggal Sewa</th>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Durasi</th>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tanggal Selesai</th>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Total Bayar</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <p class="text-sm text-dark font-weight-bold mb-0 text">Bimantoro Bayu</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">21/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0">3 Hari</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">23/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">Rp. 20.000.000</p>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <p class="text-sm text-dark font-weight-bold mb-0 text">Bimantoro Bayu</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">21/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0">3 Hari</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">23/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">Rp. 20.000.000</p>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <p class="text-sm text-dark font-weight-bold mb-0 text">Bimantoro Bayu</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">21/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0">3 Hari</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">23/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">Rp. 20.000.000</p>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <p class="text-sm text-dark font-weight-bold mb-0 text">Bimantoro Bayu</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">21/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0">3 Hari</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">23/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">Rp. 20.000.000</p>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <p class="text-sm text-dark font-weight-bold mb-0 text">Bimantoro Bayu</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">21/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0">3 Hari</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">23/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">Rp. 20.000.000</p>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <p class="text-sm text-dark font-weight-bold mb-0 text">Bimantoro Bayu</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">21/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0">3 Hari</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">23/01/2024</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-sm font-weight-bold mb-0 text">Rp. 20.000.000</p>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
