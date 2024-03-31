@@ -35,6 +35,64 @@ Coded by www.creative-tim.com
   <link href="../assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
 </head>
 
+<style>
+  .sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+  @media (max-width: 767.98px) {
+    .sidebar {
+      top: 5rem;
+    }
+  }
+
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  }
+
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+</style>
+
 <body class="landing-page">
   <!-- Navbar -->
   <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-primary navbar-light position-sticky top-0 shadow py-2">
@@ -62,6 +120,8 @@ Coded by www.creative-tim.com
           </div>
         </div>
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+          <li class="nav-item">
+          </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
               <i class="ni ni-ui-04 d-lg-none"></i>
@@ -141,140 +201,197 @@ Coded by www.creative-tim.com
   </nav>
   <!-- End Navbar -->
   <!-- <div class="wrapper"> -->
-  <div class="section section-hero section-shaped">
-    <div class="shape shape-style-3 shape-default">
-      <!-- <span class="span-150"></span>
-      <span class="span-50"></span>
-      <span class="span-50"></span>
-      <span class="span-75"></span>
-      <span class="span-100"></span>
-      <span class="span-75"></span>
-      <span class="span-50"></span>
-      <span class="span-100"></span>
-      <span class="span-50"></span>
-      <span class="span-100"></span> -->
-    </div>
-    <div class="page-header">
-      <div class="container shape-container d-flex align-items-center py-lg">
-        <div class="col px-0">
-          <div class="row align-items-center justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h1 class="text-white display-1">People stories</h1>
-              <h2 class="display-4 font-weight-normal text-white">The time is right now!</h2>
-              <div class="btn-wrapper mt-4">
-                <a href="search.html" class="btn btn-warning btn-icon mt-3 mb-sm-0">
-                  <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-                  <span class="btn-inner--text">Book Now</span>
-                </a>
-              </div>
-            </div>
-          </div>
+  <div>
+    <div class="container-fluid">
+      <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-3 pt-3 px-0 me-sm-6 me-5">
+          <li class="breadcrumb-item text-sm"><a class="opacity-7 text-dark" href="javascript:;">Pages</a></li>
+          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+      </nav> -->
+      <div>
+      </div>
+      <div class="input-group pt-4 pb-4" style="width: 40%; left: 60%;">
+        <input type="text" class="form-control" placeholder="Cari Ruangan">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button">Cari</button>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="section features-1">
-    <div class="container-fluid pl-9 pr-9">
-      <!-- <div class="row">
-        <div class="col-md-8 mx-auto text-center">
-          <span class="badge badge-primary badge-pill mb-3">Insight</span>
-          <h3 class="display-3">Full-Funnel Social Analytics</h3>
-          <p class="lead">The time is now for it to be okay to be great. For being a bright color. For standing out.</p>
-        </div>
-      </div> -->
       <div class="row">
-        <div class="col-md-3">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+        <div class="col">
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file"></span>
+                    Orders
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="shopping-cart"></span>
+                    Products
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="users"></span>
+                    Customers
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="bar-chart-2"></span>
+                    Reports
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="layers"></span>
+                    Integrations
+                  </a>
+                </li>
+              </ul>
+
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Saved reports</span>
+                <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                  <span data-feather="plus-circle"></span>
+                </a>
+              </h6>
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Current month
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Last quarter
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Social engagement
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Year-end sale
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="col-9">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3 pt-4">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3 pt-4">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3 pt-4">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3 pt-4">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3 pt-4">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3 pt-4">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3 pt-4">
-          <div class="card">
-            <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Booking</a>
+            <div class="col-md-3 pt-4">
+              <div class="card">
+                <img src="../assets/img/Ruang1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Booking</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
