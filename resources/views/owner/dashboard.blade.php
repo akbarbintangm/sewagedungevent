@@ -45,7 +45,7 @@
 						<div class="row">
 							<div class="col-8">
 								<div class="numbers">
-									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Ruangan</p>
+									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Order</p>
 									<h5 class="font-weight-bolder">
 										2,300
 									</h5>
@@ -53,7 +53,7 @@
 							</div>
 							<div class="col-4 text-end">
 								<div class="icon icon-shape bg-gradient-danger shadow-danger rounded-circle text-center">
-									<i aria-hidden="true" class="fa fa-box text-lg opacity-10"></i>
+									<i aria-hidden="true" class="fa fa-cash-register text-lg opacity-10"></i>
 								</div>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 						<div class="row">
 							<div class="col-8">
 								<div class="numbers">
-									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Fasilitas</p>
+									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Transaksi</p>
 									<h5 class="font-weight-bolder">
 										+3,462
 									</h5>
@@ -74,7 +74,28 @@
 							</div>
 							<div class="col-4 text-end">
 								<div class="icon icon-shape bg-gradient-success shadow-success rounded-circle text-center">
-									<i aria-hidden="true" class="fa fa-broom text-lg opacity-10"></i>
+									<i aria-hidden="true" class="fa fa-money-bill text-lg opacity-10"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl col-sm-6 mb-xl-0 mb-4">
+				<div class="card">
+					<div class="card-body p-3">
+						<div class="row">
+							<div class="col-8">
+								<div class="numbers">
+									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Income</p>
+									<h5 class="font-weight-bolder">
+										+3,462
+									</h5>
+								</div>
+							</div>
+							<div class="col-4 text-end">
+								<div class="icon icon-shape bg-gradient-success shadow-success rounded-circle text-center">
+									<i aria-hidden="true" class="fa fa-wallet text-lg opacity-10"></i>
 								</div>
 							</div>
 						</div>

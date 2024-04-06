@@ -8,8 +8,8 @@ Use App\Http\Controllers\HistoryController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BuildingController;
-use App\Http\Controllers\Facility;
-use App\Http\Controllers\Transaction;
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\TransactionController;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -28,19 +28,15 @@ Route::get('/reset', function () {
 })->name('reset');
 /* Login & Logout */
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'index')
-        ->name('login')
-        ->middleware('guest');
-    Route::post('/login', 'login')->name('auth');
-    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/login', 'index')->name('login')->middleware('guest');
+    Route::post('/login/auth', 'login')->name('auth-login');
+    Route::get('/logout', 'logout')->name('auth-logout');
     Route::get('/reset-logout', 'password_reset_logout')->name('reset-logout');
 });
 /* Register */
 Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'index')
-        ->name('register')
-        ->middleware('guest');
-    Route::post('/register', 'register')->name('register');
+    Route::get('/register', 'index')->name('auth-register')->middleware('guest');
+    Route::post('/register', 'register')->name('auth-registration');
 });
 /* User Page without Login */
 Route::controller(HomeController::class)->group(function () {
@@ -163,7 +159,7 @@ Route::middleware(['auth'])->group(function () {
             // Route::get('/order/delete', 'deleteOrderOwner')->name('deleteOrder:owner');
             /* Transaction History */
             Route::get('/transaction', 'transactionPageOwner')->name('transactionPage:owner');
-            Route::get('/transaction/{id}/detail', 'transactionDetailPageOwner')->name('transactionPage:owner');
+            Route::get('/transaction/{id}/detail', 'transactionDetailPageOwner')->name('transactionDetailPage:owner');
             Route::get('/transaction/dashboard', 'dashboardTransactionOwner')->name('dashboardTransaction:owner');
             Route::get('/transaction/list', 'listTransactionOwner')->name('listTransaction:owner');
             Route::get('/transaction/detail', 'detailTransactionOwner')->name('detailTransaction:owner');

@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -26,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -40,7 +46,11 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('auth/login');
+        if (!Auth::user()) {
+            return view('auth.login');
+        } else {
+            return route('/');
+        }
     }
 
     public function login(Request $request)
@@ -78,6 +88,7 @@ class LoginController extends Controller
                     if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember)) {
                         $request->session()->regenerate();
                         DB::table('histories')->insert([
+                            'id_transaction' => 0,
                             'name_history' => 'Login',
                             'content_history' => 'Login berhasil',
                             'alert_history' => 'success',
@@ -88,25 +99,24 @@ class LoginController extends Controller
                             'updated_by' => Auth::user()->id,
                             'updated_at' => Carbon::now(),
                         ]);
-                        if (Auth::user()->role == 'SA' || Auth::user()->role == 'FIN' || Auth::user()->role == 'MO' || Auth::user()->role == 'HRD' || Auth::user()->role == 'DU' || Auth::user()->role == 'AUD' || Auth::user()->role == 'KW' || Auth::user()->role == 'AWH' || Auth::user()->role == 'KQC' || Auth::user()->role == 'QC' || Auth::user()->role == 'KP' || Auth::user()->role == 'SP') {
+                        if (Auth::user()->type_user == 'ADMINISTRATOR') {
                             return redirect()
-                                ->route('dashboard')
+                                ->route('dashboardPage:admin')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
-                        } elseif (Auth::user()->role == 'AP') {
+                        } else if (Auth::user()->type_user == 'PEMILIK_GEDUNG') {
                             return redirect()
-                                ->route('transfer-produksi')
+                                ->route('dashboardPage:owner')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
-                        } elseif (Auth::user()->role == 'KB') {
-                            Auth::Logout();
-
+                        } else if (Auth::user()->type_user == 'CUSTOMER' ) {
                             return redirect()
-                                ->route('login')
-                                ->with('info', 'Akun Anda tidak diperbolehkan masuk kedalam sistem.');
+                                ->route('homePage:user')
+                                ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } elseif (Auth::attempt($credentials)) {
                         /* If User didn't Click Remember */
                         $request->session()->regenerate();
                         DB::table('histories')->insert([
+                            'id_transaction' => 0,
                             'name_history' => 'Login',
                             'content_history' => 'Login berhasil',
                             'alert_history' => 'success',
@@ -117,20 +127,18 @@ class LoginController extends Controller
                             'updated_by' => Auth::user()->id,
                             'updated_at' => Carbon::now(),
                         ]);
-                        if (Auth::user()->role == 'SA' || Auth::user()->role == 'FIN' || Auth::user()->role == 'MO' || Auth::user()->role == 'HRD' || Auth::user()->role == 'AUD' || Auth::user()->role == 'KW' || Auth::user()->role == 'AWH' || Auth::user()->role == 'KQC' || Auth::user()->role == 'QC' || Auth::user()->role == 'KP' || Auth::user()->role == 'SP') {
+                        if (Auth::user()->type_user == 'ADMINISTRATOR') {
                             return redirect()
-                                ->route('dashboard')
+                                ->route('dashboardPage:admin')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
-                        } elseif (Auth::user()->role == 'AP') {
+                        } else if (Auth::user()->type_user == 'PEMILIK_GEDUNG') {
                             return redirect()
-                                ->route('transfer-produksi')
+                                ->route('dashboardPage:owner')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
-                        } elseif (Auth::user()->role == 'KB') {
-                            Auth::Logout();
-
+                        } else if (Auth::user()->type_user == 'CUSTOMER') {
                             return redirect()
-                                ->route('login')
-                                ->with('info', 'Akun Anda tidak diperbolehkan masuk kedalam sistem.');
+                                ->route('homePage:user')
+                                ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } else {
                         return redirect()
@@ -154,6 +162,7 @@ class LoginController extends Controller
                 ->with('success', 'Terima kasih telah menggunakan aplikasi ini!');
         } else {
             DB::table('histories')->insert([
+                'id_transaction' => 0,
                 'name_history' => 'Logout',
                 'content_history' => 'Logout berhasil',
                 'alert_history' => 'success',
@@ -166,13 +175,11 @@ class LoginController extends Controller
             ]);
             if ($request->ajax()) {
                 Auth::Logout();
-
                 return redirect()
                     ->route('login')
                     ->with('success', 'Mohon Login dengan password baru Anda.');
             } else {
                 Auth::Logout();
-
                 return redirect()
                     ->route('login')
                     ->with('success', 'Terima kasih telah menggunakan aplikasi ini!');

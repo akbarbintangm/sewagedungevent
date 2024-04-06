@@ -15,6 +15,7 @@
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/argon-dashboard.css?v=2.0.4') }}" id="pagestyle" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
 	@yield('meta-link')
 </head>
 
@@ -26,16 +27,16 @@
 		@yield('content')
 	</main>
 	@include('layouts.admin.plugin')
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="{{ asset('/js/core/popper.min.js') }}"></script>
 	<script src="{{ asset('/js/core/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/perfect-scrollbar.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/smooth-scrollbar.min.js') }}"></script>
-	<script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script>
-	<script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	{{-- <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script> --}}
+	{{-- <script>
 		var ctx1 = document.getElementById("chart-line").getContext("2d");
-
 		var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
 		gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
 		gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
 		gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
@@ -54,7 +55,6 @@
 					fill: true,
 					data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
 					maxBarThickness: 6
-
 				}],
 			},
 			options: {
@@ -122,7 +122,7 @@
 			}
 			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
 		}
-	</script>
+	</script> --}}
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<script src="{{ asset('/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
 	@yield('script')

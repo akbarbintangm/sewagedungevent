@@ -24,21 +24,10 @@
 				<div class="col-lg-5">
 					<div class="card bg-secondary border-0 shadow">
 						<div class="card-header bg-white pb-5">
-							<div class="text-muted mb-3 text-center"><small>Sign up with</small></div>
-							<div class="text-center">
-								<a class="btn btn-neutral btn-icon mr-4" href="#">
-									<span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
-									<span class="btn-inner--text">Github</span>
-								</a>
-								<a class="btn btn-neutral btn-icon" href="#">
-									<span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-									<span class="btn-inner--text">Google</span>
-								</a>
-							</div>
 						</div>
 						<div class="card-body px-lg-5 py-lg-5">
 							<div class="text-muted mb-4 text-center">
-								<small>Or sign up with credentials</small>
+								<small>Sign up with credentials</small>
 							</div>
 							<form role="form">
 								<div class="form-group">
