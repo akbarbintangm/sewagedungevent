@@ -15,6 +15,8 @@
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/font-awesome.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/plugins/datatables/datatables.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/argon-design-system.css?v=1.2.2') }}" rel="stylesheet" />
 	@yield('meta-link')
 </head>
@@ -23,7 +25,6 @@
 	@include('layouts.user.navbar')
 	<div class="wrapper">
 		@yield('content')
-		<br /><br />
 		@include('layouts.user.footer')
 	</div>
 	@yield('script')
@@ -36,6 +37,8 @@
 	<script src="{{ asset('/js/plugins/moment.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/datetimepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/sweetalert2.all.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/datatables/datatables.min.js') }}"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}" type="text/javascript"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>

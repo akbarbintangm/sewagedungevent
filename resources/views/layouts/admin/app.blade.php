@@ -15,7 +15,7 @@
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/argon-dashboard.css?v=2.0.4') }}" id="pagestyle" rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
 	@yield('meta-link')
 </head>
 
@@ -27,12 +27,14 @@
 		@yield('content')
 	</main>
 	@include('layouts.admin.plugin')
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="{{ asset('/js/core/jquery.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('/js/core/popper.min.js') }}"></script>
 	<script src="{{ asset('/js/core/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/perfect-scrollbar.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/smooth-scrollbar.min.js') }}"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	<script src="{{ asset('/js/plugins/datetimepicker.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/sweetalert2.all.min.js') }}"></script>
 	{{-- <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script> --}}
 	{{-- <script>
 		var ctx1 = document.getElementById("chart-line").getContext("2d");

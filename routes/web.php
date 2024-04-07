@@ -42,6 +42,7 @@ Route::controller(RegisterController::class)->group(function () {
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'indexWithoutLoginPageUser')->name('landingWithoutLoginPage:user')->middleware('guest');
     Route::get('/building', 'buildingWithoutLoginPageUser')->name('buildingWithoutLoginPage:user')->middleware('guest');
+    Route::get('/building/detail/{id}', 'buildingDetailWithoutLoginPageUser')->name('buildingDetailWithoutLoginPage:user')->middleware('guest');
 });
 /* Middleware */
 Route::middleware(['auth'])->group(function () {
@@ -184,7 +185,7 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(BuildingController::class)->group(function () {
             /* Page, Detail, and Lists */
             Route::get('/building', 'buildingPageUser')->name('buildingPage:user');
-            Route::get('/building/{id}/detail', 'detailPageUser')->name('buildingDetailPage:user');
+            Route::get('/building/{id}/detail', 'detailPageUser')->name('buildingDetailPage:user'); // SALAH
             Route::get('/building/list', 'listBuildingUser')->name('listBuilding:user');
             Route::get('/building/detail', 'detailBuildingUser')->name('detailBuilding:user');
         });

@@ -17,6 +17,10 @@ class HomeController extends Controller
         return view("home");
     }
 
+    public function buildingWithoutLoginPageUser() {
+        return view("building");
+    }
+
     public function dashboardPageAdmin()
     {
         return view("admin.dashboard");
