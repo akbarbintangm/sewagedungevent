@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4">
+		{{-- <div class="row mt-4">
 			<div class="col mb-lg-0 mb-4">
 				<div class="card">
 					<div class="card-header p-3 pb-0">
@@ -149,7 +149,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 		@include('layouts.admin.footer')
 	</div>
 @endsection

@@ -19,7 +19,7 @@
 							<h1 class="display-1 text-white">People stories</h1>
 							<h2 class="display-4 font-weight-normal text-white">The time is right now!</h2>
 							<div class="btn-wrapper mt-4">
-								<a class="btn btn-warning btn-icon mb-sm-0 mt-3" href="search.html">
+								<a class="btn btn-warning btn-icon mb-sm-0 mt-3" href="{{route('buildingWithoutLoginPage:user')}}">
 									<span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
 									<span class="btn-inner--text">Book Now</span>
 								</a>

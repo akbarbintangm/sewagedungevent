@@ -109,14 +109,15 @@
 					<div class="card-header p-3 pb-0">
 						<div class="row">
 							<div class="col-6 align-items-center">
-								<h6 class="mt-2">Ruangan Yang Dimiliki</h6>
+								<h6 class="mt-2">Daftarkan Ruangan</h6>
 							</div>
 							<div class="col-6 text-end">
-								<a class="btn bg-gradient-dark active mb-0" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('buildingPage:admin') : route('buildingPage:owner') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a>
+								<a class="btn bg-gradient-dark active mb-0" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('buildingPage:admin') : route('buildingPage:owner') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a> <!-- LINK ROUTE FORM TAMBAH GEDUNG-->
 							</div>
 						</div>
 					</div>
-					<div class="card-body p-3 pt-4">
+                    <br>
+					{{-- <div class="card-body p-3 pt-4">
 						<ul class="list-group">
 							<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
 								<div class="d-flex flex-column">
@@ -167,7 +168,7 @@
 								</div>
 							</li>
 						</ul>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

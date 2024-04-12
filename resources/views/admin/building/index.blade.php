@@ -84,7 +84,7 @@
 												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
 											</td>
 											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
+												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button> <!-- LINK ROUTE detail-ruangan.html-->
 											</td>
 										</tr>
 										<tr>

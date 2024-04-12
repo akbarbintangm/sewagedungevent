@@ -30,14 +30,14 @@
 					<span class="nav-link-text ms-1">Daftar Ruangan</span>
 				</a>
 			</li>
-			<li class="nav-item">
+			{{-- <li class="nav-item">
 				<a class="nav-link {{ Route::currentRouteName() == 'facilityPage:admin' || Route::currentRouteName() == 'facilityPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('facilityPage:admin') : route('facilityPage:owner') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-app text-primary text-sm opacity-10"></i>
 					</div>
 					<span class="nav-link-text ms-1">Daftar Fasilitas</span>
 				</a>
-			</li>
+			</li> --}}
 			<li class="nav-item mt-3">
 				<h6 class="text-uppercase font-weight-bolder opacity-6 ms-2 ps-4 text-xs">
 					Transaksi
