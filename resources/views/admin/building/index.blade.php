@@ -21,14 +21,21 @@
 			<div class="col-12">
 				<div class="card mb-4 pb-0">
 					<div class="card-body mb-0 pt-4">
-						<p class="mb-0">
-							<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" data-bs-toggle="collapse" href="#ruanganterdaftar" role="button">
-								Ruangan Terdaftar
-							</a>
-							<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" data-bs-toggle="collapse" href="#ruanganbelumterdaftar" role="button">
-								Ruangan Belum Terdaftar
-							</a>
-						</p>
+						<div class="row">
+							<div class="col">
+								<p class="mb-0">
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" data-bs-toggle="collapse" href="#ruanganterdaftar" role="button">
+										Ruangan Terdaftar
+									</a>
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" data-bs-toggle="collapse" href="#ruanganbelumterdaftar" role="button">
+										Ruangan Belum Terdaftar
+									</a>
+								</p>
+							</div>
+							<div class="col text-end">
+								<a class="btn bg-gradient-dark active mb-0" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('addPageBuilding:admin') : route('addPageBuilding:owner') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -67,7 +74,7 @@
 												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
 											</td>
 											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
+												<a class="btn btn-outline-primary btn-sm mb-0" href="{{ route('detailPageBuilding:admin', ['id' => 1]) }}" type="button">Details</a>
 											</td>
 										</tr>
 										<tr>
@@ -84,7 +91,7 @@
 												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
 											</td>
 											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button> <!-- LINK ROUTE detail-ruangan.html-->
+												<a class="btn btn-outline-primary btn-sm mb-0" href="{{ route('detailPageBuilding:admin', ['id' => 1]) }}" type="button">Details</a>
 											</td>
 										</tr>
 										<tr>
