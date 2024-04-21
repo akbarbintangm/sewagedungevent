@@ -16,6 +16,7 @@
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/argon-dashboard.css?v=2.0.4') }}" id="pagestyle" rel="stylesheet" />
 	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/plugins/tagsinput.min.css') }}" rel="stylesheet">
 	@yield('meta-link')
 </head>
 
@@ -35,6 +36,7 @@
 	<script src="{{ asset('/js/plugins/datetimepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/sweetalert2.all.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/tagsinput.min.js') }}"></script>
 	{{-- <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script> --}}
 	{{-- <script>
 		var ctx1 = document.getElementById("chart-line").getContext("2d");

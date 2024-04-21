@@ -10,7 +10,7 @@
         "dompdf/dompdf": "^2.0",
         "goodnesskay/laravelpdfviewer": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
-        "intervention/image": "^2.7",
+        "intervention/image": "^3.6",
         "irazasyed/laravel-gamp": "^1.10",
         "laravel/fortify": "^1.17",
         "laravel/framework": "^10.10",

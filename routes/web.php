@@ -62,22 +62,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/building', 'buildingPageAdmin')->name('buildingPage:admin');
             Route::get('/building/dashboard', 'dashboardBuildingAdmin')->name('dashboardBuilding:admin');
             Route::get('/building/list', 'listBuildingAdmin')->name('listBuilding:admin');
-            Route::get('/building/detail', 'detailBuildingAdmin')->name('detailBuilding:admin');
+            // Route::get('/building/detail', 'detailBuildingAdmin')->name('detailBuilding:admin');
+            Route::get('/building/detail-building/{id}', 'detailPageBuildingAdmin')->name('detailPageBuilding:admin');
+            Route::get('/building/add-building', 'addPageBuildingAdmin')->name('addPageBuilding:admin');
             Route::post('/building/add', 'addBuildingAdmin')->name('addBuilding:admin');
             Route::post('/building/update', 'updateBuildingAdmin')->name('updateBuilding:admin');
             Route::get('/building/delete', 'deleteBuildingAdmin')->name('deleteBuilding:admin');
             Route::get('/building/verify', 'verifyBuildingAdmin')->name('verifyBuilding:admin');
-        });
-        /* Master Facility */
-        Route::controller(FacilityController::class)->group(function () {
-            Route::get('/facility', 'facilityPageAdmin')->name('facilityPage:admin');
-            Route::get('/facility/dashboard', 'dashboardFacilityAdmin')->name('dashboardFacility:admin');
-            Route::get('/facility/list', 'listFacilityAdmin')->name('listFacility:admin');
-            Route::get('/facility/detail', 'detailFacilityAdmin')->name('detailFacility:admin');
-            Route::post('/facility/add', 'addFacilityAdmin')->name('addFacility:admin');
-            Route::post('/facility/update', 'updateFacilityAdmin')->name('updateFacility:admin');
-            Route::get('/facility/delete', 'deleteFacilityAdmin')->name('deleteFacility:admin');
-            Route::get('/facility/verify', 'verifyFacilityAdmin')->name('verifyFacility:admin');
         });
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {
@@ -130,22 +121,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/building', 'buildingPageOwner')->name('buildingPage:owner');
             Route::get('/building/dashboard', 'dashboardBuildingOwner')->name('dashboardBuilding:owner');
             Route::get('/building/list', 'listBuildingOwner')->name('listBuilding:owner');
-            Route::get('/building/detail', 'detailBuildingOwner')->name('detailBuilding:owner');
+            // Route::get('/building/detail', 'detailBuildingOwner')->name('detailBuilding:owner');
+            Route::get('/building/detail-building/{id}', 'detailPageBuildingOwner')->name('detailPageBuilding:owner');
+            Route::get('/building/add-building', 'addPageBuildingOwner')->name('addPageBuilding:owner');
             Route::post('/building/add', 'addBuildingOwner')->name('addBuilding:owner');
             Route::post('/building/update', 'updateBuildingOwner')->name('updateBuilding:owner');
             Route::get('/building/delete', 'deleteBuildingOwner')->name('deleteBuilding:owner');
             Route::get('/building/verify', 'verifyBuildingOwner')->name('verifyBuilding:owner');
-        });
-        /* Master Facility */
-        Route::controller(FacilityController::class)->group(function () {
-            Route::get('/facility', 'facilityPageOwner')->name('facilityPage:owner');
-            Route::get('/facility/dashboard', 'dashboardFacilityOwner')->name('dashboardFacility:owner');
-            Route::get('/facility/list', 'listFacilityOwner')->name('listFacility:owner');
-            Route::get('/facility/detail', 'detailFacilityOwner')->name('detailFacility:owner');
-            Route::post('/facility/add', 'addFacilityOwner')->name('addFacility:owner');
-            Route::post('/facility/update', 'updateFacilityOwner')->name('updateFacility:owner');
-            Route::get('/facility/delete', 'deleteFacilityOwner')->name('deleteFacility:owner');
-            Route::get('/facility/verify', 'verifyFacilityOwner')->name('verifyFacility:owner');
         });
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {

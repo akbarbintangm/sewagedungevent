@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		</div>
-		{{-- <div class="row mt-4">
+		<div class="row mt-4">
 			<div class="col mb-lg-0 mb-4">
 				<div class="card">
 					<div class="card-header p-3 pb-0">
@@ -91,7 +91,7 @@
 								<h6 class="mt-2">Ruangan Yang Dimiliki</h6>
 							</div>
 							<div class="col-6 text-end">
-								<a class="btn bg-gradient-dark active mb-0" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('buildingPage:admin') : route('buildingPage:owner') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a>
+								<a class="btn bg-gradient-dark active mb-0" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('addPageBuilding:admin') : route('addPageBuilding:owner') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a>
 							</div>
 						</div>
 					</div>
@@ -149,7 +149,7 @@
 					</div>
 				</div>
 			</div>
-		</div> --}}
+		</div>
 		@include('layouts.admin.footer')
 	</div>
 @endsection

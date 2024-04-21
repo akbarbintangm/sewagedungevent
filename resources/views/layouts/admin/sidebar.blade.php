@@ -23,7 +23,7 @@
 				</h6>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'buildingPage:admin' || Route::currentRouteName() == 'buildingPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('buildingPage:admin') : route('buildingPage:owner') }}">
+				<a class="nav-link {{ Route::currentRouteName() == 'addPageBuilding:admin' || Route::currentRouteName() == 'addPageBuilding:owner' || Route::currentRouteName() == 'detailBuilding:admin' || Route::currentRouteName() == 'detailBuilding:owner' || Route::currentRouteName() == 'buildingPage:admin' || Route::currentRouteName() == 'buildingPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('buildingPage:admin') : route('buildingPage:owner') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-app text-primary text-sm opacity-10"></i>
 					</div>
