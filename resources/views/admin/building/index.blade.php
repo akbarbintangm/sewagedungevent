@@ -48,121 +48,18 @@
 							<h6>Daftar Ruangan Terdaftar</h6>
 						</div>
 						<div class="card-body pb-3 pt-2">
-							<div class="table-responsive p-0">
-								<table class="align-items-center mb-0 table">
+							<div class="table-responsive-lg p-0">
+								<table class="w-100 align-items-center table-verified mb-0 table">
 									<thead>
 										<tr>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Ruangan</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Nama Pemilik</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Alamat</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Range Harga</th>
-											<th class="text-secondary opacity-7"></th>
+											<th>Nama Ruangan</th>
+											<th>Nama Pemilik</th>
+											<th>Alamat</th>
+											<th>Range Harga</th>
+											<th>Action</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Suparmen</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="align-middle">
-												<a class="btn btn-outline-primary btn-sm mb-0" href="{{ route('detailPageBuilding:admin', ['id' => 1]) }}" type="button">Details</a>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Suwito</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="align-middle">
-												<a class="btn btn-outline-primary btn-sm mb-0" href="{{ route('detailPageBuilding:admin', ['id' => 1]) }}" type="button">Details</a>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Fabiano</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Eseteban</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Charles</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Verstapen</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-											</td>
-										</tr>
-									</tbody>
+									<tbody></tbody>
 								</table>
 							</div>
 						</div>
@@ -178,140 +75,19 @@
 							<h6>Daftar Ruang Yang Didaftarkan</h6>
 						</div>
 						<div class="card-body pb-3 pt-2">
-							<div class="table-responsive p-0">
-								<table class="align-items-center mb-0 table">
+							<div class="table-responsive-lg p-0">
+								<table class="w-100 align-items-center table-unverified mb-0 table">
 									<thead>
 										<tr>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Ruangan</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Nama Pemilik</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Alamat</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Range Harga</th>
-											<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Status</th>
-											<th class="text-secondary opacity-7"></th>
+											<th>Nama Ruangan</th>
+											<th>Nama Pemilik</th>
+											<th>Alamat</th>
+											<th>Range Harga</th>
+											<th>Status</th>
+											<th>Action</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Bayu</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="badge badge-sm bg-gradient-danger">Butuh Verifikasi</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-success btn-sm mb-0" type="button">Verifikasi</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Bimo</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="badge badge-sm bg-gradient-danger">Butuh Verifikasi</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-success btn-sm mb-0" type="button">Verifikasi</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Andre</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="badge badge-sm bg-gradient-danger">Butuh Verifikasi</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-success btn-sm mb-0" type="button">Verifikasi</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Elena</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="badge badge-sm bg-gradient-danger">Butuh Verifikasi</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-success btn-sm mb-0" type="button">Verifikasi</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Leonor</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="badge badge-sm bg-gradient-danger">Butuh Verifikasi</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-success btn-sm mb-0" type="button">Verifikasi</button>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center align-middle">
-												<p class="text-dark font-weight-bold text mb-0 text-sm">Ruang Renungan</p>
-											</td>
-											<td class="text-center align-middle">
-												<p class="font-weight-bold mb-0 text-sm">Vrancis</p>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<p class="font-weight-bold mb-0 text-sm">Jl. Buntu No.89</p>
-											</td>
-											<td class="text-center align-middle">
-												<span class="font-weight-bold text-sm">Rp. 3.000.000</span>
-											</td>
-											<td class="text-center align-middle text-sm">
-												<span class="badge badge-sm bg-gradient-danger">Butuh Verifikasi</span>
-											</td>
-											<td class="align-middle">
-												<button class="btn btn-outline-success btn-sm mb-0" type="button">Verifikasi</button>
-											</td>
-										</tr>
-									</tbody>
+									<tbody></tbody>
 								</table>
 							</div>
 						</div>
@@ -324,4 +100,100 @@
 @endsection
 
 @section('script')
+	<script>
+		$(document).ready(function() {
+			$.ajaxSetup({
+				headers: {
+					'csrftoken': '{{ csrf_token() }}'
+				}
+			});
+			var token = '{{ Session::token() }}';
+			var tableVerified = $('.table-verified').DataTable({
+				autoWidth: true,
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('listBuildingVerified:admin') }}",
+				headers: {
+					'CSRFToken': token
+				},
+				columns: [{
+						data: 'name',
+						name: 'buildings.name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'owner_name',
+						name: 'owner_name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'address',
+						name: 'buildings.address',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'price',
+						name: 'buildings.price',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: false,
+						searchable: false
+					}
+				]
+			});
+			var tableUnverified = $('.table-unverified').DataTable({
+				autoWidth: true,
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('listBuildingUnverified:admin') }}",
+				headers: {
+					'CSRFToken': token
+				},
+				columns: [{
+						data: 'name',
+						name: 'buildings.name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'owner_name',
+						name: 'owner_name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'address',
+						name: 'buildings.address',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'price',
+						name: 'buildings.price',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'status',
+						name: 'buildings.status',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: false,
+						searchable: false
+					}
+				]
+			});
+		});
+	</script>
 @endsection

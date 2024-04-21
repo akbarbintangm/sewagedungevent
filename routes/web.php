@@ -61,7 +61,8 @@ Route::middleware(['auth'])->group(function () {
             /* Admin */
             Route::get('/building', 'buildingPageAdmin')->name('buildingPage:admin');
             Route::get('/building/dashboard', 'dashboardBuildingAdmin')->name('dashboardBuilding:admin');
-            Route::get('/building/list', 'listBuildingAdmin')->name('listBuilding:admin');
+            Route::get('/building/list-verified', 'listBuildingAdminVerified')->name('listBuildingVerified:admin');
+            Route::get('/building/list-unverified', 'listBuildingAdminUnverified')->name('listBuildingUnverified:admin');
             // Route::get('/building/detail', 'detailBuildingAdmin')->name('detailBuilding:admin');
             Route::get('/building/detail-building/{id}', 'detailPageBuildingAdmin')->name('detailPageBuilding:admin');
             Route::get('/building/add-building', 'addPageBuildingAdmin')->name('addPageBuilding:admin');
