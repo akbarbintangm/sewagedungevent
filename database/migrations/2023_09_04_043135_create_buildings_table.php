@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('id_owner');
             $table->string('name');
             $table->bigInteger('price');
             $table->text('address');

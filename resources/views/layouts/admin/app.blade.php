@@ -17,6 +17,7 @@
 	<link href="{{ asset('/css/argon-dashboard.css?v=2.0.4') }}" id="pagestyle" rel="stylesheet" />
 	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/plugins/tagsinput.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/plugins/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 	@yield('meta-link')
 </head>
 
@@ -37,6 +38,8 @@
 	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/sweetalert2.all.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/tagsinput.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/dataTables.bootstrap4.min.js') }}"></script>
 	{{-- <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script> --}}
 	{{-- <script>
 		var ctx1 = document.getElementById("chart-line").getContext("2d");
