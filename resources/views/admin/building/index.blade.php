@@ -24,10 +24,10 @@
 						<div class="row">
 							<div class="col">
 								<p class="mb-0">
-									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" data-bs-toggle="collapse" href="#ruanganterdaftar" role="button">
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganterdaftar" role="button">
 										Ruangan Terdaftar
 									</a>
-									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" data-bs-toggle="collapse" href="#ruanganbelumterdaftar" role="button">
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganbelumterdaftar" role="button">
 										Ruangan Belum Terdaftar
 									</a>
 								</p>
@@ -42,7 +42,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md">
-				<div class="collapse" id="ruanganterdaftar">
+				<div id="ruanganterdaftar">
 					<div class="card mb-4">
 						<div class="card-header pb-0">
 							<h6>Daftar Ruangan Terdaftar</h6>
@@ -69,7 +69,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md">
-				<div class="collapse" id="ruanganbelumterdaftar">
+				<div id="ruanganbelumterdaftar">
 					<div class="card mb-4">
 						<div class="card-header pb-0">
 							<h6>Daftar Ruang Yang Didaftarkan</h6>
@@ -195,5 +195,35 @@
 				]
 			});
 		});
+
+		function deleteRoom(data) {
+			var url = '{{ route('deleteBuilding:admin', ['id' => ':data']) }}';
+			url = url.replace(':data', data);
+			submitNotification(null, 'Apakah Anda yakin', 'Data tidak dapat dikembalikan, Yakin?', 'info', url)
+				.then(replyResponse => {
+					if (replyResponse) {
+						$('.table-verified').DataTable().ajax.reload(null, false);
+						$('.table-unverified').DataTable().ajax.reload(null, false);
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+		function verifyRoom(data) {
+			var url = '{{ route('verifyBuilding:admin', ['id' => ':data']) }}';
+			url = url.replace(':data', data);
+			submitNotification(null, 'Apakah Anda yakin', 'Data Ruangan akan dikonfirmasi, Yakin?', 'info', url)
+				.then(replyResponse => {
+					if (replyResponse) {
+						$('.table-verified').DataTable().ajax.reload(null, false);
+						$('.table-unverified').DataTable().ajax.reload(null, false);
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
 	</script>
 @endsection

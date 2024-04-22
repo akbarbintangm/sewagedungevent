@@ -101,12 +101,89 @@ class BuildingController extends Controller
 
     public function detailPageBuildingAdmin($id)
     {
-        return view("admin.building.detail");
+        $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+                ->where('buildings.id', $id)
+                ->first();
+        return view("admin.building.detail", compact('data'));
     }
 
     public function detailPageBuildingOwner($id)
     {
         return view("owner.building.detail");
+    }
+
+    public function updateBuildingAdmin(Request $request, $id) {
+        $roomDataRequest = $request->validate([
+            'room_name' => 'required',
+            'room_price' => 'required',
+            'room_address' => 'required',
+            'room_description' => 'required',
+            'room_facilities' => 'required',
+            'room_image' => 'required'
+        ]);
+        $getOwnerAndBuildingData = DB::table('buildings')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.id as owner_id')
+                ->where('buildings.id', $id)
+                ->first();
+        $buildingData = [
+            'name' => $roomDataRequest['room_name'],
+            'price' => $roomDataRequest['room_price'],
+            'address' => $roomDataRequest['room_address'],
+            'description' => $roomDataRequest['room_description'],
+            'facilities' => $roomDataRequest['room_facilities'],
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        $buildingId = DB::table('buildings')->where('id', $id)->update($buildingData);
+        $this->createFolder('/rooms/' . $getOwnerAndBuildingData->owner_email);
+        $this->deleteFolder('/rooms/' . $getOwnerAndBuildingData->owner_email . '/' . $getOwnerAndBuildingData->name);
+        $this->createFolder('/rooms/' . $getOwnerAndBuildingData->owner_email . '/' . $roomDataRequest['room_name']);
+        for ($i = 0; $i < count($request->file('room_image')); $i++) {
+            if ($request->hasFile('room_image.' . $i)) {
+                $image = $request->file('room_image.' . $i);
+                $imageName = 'room_' . $i+1 . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('/rooms/' . $getOwnerAndBuildingData->owner_email . '/' . $roomDataRequest['room_name']), $imageName);
+                // disini resize ke 2160 (high res) dan duplicate jadi minified ke 360 (preview)
+                DB::table('buildings')->where('id', $id)->update(['picture_' . $i+1 => $imageName]);
+            }
+        }
+        return redirect()->route('buildingPage:admin')->with('success', 'Ruangan ' . $roomDataRequest['room_name'] . ' berhasil diedit.');
+        // update versi ke 2, todo Try Catch, dan tambahkan Response JSON, bukan redirect halaman lagi
+    }
+
+    public function verifyBuildingAdmin(Request $request, $id) {
+        $verifyData = [
+            'status' => 1,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        try {
+            $buildingId = DB::table('buildings')->where('buildings.id', $id)->update($verifyData);
+            $getData = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->first();
+            return $this->arrayResponse(200, 'success', 'Ruangan ' . $getData->name . ' berhasil di verifikasi.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
+    }
+
+    public function deleteBuildingAdmin(Request $request, $id) {
+        $getOwnerAndBuildingData = DB::table('buildings')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.id as owner_id')
+                ->where('buildings.id', $id)
+                ->first();
+        $dataRoomName = $getOwnerAndBuildingData->name;
+        $this->deleteFolder('/rooms/' . $getOwnerAndBuildingData->owner_email . '/' . $getOwnerAndBuildingData->name);
+        try {
+            $buildingId = DB::table('buildings')->where('buildings.id', $id)->delete();
+            return $this->arrayResponse(200, 'success', 'Ruangan ' . $dataRoomName . ' berhasil di hapus.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
     }
 
     public function addPageBuildingAdmin()
@@ -171,6 +248,7 @@ class BuildingController extends Controller
             }
         }
         return redirect()->route('buildingPage:admin')->with('success', 'Ruangan ' . $roomDataRequest['room_name'] . ' berhasil disimpan.');
+        // update versi ke 2, todo Try Catch, dan tambahkan Response JSON, bukan redirect halaman lagi
     }
 
     public function addPageBuildingOwner()
@@ -187,5 +265,24 @@ class BuildingController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function deleteFolder($fullPath)
+    {
+        $path = public_path($fullPath);
+        if (is_dir($path)) {
+            $files = array_diff(scandir($path), array('.', '..'));
+            foreach ($files as $file) {
+                (is_dir("$path/$file")) ? deleteFolder("$path/$file") : unlink("$path/$file");
+            }
+            return rmdir($path);
+        } else {
+            return false;
+        }
+    }
+
+    public function arrayResponse($status, $message, $detailMessage, $data){
+        $response = ['status' => $status, 'message' => $message, 'detail_message' => $detailMessage, 'data' => $data];
+        return response()->json($response);
     }
 }

@@ -111,30 +111,6 @@
 			})
 		});
 
-		function alertNotification(title, text, icon) {
-			Swal.fire({
-				title: title,
-				text: text,
-				icon: icon,
-				confirmButtonText: 'Oke'
-			});
-		}
-
-		function submitNotification(form, title, text, icon) {
-			Swal.fire({
-				title: title,
-				text: text,
-				icon: icon,
-				showCancelButton: true,
-				confirmButtonText: 'Kirim',
-				cancelButtonText: 'Batal'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					form.submit();
-				}
-			});
-		}
-
 		document.getElementById('forms').addEventListener('submit', function(e) {
 			e.preventDefault();
 			submitNotification(this, 'Apakah Anda yakin?', 'Data dapat diubah dilain waktu.', 'info');
