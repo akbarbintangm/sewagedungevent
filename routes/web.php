@@ -67,9 +67,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/building/detail-building/{id}', 'detailPageBuildingAdmin')->name('detailPageBuilding:admin');
             Route::get('/building/add-building', 'addPageBuildingAdmin')->name('addPageBuilding:admin');
             Route::post('/building/add', 'addBuildingAdmin')->name('addBuilding:admin');
-            Route::post('/building/update', 'updateBuildingAdmin')->name('updateBuilding:admin');
-            Route::get('/building/delete', 'deleteBuildingAdmin')->name('deleteBuilding:admin');
-            Route::get('/building/verify', 'verifyBuildingAdmin')->name('verifyBuilding:admin');
+            Route::post('/building/update/{id}', 'updateBuildingAdmin')->name('updateBuilding:admin');
+            Route::get('/building/delete/{id}', 'deleteBuildingAdmin')->name('deleteBuilding:admin');
+            Route::get('/building/verify/{id}', 'verifyBuildingAdmin')->name('verifyBuilding:admin');
         });
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {
