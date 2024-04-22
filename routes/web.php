@@ -44,6 +44,9 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/building', 'buildingWithoutLoginPageUser')->name('buildingWithoutLoginPage:user')->middleware('guest');
     Route::get('/building/detail/{id}', 'buildingDetailWithoutLoginPageUser')->name('buildingDetailWithoutLoginPage:user')->middleware('guest');
 });
+Route::controller(TransactionController::class)->group(function () {
+    Route::get('/building/detail/{id}/transaction/order/{sid}', 'orderBuildingPageUser')->name('orderBuildingPage:user');
+});
 /* Middleware */
 Route::middleware(['auth'])->group(function () {
     /* Histories API for All User with their Login Info */
@@ -176,7 +179,7 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(TransactionController::class)->group(function () {
             /* Building Order */
             Route::post('/building/detail/{id}/transaction/order', 'orderBuildingUser')->name('orderBuilding:user');
-            Route::get('/building/detail/{id}/transaction/order/{sid}', 'orderBuildingPageUser')->name('orderBuildingPage:user');
+            // Route::get('/building/detail/{id}/transaction/order/{sid}', 'orderBuildingPageUser')->name('orderBuildingPage:user');
             /* Payment */
             Route::post('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
             Route::get('/building/detail/{id}/transaction/payment/{sid}', 'paymentBuildingPageUser')->name('paymentBuildingPage:user');
