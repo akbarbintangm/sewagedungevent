@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+    public function orderBuildingPageUser()
+    {
+        return view("user.order");
+    }
     public function orderPageAdmin()
     {
         return view("admin.order.index");
