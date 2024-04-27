@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('total_day');
             $table->date('date_start');
             $table->date('date_end');
+            $table->text('transfer_image')->nullable();
+            $table->integer('status_order');
+            $table->integer('status_transaction');
             $table->string('code')->unique();
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
