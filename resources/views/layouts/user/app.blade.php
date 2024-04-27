@@ -27,7 +27,6 @@
 		@yield('content')
 		@include('layouts.user.footer')
 	</div>
-	@yield('script')
 	<script src="{{ asset('/js/core/jquery.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('/js/core/popper.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -42,6 +41,8 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}" type="text/javascript"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+	@include('layouts.utils')
+	@yield('script')
 </body>
 
 </html>

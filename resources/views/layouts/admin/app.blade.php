@@ -132,62 +132,7 @@
 	</script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<script src="{{ asset('/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-	<script>
-		function alertNotification(title, text, icon) {
-			Swal.fire({
-				title: title,
-				text: text,
-				icon: icon,
-				confirmButtonText: 'Oke'
-			});
-		}
-
-		function submitNotification(form, title, text, icon, url) {
-			return new Promise((resolve, reject) => {
-				Swal.fire({
-					title: title,
-					text: text,
-					icon: icon,
-					showCancelButton: true,
-					confirmButtonText: 'Kirim',
-					cancelButtonText: 'Batal',
-					showLoaderOnConfirm: true,
-					preConfirm: () => {
-						if (form) {
-							form.submit();
-							return;
-						}
-						if (!url) {
-							reject('URL tidak valid');
-							return;
-						}
-						return fetch(url)
-							.then(response => {
-								if (!response.ok) {
-									alertNotification('Gagal', 'Gagal memuat data dari server!', 'warning');
-									reject('Gagal memuat data dari server');
-									return;
-								}
-								return response.json();
-							})
-							.then(data => {
-								if (data.status === 200) {
-									alertNotification('Berhasil', data.detail_message, 'success');
-									resolve(true);
-								} else {
-									alertNotification('Gagal', data.detail_message, 'info');
-									resolve(false);
-								}
-							})
-							.catch(error => {
-								alertNotification('Gagal', error, 'error');
-								reject(error);
-							});
-					}
-				});
-			});
-		}
-	</script>
+	@include('layouts.utils')
 	@yield('script')
 </body>
 

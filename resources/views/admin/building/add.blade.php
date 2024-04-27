@@ -120,76 +120,7 @@
 			checkFileCount(input);
 			checkFileFormat(input);
 			checkAspectRatio(input);
-			checkMinResolution(input);
-		}
-
-		function checkFileCount(input) {
-			var files = input.files;
-			if (files.length > 10) {
-				alertNotification('Gambar Terlalu Banyak!', 'Gambar yang diupload maksimal adalah 10 gambar!', 'warning')
-				input.value = '';
-			}
-		}
-
-		function checkFileFormat(input) {
-			var files = input.files;
-			var invalidFiles = false;
-			for (var i = 0; i < files.length; i++) {
-				var ext = files[i].name.split('.').pop().toLowerCase();
-				if (ext !== 'jpg' && ext !== 'png') {
-					invalidFiles = true;
-					break;
-				}
-			}
-			if (invalidFiles) {
-				alertNotification('Format Gambar Salah!', 'Hanya dapat mengunggah file dengan format JPG atau PNG!', 'warning')
-				input.value = '';
-			}
-		}
-
-		function checkAspectRatio(input) {
-			var files = input.files;
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				const reader = new FileReader();
-				reader.onload = function(e) {
-					const img = new Image();
-					img.src = e.target.result;
-					img.onload = function() {
-						const width = this.width;
-						const height = this.height;
-						const aspectRatio = width / height;
-						if (aspectRatio !== (16 / 9)) {
-							alertNotification('Resolusi Gambar Salah!', 'Hanya dapat mengunggah file dengan resolusi 16:9!', 'warning')
-							input.value = '';
-						}
-					};
-				};
-				reader.readAsDataURL(file);
-			}
-			return true;
-		}
-
-		function checkMinResolution(input) {
-			var files = input.files;
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				const reader = new FileReader();
-				reader.onload = function(e) {
-					const img = new Image();
-					img.src = e.target.result;
-					img.onload = function() {
-						const width = this.width;
-						const height = this.height;
-						if (width < 1280 || height < 720) {
-							alertNotification('Resolusi Gambar Salah!', 'Hanya dapat mengunggah file dengan minimal 1280x720', 'warning')
-							input.value = '';
-						}
-					};
-				};
-				reader.readAsDataURL(file);
-			}
-			return true;
+			checkMinResolution(input, 1280, 720);
 		}
 	</script>
 @endsection
