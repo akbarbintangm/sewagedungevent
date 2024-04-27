@@ -43,102 +43,21 @@
 			</div>
 			<div class="col-9">
 				<div class="row">
-					<div class="col-md-3">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
+					@foreach ($data as $key => $item)
+						<div class="col-md-3 mb-3">
+							<div class="card">
+								<img alt="{{ $item->picture_1 }}" id="{{ $item->picture_1 }}" src="{{ asset('rooms/' . $item->owner_email . '/' . $item->name . '/' . $item->picture_1) }}">
+								<div class="card-body">
+									<h5 class="card-title text-center">{{ $item->name }}</h5>
+									<p class="card-text">{{ Str::limit($item->description, 45, '...') }}</p>
+									<p class="card-text"><b>Harga: Rp. {{ $item->price }}</b></p>
+									<div class="d-flex justify-content-center">
+										<a class="btn btn-primary" href="{{ route('buildingDetailWithoutLoginPage:user', ['id' => $item->id]) }}">Booking</a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 pt-4">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 pt-4">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 pt-4">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 pt-4">
-						<div class="card">
-							<img alt="..." class="card-img-top" src="{{ asset('img/Ruang1.jpg') }}">
-							<div class="card-body">
-								<h5 class="card-title text-center">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<div class="d-flex justify-content-center">
-									<a class="btn btn-primary" href="#">Booking</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
