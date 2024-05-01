@@ -18,6 +18,7 @@
 	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/plugins/datatables/datatables.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/argon-design-system.css?v=1.2.2') }}" rel="stylesheet" />
+	<link href="{{ asset('/vendor/lightgallery/css/lightgallery-bundle.min.css') }}" rel="stylesheet">
 	@yield('meta-link')
 </head>
 
@@ -41,6 +42,8 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}" type="text/javascript"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+	<script src="{{ asset('/vendor/lightgallery/lightgallery.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	@include('layouts.utils')
 	@yield('script')
 </body>

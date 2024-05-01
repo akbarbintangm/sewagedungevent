@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 
 @section('title')
-	Cari Ruangan
+	Detail Ruangan - {{ $data->name }}
 @endsection
 
 @section('meta-link')
@@ -9,44 +9,123 @@
 
 @section('content')
 	<div class="container-fluid mb-9 pl-9 pr-9">
-		{{-- <div class="input-group pb-4 pt-4" style="width: 40%; left: 60%;">
-			<input class="form-control" placeholder="Cari Ruangan" type="text">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="button">Cari</button>
-			</div>
-		</div> --}}
 		<div class="row mt-5">
-			{{-- <div class="col-md-3">
-				<div class="card">
-					<div class="card-header">
-						Filter
-					</div>
-					<div class="card-body">
-						<h6 class="card-title">Kategori</h6>
-						<ul class="list-group">
-							<li class="list-group-item"><a href="#">Kategori 1</a></li>
-							<li class="list-group-item"><a href="#">Kategori 2</a></li>
-							<li class="list-group-item"><a href="#">Kategori 3</a></li>
-						</ul>
-						<h6 class="card-title mt-3">Kategori</h6>
-						<ul class="list-group">
-							<li class="list-group-item"><a href="#">Kategori 1</a></li>
-							<li class="list-group-item"><a href="#">Kategori 2</a></li>
-							<li class="list-group-item"><a href="#">Kategori 3</a></li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">Harga</h5>
-						<input class="custom-range" max="100" min="0" type="range" value="50">
-					</div>
-				</div>
-			</div> --}}
 			<div class="col-12">
 				<div class="row">
 					<div class="col-md-8">
-						<div class="gambar">
-							<img alt="{{ $data->picture_1 }}" class="w-100" id="{{ $data->picture_1 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_1) }}">
+						<div class="m-4">
+							<div class="scrollable-images m-4">
+								<img alt="{{ $data->picture_1 }}" id="{{ $data->picture_1 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_1) }}">
+								@if ($data->picture_2)
+									<img alt="{{ $data->picture_2 }}" id="{{ $data->picture_2 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_2) }}">
+								@endif
+								@if ($data->picture_3)
+									<img alt="{{ $data->picture_3 }}" id="{{ $data->picture_3 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_3) }}">
+								@endif
+								@if ($data->picture_4)
+									<img alt="{{ $data->picture_4 }}" id="{{ $data->picture_4 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_4) }}">
+								@endif
+								@if ($data->picture_5)
+									<img alt="{{ $data->picture_5 }}" id="{{ $data->picture_5 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_5) }}">
+								@endif
+								@if ($data->picture_6)
+									<img alt="{{ $data->picture_6 }}" id="{{ $data->picture_6 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_6) }}">
+								@endif
+								@if ($data->picture_7)
+									<img alt="{{ $data->picture_7 }}" id="{{ $data->picture_7 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_7) }}">
+								@endif
+								@if ($data->picture_8)
+									<img alt="{{ $data->picture_8 }}" id="{{ $data->picture_8 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_8) }}">
+								@endif
+								@if ($data->picture_9)
+									<img alt="{{ $data->picture_9 }}" id="{{ $data->picture_9 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_9) }}">
+								@endif
+								@if ($data->picture_10)
+									<img alt="{{ $data->picture_10 }}" id="{{ $data->picture_10 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_10) }}">
+								@endif
+							</div>
 						</div>
+
+						{{-- <div class="gallery-container" id="lightgallery">
+							<a data-lg-size="640-360" href="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_1) }}">
+								<img alt="{{ $data->picture_1 }}" class="gallery-item" id="{{ $data->picture_1 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_1) }}">
+							</a>
+							<a data-lg-size="640-360" href="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_2) }}">
+								<img alt="{{ $data->picture_2 }}" class="gallery-item" id="{{ $data->picture_2 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_2) }}">
+							</a>
+						</div> --}}
+
+						{{-- <div class="gallery-container" id="animated-thumbnails-gallery">
+							<a class="gallery-item" data-lg-size="1600-1067" data-src="https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@tobbes_rd' >Tobias Rademacher </a></h4><p> Location - <a href='https://unsplash.com/s/photos/puezgruppe%2C-wolkenstein-in-gr%C3%B6den%2C-s%C3%BCdtirol%2C-italien'>Puezgruppe, Wolkenstein in Gröden, Südtirol, Italien</a>layers of blue.</p>">
+								<img alt="layers of blue." class="img-responsive" src="https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2400" data-pinterest-text="Pin it2" data-src="https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@therawhunter' >Massimiliano Morosinotto </a></h4><p> Location - <a href='https://unsplash.com/s/photos/tre-cime-di-lavaredo%2C-italia'>Tre Cime di Lavaredo, Italia</a>This is the Way</p>" data-tweet-text="lightGallery slide  2">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2400" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1605973029521-8154da591bd7?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@thesaboo' >Sascha Bosshard </a></h4><p> Location - <a href='https://unsplash.com/s/photos/pizol%2C-mels%2C-schweiz'>Pizol, Mels, Schweiz</a></p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1605973029521-8154da591bd7?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2398" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1526281216101-e55f00f0db7a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@yusufevli' >Yusuf Evli </a></h4><p> Foggy Road</p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1526281216101-e55f00f0db7a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1067" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@flovayn' >Jay Mantri</a></h4><p>  Misty shroud over a forest</p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1067" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1505820013142-f86a3439c5b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@flovayn' >Florian van Duyn</a></h4><p>Location - <a href='Bled, Slovenia'>Bled, Slovenia</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1505820013142-f86a3439c5b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1126" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1477322524744-0eece9e79640?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@juanster' >Juan Davila</a></h4><p>Location - <a href='Bled, Slovenia'>Bled, Slovenia</a> Wooded lake island </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1477322524744-0eece9e79640?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1063" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@davidmarcu' >David Marcu</a></h4><p>Location - <a href='https://unsplash.com/s/photos/ciuca%C8%99-peak%2C-romania'>Ciucaș Peak, Romania</a> Alone in the unspoilt wilderness </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2400" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1585338447937-7082f8fc763d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@whoisbenjamin' >whoisbenjamin</a></h4><p>Location - <a href='https://unsplash.com/s/photos/ciuca%C8%99-peak%2C-romania'>Snowdonia National Park, Blaenau Ffestiniog, UK</a>A swan on a calm misty lake in the mountains of Snowdonia, North Wales. <a href='https://unsplash.com/photos/9V6EkAoTWJM'>Link</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1585338447937-7082f8fc763d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1144" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1476842384041-a57a4f124e2e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@aaronburden' >Aaron Burden</a></h4><p>Location - <a href='https://unsplash.com/s/photos/grayling%2C-michigan%2C-united-states'>Grayling, Michigan, United States</a> Colorful trees near a lake. <a href='https://unsplash.com/photos/00QWN1J0g48'>Link</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1476842384041-a57a4f124e2e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1067" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1465311530779-5241f5a29892?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@kalenemsley' >Kalen Emsley</a></h4><p>Location - <a href='https://unsplash.com/s/photos/yukon-territory%2C-canada'>Yukon Territory, Canada</a> No captions. <a href='https://unsplash.com/photos/eHpYD4U5830'>Link</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1465311530779-5241f5a29892?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1067" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1461301214746-1e109215d6d3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@kace' >Kace Rodriguez</a></h4><p>Location - <a href='https://unsplash.com/s/photos/pfeiffer-beach%2C-united-states'>Pfeiffer Beach, United States</a> Pfeiffer Beach at Dusk. <a href='https://unsplash.com/photos/eHpYD4U5830'>Link</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1461301214746-1e109215d6d3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2400" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1610448721566-47369c768e70?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@patwhelen' >Pat Whelen</a></h4><p>Location - <a href='https://unsplash.com/s/photos/portsea-vic%2C-australia'>Portsea VIC, Australia</a> No caption <a href='https://unsplash.com/photos/EKLXDQ-dDRg'>Link</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1610448721566-47369c768e70?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1067" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@derekthomson' >Derek Thomson</a></h4><p>Location - <a href='https://unsplash.com/s/photos/mcway-falls%2C-united-states'>McWay Falls, United States</a> No caption <a href='https://unsplash.com/photos/TWoL-QCZubY'>Link</a> </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2400" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1539678050869-2b97c7c359fd?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@michaljaneck' >Michal Janek</a></h4><p>Location - <a href='https://unsplash.com/s/photos/big-sur%2C-united-states'>Big Sur, United States</a> Coast  </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1539678050869-2b97c7c359fd?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2400" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1446630073557-fca43d580fbe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@papillon' >Iris Papillon</a></h4><p>Location - <a href='https://unsplash.com/s/photos/big-sur%2C-united-states'>Big Sur, United States</a> Big Sur drive  </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1446630073557-fca43d580fbe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1065" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1596370743446-6a7ef43a36f9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@piyushh_dubeyy' >piyush dubey</a></h4><p>Published on August 2, 2020</p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1596370743446-6a7ef43a36f9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-2134" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1464852045489-bccb7d17fe39?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@fynn_it' >fynn</a></h4><p>Location - <a href='https://unsplash.com/s/photos/big-sur%2C-united-states'>Big Sur, United States</a> Wasserauen, Appenzell Innerrhoden, Schweiz  </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1464852045489-bccb7d17fe39?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1060" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@danielleone' >Daniel Leone</a></h4><p>Location - <a href='https://unsplash.com/s/photos/poon-hill%2C-ghode-pani%2C-nepal'>Poon Hill, Ghode Pani, Nepal</a> Taken from the top of Poon Hill before sun rise </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1037" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1510011560141-62c7e8fc7908?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@bboba' >Boba Jovanovic</a></h4><p>Location - <a href='https://unsplash.com/s/photos/bay-of-kotor'>Bay of Kotor</a> Boka kotorska bay </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1510011560141-62c7e8fc7908?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-899" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@svsdesigns' >Surendra Vikram Singh</a></h4><p>Location - <a href='https://unsplash.com/s/photos/lachung%2C-sikkim%2C-india'>Lachung, Sikkim, India</a> Cloud covered mountain </p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1600-1067" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1471931452361-f5ff1faa15ad?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2252&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@camadams' >Cam Adams</a></h4><p>Location - <a href='https://unsplash.com/s/photos/banff%2C-canada'>Banff, Canada</a> Lake along jagged mountains</p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1471931452361-f5ff1faa15ad?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+							<a class="gallery-item" data-lg-size="1536-2304" data-pinterest-text="Pin it3" data-src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1536&q=80" data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@rea_le' >Andrea Ledda</a></h4><p>Location - <a href='https://unsplash.com/s/photos/lago-goillet%2C-italy'>Lago Goillet, Italy</a>  Goillet Lake at 2561 meters above Breuil-Cervinia</p>" data-tweet-text="lightGallery slide  4">
+								<img class="img-responsive" src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=240&q=80" />
+							</a>
+						</div> --}}
 					</div>
 					{{-- <div class="col-md-4">
                         <div class="detail-hotel">
@@ -72,13 +151,16 @@
 							<p><strong>Email :</strong> <span id="email"> {{ $data->owner_email }} </span></p>
 							<p><strong>Rating :</strong> <span id="rating">??/10</span></p>
 							<p><strong>Harga per Hari :</strong> <span id="harga"><strong>Rp {{ $data->price }}</strong></span></p>
-							<button class="btn btn-primary btn-block" data-bs-target="#bookingModal" data-bs-toggle="modal" id="bookingButton" type="button">
+							<button class="btn btn-primary btn-block" data-bs-target="#bookingModal" data-bs-toggle="modal" id="bookingButton" onclick="getAllBookingDate()" type="button">
 								Sewa Sekarang
 							</button>
-							<button class="btn btn-primary btn-block disabled d-none" disabled id="bookedButton" type="button">
+							<button class="btn btn-primary btn-block" data-bs-target="#checkoutModal" data-bs-toggle="modal" id="checkoutButton" type="button">
+								Checkout Sekarang
+							</button>
+							<button class="btn btn-primary btn-block" data-bs-target="#confirmationModal" data-bs-toggle="modal" id="bookedButton" onclick="confirmationData()" type="button">
 								Menunggu Konfirmasi
 							</button>
-							<button class="btn btn-primary btn-block disabled d-none" disabled id="bookButton" type="button">
+							<button class="btn btn-primary btn-block disabled" id="bookButton" type="button">
 								Telah Disewa
 							</button>
 						</div>
@@ -111,47 +193,39 @@
 					</button>
 				</div>
 				<form enctype="multipart/form-data" id="bookingData">
+					@csrf
 					<div class="modal-body">
 						<div class="row">
 							<div class="col">
 								<div class="form-group">
 									<label class="form-control-label" for="nameTenant">Nama Penyewa<span class="text-danger"> *</span></label>
-									<input class="form-control" id="nameTenant" name="tenant_name" placeholder="Masukkan Nama" type="name" value="">
+									<input class="form-control" id="nameTenant" name="tenant_name" placeholder="Masukkan Nama" required="required" type="name" value="">
 								</div>
 								<div class="form-group">
 									<label class="form-control-label" for="emailTenant">Email<span class="text-danger"> *</span></label>
-									<input class="form-control" id="emailTenant" name="tenant_email" placeholder="Masukkan Email" type="email" value="">
+									<input class="form-control" id="emailTenant" name="tenant_email" placeholder="Masukkan Email" required="required" type="email" value="">
 								</div>
 								<div class="form-group">
 									<label class="form-control-label" for="phoneTenant">No Telp<span class="text-danger"> *</span></label>
-									<input class="form-control" id="phoneTenant" name="tenant_phone" placeholder="Masukkan Telepon" type="number" value="">
+									<input class="form-control" id="phoneTenant" name="tenant_phone" placeholder="Masukkan Telepon" required="required" type="number" value="">
 								</div>
 								<div class="form-group">
 									<label class="form-control-label" for="passwordTenant">Password<span class="text-danger"> *</span></label>
-									<input class="form-control" id="passwordTenant" name="tenant_password" placeholder="Masukkan Password" type="password" value="">
+									<input class="form-control" id="passwordTenant" name="tenant_password" placeholder="Masukkan Password" required="required" type="password" value="">
 								</div>
 								<div class="form-group">
 									<label class="form-control-label" for="repasswordTenant">Masukkan Ulang Password<span class="text-danger"> *</span></label>
-									<input class="form-control" id="repasswordTenant" name="tenant_repassword" placeholder="Ulangi Password" type="password" value="">
+									<input class="form-control" id="repasswordTenant" name="tenant_repassword" placeholder="Ulangi Password" required="required" type="password" value="">
 								</div>
 							</div>
 							<div class="col">
 								<div class="form-group">
 									<label class="form-control-label" for="bookingDate">Tanggal Booking<span class="text-danger"> *</span></label>
-									<input class="form-control" id="bookingDate" name="booking_date" placeholder="6/6/2026" type="date" value="">
+									<input class="form-control" id="bookingDate" name="booking_date" placeholder="6/6/2026" required="required" type="date" value="">
 								</div>
 								<div class="form-group">
 									<label class="form-control-label" for="bookingInfoDate">Tanggal Yang Sudah Booking<span class="text-danger"> *</span></label>
-									<ul class="" id="">
-										{{-- @php
-                                        $facility = explode(',', $data->facilities);
-                                    @endphp
-                                    @foreach ($facility as $item)
-                                        <li>{{ $item }}</li>
-                                    @endforeach --}}
-										<li class="text-danger">23 April 2023</li>
-										{{-- disini di isi date yang sudah dibooking --}}
-									</ul>
+									<ul class="booking-dates" id="bookingDates"></ul>
 								</div>
 							</div>
 						</div>
@@ -175,12 +249,13 @@
 					</button>
 				</div>
 				<form enctype="multipart/form-data" id="checkoutData">
+					@csrf
 					<div class="modal-body">
 						<div class="row">
 							<div class="col">
 								<div class="form-group">
 									<label class="form-control-label" for="imageTransfer">Upload Bukti Transfer <span class="text-danger">*</span></label>
-									<input accept="image/jpeg, image/png" class="form-control" data-size="5120" id="imageTransfer" name="transfer_image" onchange="validateUpload(this)" type="file">
+									<input accept="image/jpeg, image/png" class="form-control" data-size="5120" id="imageTransfer" name="transfer_image" onchange="validateUpload(this)" required="required" type="file">
 								</div>
 							</div>
 						</div>
@@ -204,6 +279,7 @@
 					</button>
 				</div>
 				<form enctype="multipart/form-data" id="confirmationData">
+					@csrf
 					<div class="modal-body">
 						<div class="row text-center" id="awaitConfirmation">
 							<div class="col text-center">
@@ -234,21 +310,107 @@
 @endsection
 
 @section('script')
-	<script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+	<script type="text/javascript">
+		$('.scrollable-images').slick({
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1
+		});
+
+		// lightGallery(document.getElementById('lightgallery'), {
+		// 	thumbnail: true,
+		// });
+
+		// $("#animated-thumbnails-gallery")
+		// 	.justifiedGallery({
+		// 		captions: false,
+		// 		lastRow: "hide",
+		// 		rowHeight: 180,
+		// 		margins: 5
+		// 	})
+		// 	.on("jg.complete", function() {
+		// 		window.lightGallery(
+		// 			document.getElementById("animated-thumbnails-gallery"), {
+		// 				autoplayFirstVideo: false,
+		// 				pager: false,
+		// 				galleryId: "nature",
+		// 				plugins: [lgZoom, lgThumbnail],
+		// 				mobileSettings: {
+		// 					controls: false,
+		// 					showCloseIcon: false,
+		// 					download: false,
+		// 					rotate: false
+		// 				}
+		// 			}
+		// 		);
+		// 	});
+
+		var idRoom = parseInt("{{ $data->id }}");
+		var tempImageData = null;
+		var transactionNumber = null;
+		var confirmationStatus = false;
+		var intervalId;
+
 		var modalBooking = $('#bookingModal');
 		var modalCheckout = $('#checkoutModal');
 		var modalConfirmation = $('#confirmationModal');
 
-		$('#awaitConfirmation').hide();
+		$('#awaitConfirmation').show();
 		$('#statusConfirmed').hide();
 		$('#statusUnconfirmed').hide();
 
 		$('#bookingButton').show();
+		$('#checkoutButton').hide();
 		$('#bookedButton').hide();
 		$('#bookButton').hide();
 
+		async function blurPasswordTenant(repassword, password) {
+			if (password.val() === repassword.val()) {
+				repassword.addClass('is-valid').removeClass('is-invalid');
+				password.addClass('is-valid').removeClass('is-invalid');
+			} else {
+				repassword.removeClass('is-valid').addClass('is-invalid').val('');
+				password.removeClass('is-valid').addClass('is-invalid');
+				modalBooking.modal('hide');
+				const result = await alertNotification('Password Tidak Sama!', 'Mohon isikan password yang sama!', 'warning');
+				if (result.isConfirmed) {
+					modalBooking.modal('show');
+				}
+			}
+		}
+
+		async function keyUpPasswordTenant(repassword, password) {
+			if (password.val() === repassword.val()) {
+				repassword.addClass('is-valid').removeClass('is-invalid');
+				password.addClass('is-valid').removeClass('is-invalid');
+			} else {
+				repassword.removeClass('is-valid').addClass('is-invalid');
+				password.removeClass('is-valid').addClass('is-invalid');
+			}
+		}
+
+		$(document).ready(function() {
+			$('#repasswordTenant').on('blur', async function() {
+				blurPasswordTenant($('#repasswordTenant'), $('#passwordTenant'));
+			}).on('keyup', async function() {
+				keyUpPasswordTenant($('#repasswordTenant'), $('#passwordTenant'));
+			});
+			$('#passwordTenant').on('keyup', async function() {
+				keyUpPasswordTenant($('#repasswordTenant'), $('#passwordTenant'));
+			});
+		});
+
 		document.getElementById('bookingData').addEventListener('submit', async function(e) {
 			e.preventDefault();
+			const bookingData = {};
+			bookingData['tenant_name'] = document.getElementById('nameTenant').value;
+			bookingData['tenant_email'] = document.getElementById('emailTenant').value;
+			bookingData['tenant_phone'] = document.getElementById('phoneTenant').value;
+			bookingData['tenant_password'] = document.getElementById('passwordTenant').value;
+			bookingData['booking_date'] = document.getElementById('bookingDate').value;
 			modalBooking.modal('hide');
 			const result = await showNotification('Apakah Anda yakin?', 'Data Akun dapat diubah dilain waktu. Namun untuk booking ulang, data tanggal tidak dapat diganti.', 'info')
 			if (!result.isConfirmed) {
@@ -256,14 +418,27 @@
 			} else {
 				showLoadingNotification();
 				try {
-					const response = await $.ajax({
-						url: '/',
-						type: 'get',
+					var url = '{{ route('orderBuildingWithoutLogin:user', ['id' => ':id']) }}';
+					url = url.replace(':id', idRoom);
+					const response = await axios.post(url, {
+						data: bookingData,
+						headers: headers,
+						processData: false,
+						contentType: false,
+						enctype: 'multipart/form-data'
 					});
-					if (response) {
+					if (response.data.status === 200) {
 						const successBooking = await alertNotification('Booking Berhasil!', 'Mohon kirim bukti pembayaran transfer!', 'success');
 						if (successBooking.isConfirmed) {
 							modalCheckout.modal('show');
+							$('#bookingButton').hide();
+							$('#checkoutButton').show();
+							transactionNumber = response.data.data.code;
+						}
+					} else {
+						const failedBooking = await alertNotification('Booking Gagal!', response.data.detail_message, 'warning');
+						if (failedBooking.isConfirmed) {
+							modalBooking.modal('show');
 						}
 					}
 					hideLoadingNotification();
@@ -279,24 +454,38 @@
 
 		document.getElementById('checkoutData').addEventListener('submit', async function(e) {
 			e.preventDefault();
+			const paymentData = new FormData();
+			paymentData.append('transfer_image', document.getElementById('imageTransfer').files[0]);
+			paymentData.append('transaction_number', transactionNumber);
 			modalCheckout.modal('hide');
-			const result = await showNotification('Apakah Anda yakin?', 'Bukti Transfer tidak dapat diunggah ulang. Anda dapat menggunggahnya ulang setelah status verifikasi dari Admin.', 'info')
+			const result = await showNotification('Apakah Anda yakin?', 'Bukti Transfer tidak dapat diunggah ulang. Anda dapat menggunggahnya ulang setelah status verifikasi dari Admin.', 'info');
 			if (!result.isConfirmed) {
 				modalCheckout.modal('show');
 			} else {
 				showLoadingNotification();
 				try {
-					const response = await $.ajax({
-						url: '/',
-						type: 'get',
+					var url = '{{ route('paymentBuildingWithoutLogin:user', ['id' => ':id']) }}';
+					url = url.replace(':id', idRoom);
+					const response = await axios.post(url, paymentData, {
+						headers: headers,
+						processData: false,
+						contentType: false,
+						enctype: 'multipart/form-data'
 					});
-					if (response) {
+					if (response.data.status === 200) {
 						const successCheckout = await alertNotification('Unggah Bukti Transfer Berhasil!', 'Mohon tunggu konfirmasi pembayaran dari Admin.', 'success');
 						if (successCheckout.isConfirmed) {
 							modalConfirmation.modal('show');
-							$('#awaitConfirmation').show();
-							$('#bookingButton').hide();
-							$('#bookedButton').show().removeClass('d-none');
+							$('#checkoutButton').hide();
+							$('#bookedButton').show();
+							confirmationStatus = true;
+							confirmationData();
+							intervalId = setInterval(confirmationData, 1000);
+						}
+					} else {
+						const failedCheckout = await alertNotification('Unggah Bukti Transfer Gagal!', response.data.detail_message, 'warning');
+						if (failedCheckout.isConfirmed) {
+							modalCheckout.modal('show');
 						}
 					}
 					hideLoadingNotification();
@@ -310,9 +499,105 @@
 			}
 		});
 
+		async function confirmationData() {
+			showLoadingToast();
+			if (confirmationStatus === true) {
+				try {
+					const transactionData = {};
+					transactionData['transaction_number'] = transactionNumber;
+					var url = '{{ route('confirmationBuildingWithoutLogin:user', ['id' => ':id']) }}';
+					url = url.replace(':id', idRoom);
+					const response = await axios.post(url, {
+						data: transactionData,
+						headers: headers,
+						processData: false,
+						contentType: false,
+						enctype: 'multipart/form-data'
+					});
+					if (response.data.status === 200) {
+						if (response.data.data.status_order === 3 && response.data.data.status_payment === 1) {
+							$('#awaitConfirmation').hide();
+							$('#statusConfirmed').show();
+							$('#statusUnconfirmed').hide();
+							clearInterval(intervalId);
+						} else if (response.data.data.status_order === 0 && response.data.data.status_payment === 2) {
+							$('#awaitConfirmation').hide();
+							$('#statusConfirmed').hide();
+							$('#statusUnconfirmed').show();
+							clearInterval(intervalId);
+						} else {
+							$('#awaitConfirmation').show();
+							$('#statusConfirmed').hide();
+							$('#statusUnconfirmed').hide();
+						}
+					} else {
+						modalConfirmation.modal('hide');
+						const failedCheckout = await alertNotification('Server Error!', response.data.detail_message, 'warning');
+						if (failedCheckout.isConfirmed) {
+							modalConfirmation.modal('show');
+						}
+					}
+					hideLoadingToast();
+				} catch (error) {
+					hideLoadingToast();
+					const failedCheckout = await alertNotification('Server Error!', 'Server sedang dalam perbaikan!', 'warning');
+					if (failedCheckout.isConfirmed) {
+						modalConfirmation.modal('show');
+					}
+				}
+			}
+		}
+
+		async function getAllBookingDate() {
+			showLoadingNotification();
+			try {
+				var url = '{{ route('getBookingDate:user', ['id' => ':id']) }}';
+				url = url.replace(':id', idRoom);
+				const response = await axios.get(url, {
+					headers: headers,
+					processData: false,
+					contentType: false,
+				});
+				if (response.data.status === 200) {
+					const bookingDatesElement = document.getElementById('bookingDates');
+					bookingDatesElement.innerHTML = '';
+					response.data.data.forEach(dates => {
+						const date = new Date(dates.date);
+						const options = {
+							day: 'numeric',
+							month: 'long',
+							year: 'numeric'
+						};
+						const formattedDate = date.toLocaleDateString('id-ID', options);
+						const li = document.createElement('li');
+						li.textContent = formattedDate;
+						bookingDatesElement.appendChild(li);
+					});
+				} else {
+					const failedCheckout = await alertNotification('Server Error!', response.data.detail_message, 'warning');
+					if (failedCheckout.isConfirmed) {}
+				}
+				hideLoadingNotification();
+			} catch (error) {
+				hideLoadingNotification();
+				const failedCheckout = await alertNotification('Server Error!', 'Server sedang dalam perbaikan!', 'warning');
+				if (failedCheckout.isConfirmed) {}
+			}
+		}
+
 		function validateUpload(input) {
 			checkFileFormat(input);
 			checkMinResolution(input, 640, 360);
 		}
+
+		$(document).ready(function() {
+			if (confirmationStatus === true || modalConfirmation.hasClass('show')) {
+				confirmationData();
+				setInterval(confirmationData, 1000);
+			}
+		});
 	</script>
+@endsection
+
+@section('script')
 @endsection

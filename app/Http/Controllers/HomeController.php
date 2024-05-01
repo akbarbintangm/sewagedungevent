@@ -39,6 +39,26 @@ class HomeController extends Controller
         return view("building-detail", compact('data'));
     }
 
+    public function getBookingDateUser(Request $request, $id) {
+        try {
+            $getBookingData = DB::table('transactions')
+                ->where('id_building', $id)
+                ->select('*')
+                ->get();
+            if($getBookingData->isNotEmpty()) {
+                $dataDate = [];
+                foreach ($getBookingData as $booking) {
+                    $dataDate[] = [
+                        'date' => $booking->date_start,
+                    ];
+                }
+            }
+            return $this->arrayResponse(200, 'success', null, $dataDate);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data konfirmasi! Alasan: '.$th, null);
+        }
+    }
+
     public function dashboardPageAdmin()
     {
         return view("admin.dashboard");
@@ -47,5 +67,10 @@ class HomeController extends Controller
     public function dashboardPageOwner()
     {
         return view("owner.dashboard");
+    }
+
+    public function arrayResponse($status, $message, $detailMessage, $data) {
+        $response = ['status' => $status, 'message' => $message, 'detail_message' => $detailMessage, 'data' => $data];
+        return response()->json($response);
     }
 }

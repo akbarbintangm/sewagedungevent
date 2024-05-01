@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_admin');
+            $table->bigInteger('id_admin')->nullable();
             $table->bigInteger('id_customer');
             $table->bigInteger('id_building');
-            $table->integer('total_day');
+            $table->integer('total_day')->nullable();
             $table->date('date_start');
-            $table->date('date_end');
+            $table->date('date_end')->nullable();
             $table->text('transfer_image')->nullable();
             $table->integer('status_order');
             $table->integer('status_transaction');

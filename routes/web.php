@@ -43,10 +43,14 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'indexWithoutLoginPageUser')->name('landingWithoutLoginPage:user')->middleware('guest');
     Route::get('/building', 'buildingWithoutLoginPageUser')->name('buildingWithoutLoginPage:user')->middleware('guest');
     Route::get('/building/detail/{id}', 'buildingDetailWithoutLoginPageUser')->name('buildingDetailWithoutLoginPage:user')->middleware('guest');
+    Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');
 });
-// Route::controller(TransactionController::class)->group(function () {
-//     Route::get('/building/detail/{id}/transaction/order/{sid}', 'orderBuildingPageUser')->name('orderBuildingPage:user');
-// });
+Route::controller(TransactionController::class)->group(function () {
+    Route::post('/building/detail/{id}/transaction/order-without-login', 'orderBuildingWithoutLoginUser')->name('orderBuildingWithoutLogin:user')->middleware('guest');
+    Route::post('/building/detail/{id}/transaction/payment-without-login', 'paymentBuildingWithoutLoginUser')->name('paymentBuildingWithoutLogin:user')->middleware('guest');
+    Route::post('/building/detail/{id}/transaction/await-confirmation-without-login', 'confirmationBuildingWithoutLoginUser')->name('confirmationBuildingWithoutLogin:user')->middleware('guest');
+});
+
 /* Middleware */
 Route::middleware(['auth'])->group(function () {
     /* Histories API for All User with their Login Info */
@@ -171,22 +175,19 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(BuildingController::class)->group(function () {
             /* Page, Detail, and Lists */
             Route::get('/building', 'buildingPageUser')->name('buildingPage:user');
-            Route::get('/building/{id}/detail', 'detailPageUser')->name('buildingDetailPage:user'); // SALAH
-            Route::get('/building/list', 'listBuildingUser')->name('listBuilding:user');
-            Route::get('/building/detail', 'detailBuildingUser')->name('detailBuilding:user');
+            Route::get('/building/detail/{id}', 'buildingDetailPageUser')->name('buildingDetailPage:user');
         });
         /* Transaction History */
         Route::controller(TransactionController::class)->group(function () {
             // Perlu perbaikan route untuk User Order Ruangan
             /* Building Order */
-            Route::post('/building/detail/{id}/transaction/order', 'orderBuildingUser')->name('orderBuilding:user');
-            // Route::get('/building/detail/{id}/transaction/order/{sid}', 'orderBuildingPageUser')->name('orderBuildingPage:user');
+            Route::get('/building/detail/{id}/transaction/order', 'orderBuildingUser')->name('orderBuilding:user');
             /* Payment */
-            Route::post('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
-            Route::get('/building/detail/{id}/transaction/payment/{sid}', 'paymentBuildingPageUser')->name('paymentBuildingPage:user');
+            Route::get('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
+            /* Awaiting Confirmation */
+            Route::get('/building/detail/{id}/transaction/await-confirmation', 'confirmationBuildingUser')->name('confirmationBuilding:user');
             /* Invoice Page */
-            Route::post('/building/detail/{id}/transaction/invoice', 'invoiceBuildingUser')->name('invoiceBuilding:user');
-            Route::get('/building/detail/{id}/transaction/invoice/{sid}', 'invoiceBuildingPageUser')->name('invoiceBuildingPage:user');
+            // Route::get('/building/detail/{id}/transaction/invoice/{sid}', 'invoiceBuildingPageUser')->name('invoiceBuildingPage:user');
             /* Transaction History */
             Route::post('/transaction', 'transactionPageUser')->name('transactionPage:user');
             Route::get('/transaction/{id}', 'transactionPageUser')->name('transactionDetailPage:user');

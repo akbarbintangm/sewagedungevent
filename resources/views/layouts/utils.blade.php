@@ -5,8 +5,14 @@
 				'csrftoken': '{{ csrf_token() }}'
 			}
 		});
-		var token = '{{ Session::token() }}';
+		const token = '{{ Session::token() }}';
 	});
+
+	const token = '{{ Session::token() }}';
+	const headers = {
+		'Authorization': token,
+		'Content-Type': 'multipart/form-data',
+	};
 
 	function checkFileCount(input) {
 		var files = input.files;
@@ -155,6 +161,26 @@
 	}
 
 	function hideLoadingNotification() {
+		try {
+			Swal.close();
+		} catch (e) {
+			//
+		}
+	}
+
+	function showLoadingToast() {
+		return Swal.fire({
+			title: 'Please wait...',
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			didOpen: () => {
+				Swal.showLoading()
+			}
+		});
+	}
+
+	function hideLoadingToast() {
 		try {
 			Swal.close();
 		} catch (e) {

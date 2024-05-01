@@ -94,13 +94,11 @@ class BuildingController extends Controller
         }
     }
 
-    public function buildingPageOwner()
-    {
+    public function buildingPageOwner() {
         return view("owner.building.index");
     }
 
-    public function detailPageBuildingAdmin($id)
-    {
+    public function detailPageBuildingAdmin($id) {
         $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
@@ -110,8 +108,7 @@ class BuildingController extends Controller
         return view("admin.building.detail", compact('data'));
     }
 
-    public function detailPageBuildingOwner($id)
-    {
+    public function detailPageBuildingOwner($id) {
         return view("owner.building.detail");
     }
 
@@ -186,8 +183,7 @@ class BuildingController extends Controller
         }
     }
 
-    public function addPageBuildingAdmin()
-    {
+    public function addPageBuildingAdmin() {
         return view("admin.building.add");
     }
 
@@ -202,7 +198,7 @@ class BuildingController extends Controller
             'room_facilities' => 'required',
             'room_image' => 'required'
         ]);
-        if (Auth::user()->type_user == "ADMINISTRATOR") {
+        if (Auth::user()->type_user == "ADMINISTRATOR" || Auth::user()->type_user == "ADMIN_ENTRY") {
             $roomOwnerData = [
                 'name' => $roomDataRequest['owner_name'],
                 'email' => $roomDataRequest['owner_email'],
@@ -217,6 +213,9 @@ class BuildingController extends Controller
             $checkDataOwner = DB::table('users')->where('email', $roomOwnerData['email'])->orWhere('name', $roomOwnerData['name'])->first();
             if (!$checkDataOwner) {
                 $idOwner = DB::table('users')->insertGetId($roomOwnerData);
+            } else {
+                $idOwner = Auth::user()->id;
+                // Beri catch jika ada kesalahan seperti administrator / admin entry yang ngemasukin datanya
             }
         } else if(Auth::user()->type_user == "PEMILIK_GEDUNG") {
             $idOwner = Auth::user()->id;
@@ -251,13 +250,11 @@ class BuildingController extends Controller
         // update versi ke 2, todo Try Catch, dan tambahkan Response JSON, bukan redirect halaman lagi
     }
 
-    public function addPageBuildingOwner()
-    {
+    public function addPageBuildingOwner() {
         return view("owner.building.add");
     }
 
-    public function createFolder($fullPath)
-    {
+    public function createFolder($fullPath) {
         $path = public_path($fullPath);
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
@@ -267,8 +264,7 @@ class BuildingController extends Controller
         }
     }
 
-    public function deleteFolder($fullPath)
-    {
+    public function deleteFolder($fullPath) {
         $path = public_path($fullPath);
         if (is_dir($path)) {
             $files = array_diff(scandir($path), array('.', '..'));
@@ -281,7 +277,7 @@ class BuildingController extends Controller
         }
     }
 
-    public function arrayResponse($status, $message, $detailMessage, $data){
+    public function arrayResponse($status, $message, $detailMessage, $data) {
         $response = ['status' => $status, 'message' => $message, 'detail_message' => $detailMessage, 'data' => $data];
         return response()->json($response);
     }
