@@ -25,177 +25,19 @@
 					</div>
 					<div class="card-body pb-3 pt-3">
 						<div class="table-responsive p-0">
-							<table class="align-items-center mb-0 table">
+							<table class="align-items-center table-transaction mb-0 table">
 								<thead>
 									<tr>
 										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Kode Pembayaran</th>
 										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Tanggal Pembayaran</th>
 										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Nama</th>
-										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Durasi</th>
+										{{-- <th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Durasi</th> --}}
 										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Tota Bayar</th>
 										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Status Pembayaran</th>
-										<th class="text-secondary opacity-7"></th>
-										<th class="text-secondary opacity-7"></th>
+										<th class="text-uppercase text-secondary font-weight-bolder opacity-7 text-center text-xs">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="text-center align-middle">
-											<p class="text-dark font-weight-bold mb-0 text-sm">TRX0012</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">10/02/2024</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Alejandro Bimbim</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">3 Hari</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Rp. 20.000.000</p>
-										</td>
-										<td class="text-center align-middle text-sm">
-											<span class="badge badge-sm bg-gradient-success">Lunas</span>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-success btn-sm mb-0" type="button">Konfirmasi</button>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center align-middle">
-											<p class="text-dark font-weight-bold mb-0 text-sm">TRX0013</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">10/02/2024</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Sergio Perez</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">3 Hari</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Rp. 20.000.000</p>
-										</td>
-										<td class="text-center align-middle text-sm">
-											<span class="badge badge-sm bg-gradient-warning">Diproses</span>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-success btn-sm mb-0" type="button">Konfirmasi</button>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center align-middle">
-											<p class="text-dark font-weight-bold mb-0 text-sm">TRX0014</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">10/02/2024</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Yuki Sunoda</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">2 Hari</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Rp. 20.000.000</p>
-										</td>
-										<td class="text-center align-middle text-sm">
-											<span class="badge badge-sm bg-gradient-warning">Diproses</span>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-success btn-sm mb-0" type="button">Konfirmasi</button>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center align-middle">
-											<p class="text-dark font-weight-bold mb-0 text-sm">TRX0015</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">10/02/2024</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Zhou Guanyou</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">1 Hari</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Rp. 20.000.000</p>
-										</td>
-										<td class="text-center align-middle text-sm">
-											<span class="badge badge-sm bg-gradient-success">Lunas</span>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-success btn-sm mb-0" type="button">Konfirmasi</button>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center align-middle">
-											<p class="text-dark font-weight-bold mb-0 text-sm">TRX0016</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">10/02/2024</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Valteri Bottas</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">2 Hari</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Rp. 20.000.000</p>
-										</td>
-										<td class="text-center align-middle text-sm">
-											<span class="badge badge-sm bg-gradient-warning">Diproses</span>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-success btn-sm mb-0" type="button">Konfirmasi</button>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center align-middle">
-											<p class="text-dark font-weight-bold mb-0 text-sm">TRX0017</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">10/02/2024</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Lance Stroll</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">1 Hari</p>
-										</td>
-										<td class="text-center align-middle">
-											<p class="font-weight-bold mb-0 text-sm">Rp. 20.000.000</p>
-										</td>
-										<td class="text-center align-middle text-sm">
-											<span class="badge badge-sm bg-gradient-success">Lunas</span>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-primary btn-sm mb-0" type="button">Details</button>
-										</td>
-										<td class="align-middle">
-											<button class="btn btn-outline-success btn-sm mb-0" type="button">Konfirmasi</button>
-										</td>
-									</tr>
-								</tbody>
+								<tbody></tbody>
 							</table>
 						</div>
 					</div>
@@ -207,4 +49,94 @@
 @endsection
 
 @section('script')
+	<script>
+		$(document).ready(function() {
+			$.ajaxSetup({
+				headers: {
+					'csrftoken': '{{ csrf_token() }}'
+				}
+			});
+			var token = '{{ Session::token() }}';
+			var tableVerified = $('.table-transaction').DataTable({
+				autoWidth: true,
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('listTransaction:admin') }}",
+				headers: {
+					'CSRFToken': token
+				},
+				columns: [{
+						data: 'code',
+						name: 'transactions.code',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'date_payment',
+						name: 'transaction.updated_at',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'tenant_name',
+						name: 'tenant_name',
+						orderable: true,
+						searchable: true
+					},
+					// {
+					// 	data: 'total_day',
+					// 	name: 'transactions.total_day',
+					// 	orderable: true,
+					// 	searchable: true
+					// },
+					{
+						data: 'total_pay',
+						name: 'transactions.total_pay',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'status_transaction',
+						name: 'status_transaction',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: false,
+						searchable: false
+					}
+				]
+			});
+		});
+
+		function verifyOrder(data) {
+			var url = '{{ route('updateOrder:admin', ['id' => ':data']) }}';
+			url = url.replace(':data', data);
+			submitNotification(null, 'Apakah Anda yakin', 'Verifikasi Order Booking Ini?', 'info', url)
+				.then(replyResponse => {
+					if (replyResponse) {
+						$('.table-transaction').DataTable().ajax.reload(null, false);
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+		function verifyTransaction(data) {
+			var url = '{{ route('updateTransaction:admin', ['id' => ':data']) }}';
+			url = url.replace(':data', data);
+			submitNotification(null, 'Apakah Anda yakin', 'Verifikasi Order/Transaksi Booking Ini?', 'info', url)
+				.then(replyResponse => {
+					if (replyResponse) {
+						$('.table-transaction').DataTable().ajax.reload(null, false);
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+	</script>
 @endsection

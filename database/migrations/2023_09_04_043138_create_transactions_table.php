@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date_start');
             $table->date('date_end')->nullable();
             $table->text('transfer_image')->nullable();
+            $table->integer('total_pay')->nullable();
             $table->integer('status_order');
             $table->integer('status_transaction');
             $table->string('code')->unique();

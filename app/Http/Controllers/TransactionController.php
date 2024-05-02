@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Str;
+use DataTables;
 
 class TransactionController extends Controller
 {
@@ -56,6 +57,7 @@ class TransactionController extends Controller
                 $uniqueNumber = strtoupper(Str::uuid()->toString());
                 $code = 'TRX/' . str_replace('-', '', $request['data']['booking_date']) . '/' . $id . '/' . strtoupper(substr($request['data']['tenant_name'], 0, 1)) . '/' . $currentDate . '/' . $uniqueNumber;
                 // example: TRX/20240502/1/AKBAR/20240501/nomorngawur
+                $getDataBuilding = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->first();
                 $newBooking = DB::table('transactions')->insertGetId([
                     'id_admin' => null,
                     'id_customer' => $newUsers,
@@ -67,6 +69,7 @@ class TransactionController extends Controller
                     'status_order' => 1,
                     'status_transaction' => 0,
                     'code' => $code,
+                    'total_pay' => $getDataBuilding->price || null,
                     'created_by' => $id,
                     'updated_by' => $id,
                     'created_at' => Carbon::now(),
@@ -162,6 +165,152 @@ class TransactionController extends Controller
 
     public function orderPageAdmin() {
         return view("admin.order.index");
+    }
+
+    public function listOrderAdmin(Request $request) {
+        if ($request->ajax()) {
+            $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                // ->join('users as user_owner', 'user_owner.id', 'transactions.id_owner')
+                ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
+                // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.name as building_name')
+                ->whereIn('transactions.status_order', [1,2])
+                ->whereIn('transactions.status_transaction', [0]);
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('tenant_name', function ($row) {
+                    $data['tenant_name'] = $row->tenant_name;
+                    return view('components.admin.order.tenant_name', $data);
+                })
+                ->addColumn('building_name', function ($row) {
+                    $data['building_name'] = $row->building_name;
+                    return view('components.admin.order.building_name', $data);
+                })
+                ->addColumn('date_start', function ($row) {
+                    $data['date_start'] = $row->date_start;
+                    return view('components.admin.order.date_start', $data);
+                })
+                ->addColumn('total_day', function ($row) {
+                    $data['total_day'] = $row->total_day;
+                    return view('components.admin.order.total_day', $data);
+                })
+                ->addColumn('date_end', function ($row) {
+                    $data['date_end'] = $row->date_end;
+                    return view('components.admin.order.date_end', $data);
+                })
+                ->addColumn('total_pay', function ($row) {
+                    $data['total_pay'] = $row->total_pay;
+                    return view('components.admin.order.total_pay', $data);
+                })
+                ->addColumn('action', function ($row) {
+                    $data['id'] = $row->id;
+                    $data['status_order'] = $row->status_order;
+                    return view('components.admin.order.action', $data);
+                })
+                ->rawColumns(['tenant_name', 'building_name', 'date_start', 'total_day', 'date_end', 'total_pay', 'action'])
+                ->escapeColumns([])
+                ->make();
+        }
+    }
+
+    public function updateOrderAdmin(Request $request, $id) {
+        $verifyData = [
+            'status_order' => 3,
+            'status_transaction' => 1,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        try {
+            $buildingId = DB::table('transactions')->where('transactions.id', $id)->update($verifyData);
+            $getData = DB::table('transactions')->where('transactions.id', $id)->select('transactions.*')->first();
+            return $this->arrayResponse(200, 'success', 'Order ' . $getData->code . ' berhasil di verifikasi.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
+    }
+
+    public function listTransactionAdmin(Request $request) {
+        if ($request->ajax()) {
+            $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                // ->join('users as user_owner', 'user_owner.id', 'transactions.id_owner')
+                ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
+                // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.name as building_name')
+                ->whereIn('transactions.status_order', [0,1,2,3])
+                ->whereIn('transactions.status_transaction', [0,1,2]);
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('code', function ($row) {
+                    $data['code'] = $row->code;
+                    return view('components.admin.transaction.code', $data);
+                })
+                ->addColumn('date_payment', function ($row) {
+                    $data['updated_at'] = $row->updated_at;
+                    return view('components.admin.transaction.date_payment', $data);
+                })
+                ->addColumn('tenant_name', function ($row) {
+                    $data['tenant_name'] = $row->tenant_name;
+                    return view('components.admin.transaction.tenant_name', $data);
+                })
+                ->addColumn('total_day', function ($row) {
+                    $data['total_day'] = $row->total_day;
+                    return view('components.admin.transaction.total_day', $data);
+                })
+                ->addColumn('total_pay', function ($row) {
+                    $data['total_pay'] = $row->total_pay;
+                    return view('components.admin.transaction.total_pay', $data);
+                })
+                ->addColumn('status_transaction', function ($row) {
+                    $data['status_order'] = $row->status_order;
+                    $data['status_transaction'] = $row->status_transaction;
+                    return view('components.admin.transaction.status_transaction', $data);
+                })
+                ->addColumn('action', function ($row) {
+                    $data['id'] = $row->id;
+                    $data['status_order'] = $row->status_order;
+                    $data['status_transaction'] = $row->status_transaction;
+                    return view('components.admin.transaction.action', $data);
+                })
+                ->rawColumns(['code', 'date_payment', 'tenant_name', 'total_day', 'total_pay', 'status_transaction', 'action'])
+                ->escapeColumns([])
+                ->make();
+        }
+    }
+
+    public function updateTransactionAdmin(Request $request, $id) {
+        $verifyData = [
+            'status_order' => 3,
+            'status_transaction' => 2,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        try {
+            $buildingId = DB::table('transactions')->where('transactions.id', $id)->update($verifyData);
+            $getData = DB::table('transactions')->where('transactions.id', $id)->select('transactions.*')->first();
+            return $this->arrayResponse(200, 'success', 'Transaksi ' . $getData->code . ' berhasil di verifikasi.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
+    }
+
+    public function updateCancelTransactionAdmin(Request $request, $id) {
+        $verifyData = [
+            'status_order' => 0,
+            'status_transaction' => 0,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        try {
+            $buildingId = DB::table('transactions')->where('transactions.id', $id)->update($verifyData);
+            $getData = DB::table('transactions')->where('transactions.id', $id)->select('transactions.*')->first();
+            return $this->arrayResponse(200, 'success', 'Transaksi ' . $getData->code . ' berhasil di batalkan.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
     }
 
     public function orderPageOwner() {

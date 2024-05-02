@@ -43,6 +43,8 @@ class HomeController extends Controller
         try {
             $getBookingData = DB::table('transactions')
                 ->where('id_building', $id)
+                ->whereIn('transactions.status_order', [1,2])
+                ->whereIn('transactions.status_transaction', [1])
                 ->select('*')
                 ->get();
             if($getBookingData->isNotEmpty()) {

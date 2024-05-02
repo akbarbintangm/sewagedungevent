@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('status');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
+            // kolom gawe nomor_rekening
             $table->timestamps();
         });
     }

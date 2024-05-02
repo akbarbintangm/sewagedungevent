@@ -85,10 +85,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/order/{id}/detail', 'orderDetailPageAdmin')->name('orderDetailPage:admin');
             Route::get('/order/dashboard', 'dashboardOrderAdmin')->name('dashboardOrder:admin');
             Route::get('/order/list', 'listOrderAdmin')->name('listOrder:admin');
-            Route::get('/order/detail', 'detailOrderAdmin')->name('detailOrder:admin');
+            // Route::get('/order/detail', 'detailOrderAdmin')->name('detailOrder:admin');
             // Route::post('/order/add', 'addOrderAdmin')->name('addOrder:admin');
-            Route::post('/order/update', 'updateOrderAdmin')->name('updateOrder:admin');
-            Route::get('/order/delete', 'deleteOrderAdmin')->name('deleteOrder:admin');
+            Route::get('/order/update/{id}', 'updateOrderAdmin')->name('updateOrder:admin');
+            // Route::get('/order/delete', 'deleteOrderAdmin')->name('deleteOrder:admin');
             /* Transaction History */
             Route::get('/transaction', 'transactionPageAdmin')->name('transactionPage:admin');
             Route::get('/transaction/{id}/detail', 'transactionDetailPageAdmin')->name('transactionDetailPage:admin');
@@ -96,8 +96,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/transaction/list', 'listTransactionAdmin')->name('listTransaction:admin');
             Route::get('/transaction/detail', 'detailTransactionAdmin')->name('detailTransaction:admin');
             // Route::post('/transaction/add', 'addTransactionAdmin')->name('addTransaction:admin');
-            // Route::post('/transaction/update', 'updateTransactionAdmin')->name('updateTransaction:admin');
-            Route::get('/transaction/delete', 'deleteTransactionAdmin')->name('deleteTransaction:admin');
+            Route::get('/transaction/update/{id}', 'updateTransactionAdmin')->name('updateTransaction:admin');
+            // Route::get('/transaction/delete', 'deleteTransactionAdmin')->name('deleteTransaction:admin');
         });
         /* Master User */
         Route::controller(UserController::class)->group(function () {
