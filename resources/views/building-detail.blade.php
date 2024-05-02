@@ -558,7 +558,7 @@
 					processData: false,
 					contentType: false,
 				});
-				if (response.data.status === 200) {
+				if (response.data.status === 200 && response.data.data) {
 					const bookingDatesElement = document.getElementById('bookingDates');
 					bookingDatesElement.innerHTML = '';
 					response.data.data.forEach(dates => {
@@ -573,9 +573,6 @@
 						li.textContent = formattedDate;
 						bookingDatesElement.appendChild(li);
 					});
-				} else {
-					const failedCheckout = await alertNotification('Server Error!', response.data.detail_message, 'warning');
-					if (failedCheckout.isConfirmed) {}
 				}
 				hideLoadingNotification();
 			} catch (error) {

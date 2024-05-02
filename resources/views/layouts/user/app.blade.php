@@ -43,7 +43,7 @@
 	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}" type="text/javascript"></script>
 	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 	<script src="{{ asset('/vendor/lightgallery/lightgallery.min.js') }}"></script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	@include('layouts.utils')
 	@yield('script')
 </body>

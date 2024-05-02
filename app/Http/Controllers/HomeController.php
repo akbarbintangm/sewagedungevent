@@ -52,8 +52,10 @@ class HomeController extends Controller
                         'date' => $booking->date_start,
                     ];
                 }
+                return $this->arrayResponse(200, 'success', null, $dataDate);
+            } else {
+                return $this->arrayResponse(200, 'success', null, null);
             }
-            return $this->arrayResponse(200, 'success', null, $dataDate);
         } catch (\Throwable $th) {
             return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data konfirmasi! Alasan: '.$th, null);
         }
