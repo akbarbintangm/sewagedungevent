@@ -15,8 +15,7 @@ use DataTables;
 
 class BuildingController extends Controller
 {
-    public function buildingPageAdmin()
-    {
+    public function buildingPageAdmin() {
         return view("admin.building.index");
     }
 

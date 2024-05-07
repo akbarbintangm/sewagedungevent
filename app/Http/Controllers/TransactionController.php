@@ -30,8 +30,9 @@ class TransactionController extends Controller
         return view("user.order");
     }
 
-    public function orderBuildingWithoutLoginUser(Request $request, $id) {
+    public function orderBuildingUser(Request $request, $id) {
         try {
+            $autoLogin = false;
             $checkDateBooking = DB::table('transactions')
                 ->where('date_start', $request['data']['booking_date'])
                 ->whereIn('status_order', [1, 2, 3])
@@ -39,7 +40,7 @@ class TransactionController extends Controller
                 ->select('*')
                 ->first();
             $checkUser = DB::table('users')->where('email', $request['data']['tenant_email'])->select('*')->first();
-            if(!$checkUser && !$checkDateBooking) {
+            if(!$checkUser && !Auth::check()) {
                 $newUsers = DB::table('users')->insertGetId([
                     'name' => $request['data']['tenant_name'],
                     'email' => $request['data']['tenant_email'],
@@ -53,14 +54,22 @@ class TransactionController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ]);
+                if($newUsers) {
+                    $autoLogin = Auth::attempt(['email' => $request['data']['tenant_email'], 'password' => $request['data']['tenant_password']], null);
+                } else {
+                    return $this->arrayResponse(400, 'failed', 'Data User '.$request['data']['tenant_email'].' gagal dimasukkan!', $request['data']);
+                }
+            } else if(Auth::check()) {
+                $autoLogin = true;
+            }
+            if($autoLogin && !$checkDateBooking) {
                 $currentDate = Carbon::now()->format('Ymd');
                 $uniqueNumber = strtoupper(Str::uuid()->toString());
                 $code = 'TRX/' . str_replace('-', '', $request['data']['booking_date']) . '/' . $id . '/' . strtoupper(substr($request['data']['tenant_name'], 0, 1)) . '/' . $currentDate . '/' . $uniqueNumber;
-                // example: TRX/20240502/1/AKBAR/20240501/nomorngawur
                 $getDataBuilding = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->first();
                 $newBooking = DB::table('transactions')->insertGetId([
                     'id_admin' => null,
-                    'id_customer' => $newUsers,
+                    'id_customer' => isset($newUsers) ? $newUsers : Auth::user()->id,
                     'id_building' => $id,
                     'total_day' => null,
                     'date_start' => $request['data']['booking_date'],
@@ -70,12 +79,11 @@ class TransactionController extends Controller
                     'status_transaction' => 0,
                     'code' => $code,
                     'total_pay' => $getDataBuilding->price || null,
-                    'created_by' => $id,
-                    'updated_by' => $id,
+                    'created_by' => isset($newUsers) ? $newUsers : Auth::user()->id,
+                    'updated_by' => isset($newUsers) ? $newUsers : Auth::user()->id,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ]);
-                // seharusnya disini ada function login
                 if ($newBooking) {
                     $getDataTransaction = DB::table('transactions')->where('id', $newBooking)->select('*')->first();
                     return $this->arrayResponse(200, 'success', null, $getDataTransaction);
@@ -94,7 +102,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function paymentBuildingWithoutLoginUser(Request $request, $id) {
+    public function paymentBuildingUser(Request $request, $id) {
         try {
             $getDataUsersAndTransaction = DB::table('transactions')
                 ->join('users as user_customer', 'user_customer.id', 'transactions.id_customer')
@@ -131,7 +139,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function confirmationBuildingWithoutLoginUser(Request $request, $id) {
+    public function confirmationBuildingUser(Request $request, $id) {
         try {
             $getDataTransaction = DB::table('transactions')
                 ->where('id_building', $id)
@@ -149,18 +157,6 @@ class TransactionController extends Controller
         } catch (\Throwable $th) {
             return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data konfirmasi! Alasan: '.$th, null);
         }
-    }
-
-    public function orderBuildingUser(Request $request, $id) {
-        return $this->arrayResponse(200, 'success', null, null);
-    }
-
-    public function paymentBuildingUser(Request $request, $id) {
-        return $this->arrayResponse(200, 'success', null, null);
-    }
-
-    public function confirmationBuildingUser(Request $request, $id) {
-        return $this->arrayResponse(200, 'success', null, null);
     }
 
     public function orderPageAdmin() {

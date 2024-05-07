@@ -26,6 +26,11 @@ Route::get('/reset', function () {
         ->back()
         ->with('info', 'Data Cache telah dibersihkan.');
 })->name('reset');
+// Check Auth
+Route::get('/check-auth', function () {
+    $response = ['status' => 200, 'message' => 'success', 'detail_message' => '', 'authenticated' => Auth::check(), 'data' => Auth::user()];
+    return response()->json($response);
+})->name('check-login');
 /* Login & Logout */
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
@@ -46,14 +51,15 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');
 });
 Route::controller(TransactionController::class)->group(function () {
-    Route::post('/building/detail/{id}/transaction/order-without-login', 'orderBuildingWithoutLoginUser')->name('orderBuildingWithoutLogin:user')->middleware('guest');
-    Route::post('/building/detail/{id}/transaction/payment-without-login', 'paymentBuildingWithoutLoginUser')->name('paymentBuildingWithoutLogin:user')->middleware('guest');
-    Route::post('/building/detail/{id}/transaction/await-confirmation-without-login', 'confirmationBuildingWithoutLoginUser')->name('confirmationBuildingWithoutLogin:user')->middleware('guest');
+    Route::post('/building/detail/{id}/transaction/order-without-login', 'orderBuildingUser')->name('orderBuildingWithoutLogin:user');
+    Route::post('/building/detail/{id}/transaction/payment-without-login', 'paymentBuildingUser')->name('paymentBuildingWithoutLogin:user');
+    Route::post('/building/detail/{id}/transaction/await-confirmation-without-login', 'confirmationBuildingUser')->name('confirmationBuildingWithoutLogin:user');
 });
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/user/profile', 'profilePageUser')->name('profilePage:user');
 });
+
 /* Middleware */
 Route::middleware(['auth'])->group(function () {
     /* Histories API for All User with their Login Info */
@@ -175,7 +181,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'indexPageUser')->name('homePage:user');
         });
         /* Building List */
-        Route::controller(BuildingController::class)->group(function () {
+        Route::controller(HomeController::class)->group(function () {
             /* Page, Detail, and Lists */
             Route::get('/building', 'buildingPageUser')->name('buildingPage:user');
             Route::get('/building/detail/{id}', 'buildingDetailPageUser')->name('buildingDetailPage:user');
@@ -183,14 +189,9 @@ Route::middleware(['auth'])->group(function () {
         /* Transaction History */
         Route::controller(TransactionController::class)->group(function () {
             // Perlu perbaikan route untuk User Order Ruangan
-            /* Building Order */
-            Route::get('/building/detail/{id}/transaction/order', 'orderBuildingUser')->name('orderBuilding:user');
-            /* Payment */
-            Route::get('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
-            /* Awaiting Confirmation */
-            Route::get('/building/detail/{id}/transaction/await-confirmation', 'confirmationBuildingUser')->name('confirmationBuilding:user');
-            /* Invoice Page */
-            // Route::get('/building/detail/{id}/transaction/invoice/{sid}', 'invoiceBuildingPageUser')->name('invoiceBuildingPage:user');
+            Route::post('/building/detail/{id}/transaction/order', 'orderBuildingUser')->name('orderBuilding:user');
+            Route::post('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
+            Route::post('/building/detail/{id}/transaction/await-confirmation', 'confirmationBuildingUser')->name('confirmationBuilding:user');
             /* Transaction History */
             Route::post('/transaction', 'transactionPageUser')->name('transactionPage:user');
             Route::get('/transaction/{id}', 'transactionPageUser')->name('transactionDetailPage:user');
