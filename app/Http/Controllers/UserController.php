@@ -22,4 +22,8 @@ class UserController extends Controller
     public function userPageOwner() {
         return view("owner.users.index");
     }
+
+    public function profilePageUser() {
+        return view("user.account");
+    }
 }
