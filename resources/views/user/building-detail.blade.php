@@ -568,7 +568,7 @@
 		});
 
 		async function confirmationData() {
-			showLoadingToast();
+			// showLoadingToast();
 			if (confirmationStatus === true) {
 				try {
 					const transactionData = {};
@@ -605,9 +605,9 @@
 							modalConfirmation.modal('show');
 						}
 					}
-					hideLoadingToast();
+					// hideLoadingToast();
 				} catch (error) {
-					hideLoadingToast();
+					// hideLoadingToast();
 					const failedCheckout = await alertNotification('Server Error!', 'Server sedang dalam perbaikan!', 'warning');
 					if (failedCheckout.isConfirmed) {
 						modalConfirmation.modal('show');

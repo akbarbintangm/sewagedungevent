@@ -16,6 +16,7 @@ class HomeController extends Controller
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
             ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
             ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->where('buildings.status', 1)
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
@@ -28,6 +29,7 @@ class HomeController extends Controller
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
             ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
             ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->where('buildings.status', 1)
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
@@ -36,10 +38,12 @@ class HomeController extends Controller
 
     public function buildingWithoutLoginPageUser() {
         $data = DB::table('buildings')
-                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
-                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
-                ->get();
+            ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->where('buildings.status', 1)
+            ->orderBy('buildings.created_at', 'desc')
+            ->get();
         return view("user.building", compact('data'));
     }
 
@@ -49,6 +53,7 @@ class HomeController extends Controller
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
                 ->where('buildings.id' ,$id)
+                ->where('buildings.status', 1)
                 ->first();
         $dataBooking = (object) [
             'code' => '',
@@ -88,6 +93,7 @@ class HomeController extends Controller
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
             ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
             ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->where('buildings.status', 1)
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
@@ -96,10 +102,13 @@ class HomeController extends Controller
 
     public function buildingPageUser() {
         $data = DB::table('buildings')
-                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
-                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
-                ->get();
+            ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->where('buildings.status', 1)
+            ->orderBy('buildings.created_at', 'desc')
+            ->limit(10)
+            ->get();
         return view("user.building", compact('data'));
     }
 
@@ -109,6 +118,7 @@ class HomeController extends Controller
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
                 ->where('buildings.id' ,$id)
+                ->where('buildings.status', 1)
                 ->first();
         $dataBooking = DB::table('transactions')
                 ->where('transactions.id_customer', Auth::user()->id)
