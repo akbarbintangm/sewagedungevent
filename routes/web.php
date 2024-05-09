@@ -40,14 +40,14 @@ Route::controller(LoginController::class)->group(function () {
 });
 /* Register */
 Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'index')->name('auth-register')->middleware('guest');
-    Route::post('/register', 'register')->name('auth-registration');
+    Route::get('/register', 'index')->name('register')->middleware('guest');
+    Route::post('/register', 'register')->name('auth-register');
 });
 /* User Page without Login */
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'indexWithoutLoginPageUser')->name('landingWithoutLoginPage:user')->middleware('guest');
-    Route::get('/building', 'buildingWithoutLoginPageUser')->name('buildingWithoutLoginPage:user')->middleware('guest');
-    Route::get('/building/detail/{id}', 'buildingDetailWithoutLoginPageUser')->name('buildingDetailWithoutLoginPage:user')->middleware('guest');
+    Route::get('/', 'indexWithoutLoginPageUser')->name('landingWithoutLoginPage:user');
+    Route::get('/building', 'buildingWithoutLoginPageUser')->name('buildingWithoutLoginPage:user');
+    Route::get('/building/detail/{id}', 'buildingDetailWithoutLoginPageUser')->name('buildingDetailWithoutLoginPage:user');
     Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');
 });
 Route::controller(TransactionController::class)->group(function () {

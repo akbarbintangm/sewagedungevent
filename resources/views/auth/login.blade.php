@@ -10,14 +10,6 @@
 @section('content')
 	<section class="section section-shaped section-lg">
 		<div class="shape shape-style-1 bg-gradient-default">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
 		</div>
 		<div class="pt-lg-7 container">
 			<div class="row justify-content-center">
@@ -29,7 +21,31 @@
 							<div class="text-muted mb-4 text-center">
 								<small>Sign in with credentials</small>
 							</div>
-							<form action="{{ route('auth-login') }}" enctype="multipart/form-data" method="POST" role="form">
+							@if ($message = Session::get('success'))
+								<div class="alert alert-dismissible fade show alert-success alert-block shadow-sm" data-alerts=”alerts” data-dismiss="alert" data-fade=”5000″ role="alert">
+									<strong>Well done!</strong> {{ $message }}
+									<button class="close" data-dismiss="alert" type="button">×</button>
+								</div>
+							@endif
+							@if ($message = Session::get('error'))
+								<div class="alert alert-dismissible fade show alert-danger alert-block shadow-sm" data-alerts=”alerts” data-dismiss="alert" data-fade=”5000″ role="alert">
+									<strong>Error!</strong> {{ $message }}
+									<button class="close" data-dismiss="alert" type="button">×</button>
+								</div>
+							@endif
+							@if ($message = Session::get('warning'))
+								<div class="alert alert-dismissible fade show alert-warning alert-block shadow-sm" data-alerts=”alerts” data-dismiss="alert" data-fade=”5000″ role="alert">
+									<strong>Warning!</strong> {{ $message }}
+									<button class="close" data-dismiss="alert" type="button">×</button>
+								</div>
+							@endif
+							@if ($message = Session::get('info'))
+								<div class="alert alert-dismissible fade show alert-info alert-block shadow-sm" data-alerts=”alerts” data-dismiss="alert" data-fade=”5000″ role="alert">
+									<strong>Info!</strong> {{ $message }}
+									<button class="close" data-dismiss="alert" type="button">×</button>
+								</div>
+							@endif
+							<form action="{{ route('auth-login') }}" enctype="multipart/form-data" id="forms" method="POST" role="form">
 								@csrf
 								<div class="form-group mb-3">
 									<div class="input-group input-group-alternative">
@@ -62,7 +78,7 @@
 							<a class="text-light" href="#"><small>Forgot password?</small></a>
 						</div>
 						<div class="col-6 text-right">
-							<a class="text-light" href="{{ route('auth-register') }}"><small>Create new account</small></a>
+							<a class="text-light" href="{{ route('register') }}"><small>Ga punya akun? Ya buat lah bang!</small></a>
 						</div>
 					</div>
 				</div>
@@ -72,4 +88,10 @@
 @endsection
 
 @section('script')
+	<script>
+		document.getElementById('forms').addEventListener('submit', function(e) {
+			e.preventDefault();
+			submitNotification(this, 'Apakah Anda yakin untuk Login?', 'Mohon taati peraturan yang ada.', 'info');
+		});
+	</script>
 @endsection

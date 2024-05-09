@@ -11,45 +11,30 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    /* public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    } */
 
     public function index()
     {
         if (!Auth::user()) {
             return view('auth.login');
         } else {
-            return route('/');
+            if (Auth::user()->type_user == 'ADMINISTRATOR') {
+                return redirect()
+                    ->route('dashboardPage:admin')
+                    ->with('success', 'Anda Sudah Login! '.Auth::user()->name);
+            } else if (Auth::user()->type_user == 'PEMILIK_GEDUNG') {
+                return redirect()
+                    ->route('dashboardPage:owner')
+                    ->with('success', 'Anda Sudah Login! '.Auth::user()->name);
+            } else if (Auth::user()->type_user == 'CUSTOMER' ) {
+                return redirect()
+                    ->route('homePage:user')
+                    ->with('success', 'Anda Sudah Login! '.Auth::user()->name);
+            }
         }
     }
 
@@ -84,7 +69,6 @@ class LoginController extends Controller
                         ->route('login')
                         ->with('info', 'Akun Anda masih belum aktif, mohon hubungi Admin segera.');
                 } else {
-                    /* If Remember */
                     if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember)) {
                         $request->session()->regenerate();
                         DB::table('histories')->insert([
@@ -113,7 +97,6 @@ class LoginController extends Controller
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } elseif (Auth::attempt($credentials)) {
-                        /* If User didn't Click Remember */
                         $request->session()->regenerate();
                         DB::table('histories')->insert([
                             'id_transaction' => 0,
