@@ -127,15 +127,6 @@
 							</a>
 						</div> --}}
 					</div>
-					{{-- <div class="col-md-4">
-                        <div class="detail-hotel">
-                            <h2 id="namaHotel">Hotel Bintang Lima</h2>
-                            <p><strong>Lokasi :</strong> <span id="lokasiHotel">Jl. Sudirman No. 123, Jakarta</span></p>
-                            <p><strong>Rating :</strong> <span id="ratingHotel">9.0</span></p>
-                            <p><strong>Harga per Malam :</strong> <span id="hargaHotel"><strong>Rp 1.000.000</strong></span></p>
-                            <button class="btn btn-primary btn-block">Pesan Sekarang</button>
-                        </div>
-                    </div> --}}
 				</div>
 				<div class="row mt-5">
 					<div class="col-md-8">
@@ -150,7 +141,7 @@
 							<p><strong>Lokasi :</strong> <span id="lokasi"> {{ $data->address }} </span></p>
 							<p><strong>Email :</strong> <span id="email"> {{ $data->owner_email }} </span></p>
 							<p><strong>Rating :</strong> <span id="rating">??/10</span></p>
-							<p><strong>Harga per Hari :</strong> <span id="harga"><strong>Rp {{ $data->price }}</strong></span></p>
+							<p><strong>Harga per Hari :</strong> <span id="harga">Rp. {{ number_format($data->price, 0, ',', '.') }}</span></p>
 							@if (Auth::check())
 								<button class="btn btn-primary btn-block" data-bs-target="#bookingModal" data-bs-toggle="modal" id="bookingButton" onclick="getAllBookingDate()" style="display: none;" type="button">
 									Sewa Sekarang

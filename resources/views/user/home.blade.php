@@ -44,7 +44,7 @@
 							<div class="card-body">
 								<h5 class="card-title text-center">{{ $item->name }}</h5>
 								<p class="card-text">{{ Str::limit($item->description, 45, '...') }}</p>
-								<p class="card-text"><b>Harga: Rp. {{ $item->price }}</b></p>
+								<p class="card-text"><b>Harga: Rp. {{ number_format($item->price, 0, ',', '.') }}</b></p>
 								<div class="d-flex justify-content-center">
 									@if (Auth::check())
 										<a class="btn btn-primary" href="{{ route('buildingDetailPage:user', ['id' => $item->id]) }}">Booking</a>

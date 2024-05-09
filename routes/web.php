@@ -94,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/order/{id}/detail', 'orderDetailPageAdmin')->name('orderDetailPage:admin');
             Route::get('/order/dashboard', 'dashboardOrderAdmin')->name('dashboardOrder:admin');
             Route::get('/order/list', 'listOrderAdmin')->name('listOrder:admin');
-            // Route::get('/order/detail', 'detailOrderAdmin')->name('detailOrder:admin');
+            // Route::get('/order/detail/{id}', 'detailOrderAdmin')->name('detailOrder:admin');
             // Route::post('/order/add', 'addOrderAdmin')->name('addOrder:admin');
             Route::get('/order/update/{id}', 'updateOrderAdmin')->name('updateOrder:admin');
             // Route::get('/order/delete', 'deleteOrderAdmin')->name('deleteOrder:admin');
@@ -103,7 +103,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/transaction/{id}/detail', 'transactionDetailPageAdmin')->name('transactionDetailPage:admin');
             Route::get('/transaction/dashboard', 'dashboardTransactionAdmin')->name('dashboardTransaction:admin');
             Route::get('/transaction/list', 'listTransactionAdmin')->name('listTransaction:admin');
-            Route::get('/transaction/detail', 'detailTransactionAdmin')->name('detailTransaction:admin');
+            Route::get('/transaction/detail/{id}', 'detailTransactionAdmin')->name('detailTransaction:admin');
             // Route::post('/transaction/add', 'addTransactionAdmin')->name('addTransaction:admin');
             Route::get('/transaction/update/{id}', 'updateTransactionAdmin')->name('updateTransaction:admin');
             // Route::get('/transaction/delete', 'deleteTransactionAdmin')->name('deleteTransaction:admin');

@@ -40,6 +40,7 @@ class TransactionController extends Controller
                 ->select('*')
                 ->first();
             $checkUser = DB::table('users')->where('email', $request['data']['tenant_email'])->select('*')->first();
+            $getDataUserName = $request['data']['tenant_name'];
             if(!$checkUser && !Auth::check()) {
                 $newUsers = DB::table('users')->insertGetId([
                     'name' => $request['data']['tenant_name'],
@@ -56,17 +57,19 @@ class TransactionController extends Controller
                 ]);
                 if($newUsers) {
                     $autoLogin = Auth::attempt(['email' => $request['data']['tenant_email'], 'password' => $request['data']['tenant_password']], null);
+                    $getDataUserName = DB::table('users')->where('id', $newUsers)->select('*')->pluck('name');
                 } else {
                     return $this->arrayResponse(400, 'failed', 'Data User '.$request['data']['tenant_email'].' gagal dimasukkan!', $request['data']);
                 }
             } else if(Auth::check()) {
                 $autoLogin = true;
+                $getDataUserName = Auth::user()->name;
             }
             if($autoLogin && !$checkDateBooking) {
                 $currentDate = Carbon::now()->format('Ymd');
-                $uniqueNumber = strtoupper(Str::uuid()->toString());
-                $code = 'TRX/' . str_replace('-', '', $request['data']['booking_date']) . '/' . $id . '/' . strtoupper(substr($request['data']['tenant_name'], 0, 1)) . '/' . $currentDate . '/' . $uniqueNumber;
-                $getDataBuilding = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->first();
+                // $uniqueNumber = strtoupper(Str::uuid()->toString());
+                $code = 'TRX/' . str_replace('-', '', $request['data']['booking_date']) . '/' . $id . '/' . strtoupper($getDataUserName) . '/' . $currentDate /* . '/' . $uniqueNumber */;
+                $getDataBuildingPrice = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->pluck('buildings.price')->first();
                 $newBooking = DB::table('transactions')->insertGetId([
                     'id_admin' => null,
                     'id_customer' => isset($newUsers) ? $newUsers : Auth::user()->id,
@@ -78,7 +81,7 @@ class TransactionController extends Controller
                     'status_order' => 1,
                     'status_transaction' => 0,
                     'code' => $code,
-                    'total_pay' => $getDataBuilding->price || null,
+                    'total_pay' => $getDataBuildingPrice,
                     'created_by' => isset($newUsers) ? $newUsers : Auth::user()->id,
                     'updated_by' => isset($newUsers) ? $newUsers : Auth::user()->id,
                     'created_at' => Carbon::now(),
@@ -222,6 +225,21 @@ class TransactionController extends Controller
             $buildingId = DB::table('transactions')->where('transactions.id', $id)->update($verifyData);
             $getData = DB::table('transactions')->where('transactions.id', $id)->select('transactions.*')->first();
             return $this->arrayResponse(200, 'success', 'Order ' . $getData->code . ' berhasil di verifikasi.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
+    }
+
+    public function detailTransactionAdmin(Request $request, $id) {
+        try {
+            $transactionData = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', 'user_tenant.name as tenant_name', 'building_list.name as building_name')
+                ->where('transactions.id', $id)
+                ->first();
+            return $this->arrayResponse(200, 'success', null, $transactionData);
         } catch (\Throwable $th) {
             return $this->arrayResponse(400, 'error', $th, null);
         }
