@@ -10,7 +10,7 @@
 	<div class="w-auto" id="sidenav-collapse-main">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'dashboardPage:admin' || Route::currentRouteName() == 'dashboardPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('dashboardPage:admin') : route('dashboardPage:owner') }}">
+				<a class="nav-link" href="{{ route('dashboardPage:admin') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
 					</div>
@@ -23,28 +23,20 @@
 				</h6>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'addPageBuilding:admin' || Route::currentRouteName() == 'addPageBuilding:owner' || Route::currentRouteName() == 'detailBuilding:admin' || Route::currentRouteName() == 'detailBuilding:owner' || Route::currentRouteName() == 'buildingPage:admin' || Route::currentRouteName() == 'buildingPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('buildingPage:admin') : route('buildingPage:owner') }}">
+				<a class="nav-link" href="{{ route('buildingPage:admin') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-app text-primary text-sm opacity-10"></i>
 					</div>
 					<span class="nav-link-text ms-1">Daftar Ruangan</span>
 				</a>
 			</li>
-			{{-- <li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'facilityPage:admin' || Route::currentRouteName() == 'facilityPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('facilityPage:admin') : route('facilityPage:owner') }}">
-					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
-						<i class="ni ni-app text-primary text-sm opacity-10"></i>
-					</div>
-					<span class="nav-link-text ms-1">Daftar Fasilitas</span>
-				</a>
-			</li> --}}
 			<li class="nav-item mt-3">
 				<h6 class="text-uppercase font-weight-bolder opacity-6 ms-2 ps-4 text-xs">
 					Transaksi
 				</h6>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'orderPage:admin' || Route::currentRouteName() == 'orderPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('orderPage:admin') : route('orderPage:owner') }}">
+				<a class="nav-link" href="{{ route('orderPage:admin') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-app text-primary text-sm opacity-10"></i>
 					</div>
@@ -52,7 +44,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'transactionPage:admin' || Route::currentRouteName() == 'transactionPage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('transactionPage:admin') : route('transactionPage:owner') }}">
+				<a class="nav-link" href="{{ route('transactionPage:admin') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-app text-primary text-sm opacity-10"></i>
 					</div>
@@ -64,18 +56,16 @@
 					User
 				</h6>
 			</li>
-			@if (Auth::user()->type_user === 'ADMINISTRATOR')
-				<li class="nav-item">
-					<a class="nav-link {{ Route::currentRouteName() == 'userPage:admin' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('userPage:admin') : '' }}">
-						<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
-							<i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-						</div>
-						<span class="nav-link-text ms-1">Daftar User</span>
-					</a>
-				</li>
-			@endif
 			<li class="nav-item">
-				<a class="nav-link {{ Route::currentRouteName() == 'profilePage:admin' || Route::currentRouteName() == 'profilePage:owner' ? 'active' : '' }}" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('profilePage:admin') : route('profilePage:owner') }}">
+				<a class="nav-link" href="{{ route('userPage:admin') }}">
+					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
+						<i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+					</div>
+					<span class="nav-link-text ms-1">Daftar User</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ route('profilePage:admin') }}">
 					<div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center me-2 text-center">
 						<i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
 					</div>

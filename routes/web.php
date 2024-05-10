@@ -102,7 +102,6 @@ Route::middleware(['auth'])->group(function () {
         });
         /* Master Building */
         Route::controller(BuildingController::class)->group(function () {
-            /* Admin */
             Route::get('/building', 'buildingPageAdmin', function() {
                 clearOrRunSchedule();
             })->name('buildingPage:admin');
@@ -158,8 +157,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/profile/password', 'updatePasswordProfileAdmin')->name('updatePasswordProfile:admin');
         });
     });
-    /* Owner Page */
     /* Admin Entry Page */
+
+    /* Owner Page */
+
     /* User Page */
     Route::group(['prefix' => 'user'], function () {
         Route::get('/reset', function () {
