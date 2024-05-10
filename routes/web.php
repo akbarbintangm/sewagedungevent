@@ -98,6 +98,7 @@ Route::middleware(['auth'])->group(function () {
         /* Dashboard */
         Route::controller(HomeController::class)->group(function () {
             Route::get('/', 'dashboardPageAdmin')->name('dashboardPage:admin');
+            Route::get('/counter-dashboard', 'dashboardCounterAdmin')->name('counterDashboard:admin');
         });
         /* Master Building */
         Route::controller(BuildingController::class)->group(function () {

@@ -51,7 +51,7 @@
 	</script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<script src="{{ asset('/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="{{ asset('/js/plugins/axios.min.js') }}"></script>
 	@include('layouts.utils')
 	@yield('script')
 	@if ($message = Session::get('success'))

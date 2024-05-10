@@ -25,8 +25,7 @@
 							<div class="col-8">
 								<div class="numbers">
 									<p class="text-uppercase font-weight-bold mb-0 text-sm">User</p>
-									<h5 class="font-weight-bolder">
-										$53,000
+									<h5 class="font-weight-bolder" id="userCount">0
 									</h5>
 								</div>
 							</div>
@@ -46,8 +45,7 @@
 							<div class="col-8">
 								<div class="numbers">
 									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Ruangan</p>
-									<h5 class="font-weight-bolder">
-										2,300
+									<h5 class="font-weight-bolder" id="roomCount">0
 									</h5>
 								</div>
 							</div>
@@ -67,8 +65,7 @@
 							<div class="col-8">
 								<div class="numbers">
 									<p class="text-uppercase font-weight-bold mb-0 text-sm">Jumlah Fasilitas</p>
-									<h5 class="font-weight-bolder">
-										+3,462
+									<h5 class="font-weight-bolder" id="facilitiesCount">0
 									</h5>
 								</div>
 							</div>
@@ -97,54 +94,29 @@
 					</div>
 					<div class="card-body p-3 pt-4">
 						<ul class="list-group">
-							<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
-								<div class="d-flex flex-column">
-									<h6 class="mb-3 text-sm">NAMA RUANGAN</h6>
-									<span class="mb-2 text-xs">Nama: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-									<span class="mb-2 text-xs">Pemilik: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-									<span class="text-xs">Alamat: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-								</div>
-								<div class="ms-auto text-end">
-									<a class="btn btn-link text-danger text-gradient mb-0 px-3" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-									<a class="btn btn-link text-dark mb-0 px-3" href="javascript:;"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
-								</div>
-							</li>
-							<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
-								<div class="d-flex flex-column">
-									<h6 class="mb-3 text-sm">NAMA RUANGAN</h6>
-									<span class="mb-2 text-xs">Nama: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-									<span class="mb-2 text-xs">Pemilik: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-									<span class="text-xs">Alamat: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-								</div>
-								<div class="ms-auto text-end">
-									<a class="btn btn-link text-danger text-gradient mb-0 px-3" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-									<a class="btn btn-link text-dark mb-0 px-3" href="javascript:;"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
-								</div>
-							</li>
-							<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
-								<div class="d-flex flex-column">
-									<h6 class="mb-3 text-sm">NAMA RUANGAN</h6>
-									<span class="mb-2 text-xs">Nama: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-									<span class="mb-2 text-xs">Pemilik: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-									<span class="text-xs">Alamat: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-								</div>
-								<div class="ms-auto text-end">
-									<a class="btn btn-link text-danger text-gradient mb-0 px-3" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-									<a class="btn btn-link text-dark mb-0 px-3" href="javascript:;"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
-								</div>
-							</li>
-							<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
-								<div class="d-flex flex-column">
-									<h6 class="mb-3 text-sm">NAMA RUANGAN</h6>
-									<span class="mb-2 text-xs">Nama: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-									<span class="mb-2 text-xs">Pemilik: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-									<span class="text-xs">Alamat: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-								</div>
-								<div class="ms-auto text-end">
-									<a class="btn btn-link text-danger text-gradient mb-0 px-3" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-									<a class="btn btn-link text-dark mb-0 px-3" href="javascript:;"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
-								</div>
-							</li>
+							@if ($data->isEmpty())
+								<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
+									<div class="d-flex flex-column">
+										<h6 class="mb-3 text-sm">Belum Ada Data Ruangan!</h6>
+									</div>
+									<div class="ms-auto text-end">
+									</div>
+								</li>
+							@else
+								@foreach ($data as $key => $item)
+									<li class="list-group-item d-flex border-radius-lg mb-2 border-0 bg-gray-100 p-4">
+										<div class="d-flex flex-column">
+											<h6 class="mb-3 text-sm">{{ $item->name }}</h6>
+											<span class="mb-2 text-xs">Nama: <span class="text-dark font-weight-bold ms-sm-2">{{ $item->name }}</span></span>
+											<span class="mb-2 text-xs">Pemilik: <span class="text-dark ms-sm-2 font-weight-bold">{{ $item->owner_name }}</span></span>
+											<span class="text-xs">Alamat: <span class="text-dark ms-sm-2 font-weight-bold">{{ $item->address }}</span></span>
+										</div>
+										<div class="ms-auto text-end">
+											<a class="btn btn-link text-dark mb-0 px-3" href="{{ route('detailPageBuilding:admin', ['id' => $item->id]) }}"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
+										</div>
+									</li>
+								@endforeach
+							@endif
 						</ul>
 					</div>
 				</div>
@@ -155,4 +127,27 @@
 @endsection
 
 @section('script')
+	<script>
+		$(document).ready(function() {
+			getAllCountDashboard();
+		});
+
+		async function getAllCountDashboard() {
+			showLoadingNotification();
+			try {
+				var url = '{{ route('counterDashboard:admin') }}';
+				const response = await axios.get(url);
+				if (response.data.status === 200) {
+					$('#userCount').html(response.data.data.user_count);
+					$('#roomCount').html(response.data.data.room_count);
+					$('#facilitiesCount').html(0);
+				}
+				hideLoadingNotification();
+			} catch (error) {
+				hideLoadingNotification();
+				const failedFetch = await alertNotification('Server Error!', 'Server sedang dalam perbaikan!', 'warning');
+				if (failedFetch.isConfirmed) {}
+			}
+		}
+	</script>
 @endsection

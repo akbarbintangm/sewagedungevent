@@ -87,8 +87,7 @@ class HomeController extends Controller
         }
     }
 
-    public function indexPageUser()
-    {
+    public function indexPageUser() {
         $data = DB::table('buildings')
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
             ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
@@ -129,12 +128,53 @@ class HomeController extends Controller
         return view("user.building-detail", compact('data', 'dataBooking'));
     }
 
+    public function dashboardCounterAdmin() {
+        try {
+            $countUser = DB::table('users')->where('status', 1)->count();
+            $countBuilding = DB::table('buildings')->where('status', 1)->count();
+            $data = [
+                'user_count' => $countUser,
+                'room_count' => $countBuilding,
+            ];
+            return $this->arrayResponse(200, 'success', null, $data);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data dashboard! Alasan: '.$th, null);
+        }
+    }
+
+    public function dashboardCounterOwner() {
+        try {
+            $countUser = DB::table('users')->where('status', 1)->count();
+            $countBuilding = DB::table('buildings')->where('status', 1)->where('id_owner', Auth::user()->id)->count();
+            $data = [
+                'user_count' => $countUser,
+                'room_count' => $countBuilding,
+            ];
+            return $this->arrayResponse(200, 'success', null, $data);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data dashboard! Alasan: '.$th, null);
+        }
+    }
+
     public function dashboardPageAdmin() {
-        return view("admin.dashboard");
+        $data = DB::table('buildings')
+            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+            ->where('buildings.status', 1)
+            ->select('buildings.*', 'user_owner.name as owner_name')
+            ->limit(10)
+            ->get();
+        return view("admin.dashboard", compact('data'));
     }
 
     public function dashboardPageOwner() {
-        return view("owner.dashboard");
+        $data = DB::table('buildings')
+            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+            ->where('buildings.status', 1)
+            ->where('buildings.id_owner', Auth::user()->id)
+            ->select('buildings.*', 'user_owner.name as owner_name')
+            ->limit(10)
+            ->get();
+        return view("owner.dashboard", compact('data'));
     }
 
     public function arrayResponse($status, $message, $detailMessage, $data) {
