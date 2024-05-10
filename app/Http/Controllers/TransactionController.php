@@ -57,7 +57,7 @@ class TransactionController extends Controller
                 ]);
                 if($newUsers) {
                     $autoLogin = Auth::attempt(['email' => $request['data']['tenant_email'], 'password' => $request['data']['tenant_password']], null);
-                    $getDataUserName = DB::table('users')->where('id', $newUsers)->select('*')->pluck('name');
+                    $getDataUserName = DB::table('users')->where('id', $newUsers)->select('*')->pluck('name')->first();
                 } else {
                     return $this->arrayResponse(400, 'failed', 'Data User '.$request['data']['tenant_email'].' gagal dimasukkan!', $request['data']);
                 }
