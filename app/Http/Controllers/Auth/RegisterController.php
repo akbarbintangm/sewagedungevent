@@ -23,22 +23,24 @@ class RegisterController extends Controller
 
     public function index()
     {
-        if (!Auth::user()) {
+        if (Auth::check() && Auth::user()->type_user == 'ADMINISTRATOR') {
+            return redirect()
+                ->route('dashboardPage:admin')
+                ->with('info', 'Anda Sudah Register! '.Auth::user()->name);
+        } else if (Auth::check() && Auth::user()->type_user == 'PEMILIK_GEDUNG') {
+            return redirect()
+                ->route('dashboardPage:owner')
+                ->with('info', 'Anda Sudah Register! '.Auth::user()->name);
+        } else if (Auth::check() && Auth::user()->type_user == 'CUSTOMER' ) {
+            return redirect()
+                ->route('homePage:user')
+                ->with('info', 'Anda Sudah Register! '.Auth::user()->name);
+        } else if (Auth::check() && Auth::user()->type_user == 'ENTRY') {
+            return redirect()
+                ->route('dashboardPage:entry')
+                ->with('info', 'Anda Sudah Register! '.Auth::user()->name);
+        } else if (!Auth::check() || !Auth::user()) {
             return view('auth.register');
-        } else {
-            if (Auth::user()->type_user == 'ADMINISTRATOR') {
-                return redirect()
-                    ->route('dashboardPage:admin')
-                    ->with('success', 'Anda Sudah Register! '.Auth::user()->name);
-            } else if (Auth::user()->type_user == 'PEMILIK_GEDUNG') {
-                return redirect()
-                    ->route('dashboardPage:owner')
-                    ->with('success', 'Anda Sudah Register! '.Auth::user()->name);
-            } else if (Auth::user()->type_user == 'CUSTOMER' ) {
-                return redirect()
-                    ->route('homePage:user')
-                    ->with('success', 'Anda Sudah Register! '.Auth::user()->name);
-            }
         }
     }
 

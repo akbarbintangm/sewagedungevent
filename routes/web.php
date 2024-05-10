@@ -27,9 +27,7 @@ function clearOrRunSchedule() {
 /* Clear Cache */
 Route::get('/reset', function () {
     clearOrRunSchedule();
-    return redirect()
-        ->back()
-        ->with('info', 'Data Cache telah dibersihkan.');
+    return redirect('/')->with('info', 'Data Cache telah dibersihkan.');
 })->name('reset');
 
 /* Check Auth */
@@ -91,6 +89,12 @@ Route::middleware(['auth'])->group(function () {
     });
     /* Admin Page */
     Route::group(['prefix' => 'admin'], function () {
+        Route::get('/reset', function () {
+            clearOrRunSchedule();
+            return redirect()
+                ->route('dashboardPage:admin')
+                ->with('info', 'Data Cache telah dibersihkan.');
+        })->name('admin-reset');
         /* Dashboard */
         Route::controller(HomeController::class)->group(function () {
             Route::get('/', 'dashboardPageAdmin')->name('dashboardPage:admin');
@@ -157,6 +161,12 @@ Route::middleware(['auth'])->group(function () {
     /* Admin Entry Page */
     /* User Page */
     Route::group(['prefix' => 'user'], function () {
+        Route::get('/reset', function () {
+            clearOrRunSchedule();
+            return redirect()
+                ->route('homePage:user')
+                ->with('info', 'Data Cache telah dibersihkan.');
+        })->name('user-reset');
         /* Home */
         Route::controller(HomeController::class)->group(function () {
             Route::get('/', 'indexPageUser', function() {

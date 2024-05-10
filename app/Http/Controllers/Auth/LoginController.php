@@ -19,22 +19,24 @@ class LoginController extends Controller
 
     public function index()
     {
-        if (!Auth::user()) {
+        if (Auth::check() && Auth::user()->type_user == 'ADMINISTRATOR') {
+            return redirect()
+                ->route('dashboardPage:admin')
+                ->with('info', 'Anda Sudah Login! '.Auth::user()->name);
+        } else if (Auth::check() && Auth::user()->type_user == 'PEMILIK_GEDUNG') {
+            return redirect()
+                ->route('dashboardPage:owner')
+                ->with('info', 'Anda Sudah Login! '.Auth::user()->name);
+        } else if (Auth::check() && Auth::user()->type_user == 'CUSTOMER' ) {
+            return redirect()
+                ->route('homePage:user')
+                ->with('info', 'Anda Sudah Login! '.Auth::user()->name);
+        } else if (Auth::check() && Auth::user()->type_user == 'ENTRY') {
+            return redirect()
+                ->route('dashboardPage:entry')
+                ->with('info', 'Anda Sudah Login! '.Auth::user()->name);
+        } else if (!Auth::check() || !Auth::user()) {
             return view('auth.login');
-        } else {
-            if (Auth::user()->type_user == 'ADMINISTRATOR') {
-                return redirect()
-                    ->route('dashboardPage:admin')
-                    ->with('success', 'Anda Sudah Login! '.Auth::user()->name);
-            } else if (Auth::user()->type_user == 'PEMILIK_GEDUNG') {
-                return redirect()
-                    ->route('dashboardPage:owner')
-                    ->with('success', 'Anda Sudah Login! '.Auth::user()->name);
-            } else if (Auth::user()->type_user == 'CUSTOMER' ) {
-                return redirect()
-                    ->route('homePage:user')
-                    ->with('success', 'Anda Sudah Login! '.Auth::user()->name);
-            }
         }
     }
 
@@ -91,9 +93,13 @@ class LoginController extends Controller
                             return redirect()
                                 ->route('dashboardPage:owner')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
-                        } else if (Auth::user()->type_user == 'CUSTOMER' ) {
+                        } else if (Auth::user()->type_user == 'CUSTOMER') {
                             return redirect()
                                 ->route('homePage:user')
+                                ->with('success', 'Selamat Datang! '.Auth::user()->name);
+                        } else if (Auth::user()->type_user == 'ADMIN_ENTRY') {
+                            return redirect()
+                                ->route('dashboardPage:entry')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } elseif (Auth::attempt($credentials)) {
@@ -118,9 +124,9 @@ class LoginController extends Controller
                             return redirect()
                                 ->route('dashboardPage:owner')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
-                        } else if (Auth::user()->type_user == 'CUSTOMER') {
+                        } else if (Auth::user()->type_user == 'ADMIN_ENTRY') {
                             return redirect()
-                                ->route('homePage:user')
+                                ->route('dashboardPage:entry')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } else {

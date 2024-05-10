@@ -46,6 +46,69 @@
 	<script src="{{ asset('/js/plugins/axios.min.js') }}"></script>
 	@include('layouts.utils')
 	@yield('script')
+	@if ($message = Session::get('success'))
+		<script>
+			$(document).ready(function() {
+				Swal.fire({
+					icon: 'success',
+					title: 'Well done!',
+					text: '{{ $message }}',
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 5000
+				});
+			});
+		</script>
+	@endif
+
+	@if ($message = Session::get('error') || ($message = Session::get('danger')))
+		<script>
+			$(document).ready(function() {
+				Swal.fire({
+					icon: 'error',
+					title: 'Error!',
+					text: '{{ $message }}',
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 5000
+				});
+			});
+		</script>
+	@endif
+
+	@if ($message = Session::get('warning'))
+		<script>
+			$(document).ready(function() {
+				Swal.fire({
+					icon: 'warning',
+					title: 'Warning!',
+					text: '{{ $message }}',
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 5000
+				});
+			});
+		</script>
+	@endif
+
+	@if ($message = Session::get('info'))
+		<script>
+			$(document).ready(function() {
+				Swal.fire({
+					icon: 'info',
+					title: 'Info!',
+					text: '{{ $message }}',
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 5000
+				});
+			});
+		</script>
+	@endif
 </body>
 
 </html>

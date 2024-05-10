@@ -425,7 +425,10 @@
 					$('#bookingButton').hide();
 					$('#bookButton').show();
 				}
-				// penambahan status order 3 + status trx 2
+				if (loginCheck === true && statusOrder === 3 && statusTransaction === 2) {
+					$('#bookingButton').show();
+					$('#bookButton').hide();
+				}
 			} catch (error) {
 				hideLoadingNotification();
 				loginCheck = false;

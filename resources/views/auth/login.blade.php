@@ -27,7 +27,7 @@
 									<button class="close" data-dismiss="alert" type="button">×</button>
 								</div>
 							@endif
-							@if ($message = Session::get('error'))
+							@if ($message = Session::get('error') || ($message = Session::get('danger')))
 								<div class="alert alert-dismissible fade show alert-danger alert-block shadow-sm" data-alerts=”alerts” data-dismiss="alert" data-fade=”5000″ role="alert">
 									<strong>Error!</strong> {{ $message }}
 									<button class="close" data-dismiss="alert" type="button">×</button>

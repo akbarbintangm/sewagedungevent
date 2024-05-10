@@ -67,7 +67,7 @@ class HomeController extends Controller
         try {
             $getBookingData = DB::table('transactions')
                 ->where('id_building', $id)
-                ->whereIn('transactions.status_order', [0,1,2,3])
+                ->whereIn('transactions.status_order', [1,2,3])
                 ->whereIn('transactions.status_transaction', [1])
                 ->select('*')
                 ->get();
@@ -124,6 +124,7 @@ class HomeController extends Controller
                 ->where('transactions.id_customer', Auth::user()->id)
                 ->where('transactions.id_building', $id)
                 ->select('transactions.*')
+                ->latest('transactions.updated_at')
                 ->first();
         return view("user.building-detail", compact('data', 'dataBooking'));
     }
