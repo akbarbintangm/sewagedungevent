@@ -16,7 +16,7 @@
 	<link href="{{ asset('/css/font-awesome.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/plugins/datatables/datatables.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/plugins/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/argon-design-system.css?v=1.2.2') }}" rel="stylesheet" />
 	<link href="{{ asset('/vendor/lightgallery/css/lightgallery-bundle.min.css') }}" rel="stylesheet">
 	@yield('meta-link')

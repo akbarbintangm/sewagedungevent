@@ -75,12 +75,6 @@ Route::controller(TransactionController::class)->group(function () {
     Route::post('/building/detail/{id}/transaction/await-confirmation-without-login', 'confirmationBuildingUser')->name('confirmationBuildingWithoutLogin:user');
 });
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('/user/profile', 'profilePageUser', function() {
-        clearOrRunSchedule();
-    })->name('profilePage:user');
-});
-
 /* Middleware */
 Route::middleware(['auth'])->group(function () {
     /* Histories API for All User with their Login Info */
@@ -203,6 +197,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/profile', 'profilePageUser', function() {
                 clearOrRunSchedule();
             })->name('profilePage:user');
+            Route::get('/profile/history-transaction', 'dataHistoryTransactionUser')->name('dataHistoryTransactionUser:user');
             Route::post('/profile/update', 'updateProfileUser')->name('updateProfile:user');
             Route::post('/profile/password', 'updatePasswordProfileUser')->name('updatePasswordProfile:user');
         });
