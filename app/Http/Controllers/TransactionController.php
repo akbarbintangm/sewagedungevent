@@ -34,6 +34,7 @@ class TransactionController extends Controller
         try {
             $autoLogin = false;
             $checkDateBooking = DB::table('transactions')
+                ->where('id_building', $id)
                 ->where('date_start', $request['data']['booking_date'])
                 ->whereIn('status_order', [1, 2, 3])
                 ->whereIn('status_transaction', [0, 1])
