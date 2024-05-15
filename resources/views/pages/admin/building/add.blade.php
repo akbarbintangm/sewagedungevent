@@ -34,20 +34,38 @@
 											<input class="form-control" id="roomName" name="room_name" placeholder="Ruangan A" required type="text">
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="form-control-label" for="ownerName">Nama Pemilik <span class="text-danger">*</span></label>
-											<input class="form-control" id="ownerName" name="owner_name" placeholder="Johnson" required type="name">
+									@if (Auth::user()->type_user === 'PEMILIK_GEDUNG')
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="form-control-label" for="ownerName">Nama Pemilik <span class="text-danger">*</span></label>
+												<input class="form-control" disabled id="ownerName" name="owner_name" placeholder="Johnson" required type="name" value="{{ Auth::user()->name }}">
+											</div>
 										</div>
-									</div>
+									@else
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="form-control-label" for="ownerName">Nama Pemilik <span class="text-danger">*</span></label>
+												<input class="form-control" id="ownerName" name="owner_name" placeholder="Johnson" required type="name">
+											</div>
+										</div>
+									@endif
 								</div>
 								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="form-control-label" for="emailOwner">Email <span class="text-danger">*</span></label>
-											<input class="form-control" id="emailOwner" name="owner_email" placeholder="johnson@gmail.com" required type="email">
+									@if (Auth::user()->type_user === 'PEMILIK_GEDUNG')
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="form-control-label" for="emailOwner">Email <span class="text-danger">*</span></label>
+												<input class="form-control" disabled id="emailOwner" name="owner_email" placeholder="johnson@gmail.com" required type="email" value="{{ Auth::user()->email }}">
+											</div>
 										</div>
-									</div>
+									@else
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="form-control-label" for="emailOwner">Email <span class="text-danger">*</span></label>
+												<input class="form-control" id="emailOwner" name="owner_email" placeholder="johnson@gmail.com" required type="email">
+											</div>
+										</div>
+									@endif
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="form-control-label" for="addressRoom">Alamat Ruangan <span class="text-danger">*</span></label>

@@ -203,10 +203,10 @@ class TransactionController extends Controller
                 ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
                 // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
                 ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
-                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.id as id_building', 'building_list.name as building_name')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.id_owner as id_owner', 'building_list.name as building_name')
                 ->whereIn('transactions.status_order', [1,2])
                 ->whereIn('transactions.status_transaction', [0])
-                ->where('id_building', Auth::user()->id);
+                ->where('id_owner', Auth::user()->id);
             } else {
                 $data = [];
             }
@@ -307,10 +307,10 @@ class TransactionController extends Controller
                 ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
                 // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
                 ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
-                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.id as id_building', 'building_list.name as building_name')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.id_owner as id_owner', 'building_list.name as building_name')
                 ->whereIn('transactions.status_order', [0,1,2,3])
                 ->whereIn('transactions.status_transaction', [0,1,2])
-                ->where('id_building', Auth::user()->id);
+                ->where('id_owner', Auth::user()->id);
             } else {
                 $data = [];
             }

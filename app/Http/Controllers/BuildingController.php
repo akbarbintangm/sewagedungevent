@@ -71,6 +71,7 @@ class BuildingController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $data['id'] = $row->id;
+                    $data['status'] = $row->status;
                     return view('components.admin.building.verified.action', $data);
                 })
                 ->rawColumns(['name', 'owner_name', 'address', 'price', 'action'])
@@ -127,6 +128,7 @@ class BuildingController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $data['id'] = $row->id;
+                    $data['status'] = $row->status;
                     return view('components.admin.building.unverified.action', $data);
                 })
                 ->rawColumns(['name', 'owner_name', 'address', 'price', 'status', 'action'])
@@ -249,10 +251,10 @@ class BuildingController extends Controller
         ]);
         if (Auth::user()->type_user == "ADMINISTRATOR" || Auth::user()->type_user == "ADMIN_ENTRY") {
             $roomOwnerData = [
-                'name' => $roomDataRequest['owner_name'],
+                'name' => Str::title($roomDataRequest['owner_name']),
                 'email' => $roomDataRequest['owner_email'],
                 'type_user' => 'PEMILIK_GEDUNG',
-                'password' => Hash::make('roomowner'),
+                'password' => Hash::make(Str::lower(str_replace(' ', '', $roomDataRequest['owner_name']))),
                 'status' => 1,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,

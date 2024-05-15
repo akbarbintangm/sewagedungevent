@@ -108,7 +108,7 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             $name = $this->shuffleAndConsistent($names[array_rand($names)]);
             $email = strtolower($name) . $i . '@gmail.com';
-            $password = Hash::make($name);
+            $password = Hash::make(strtolower($name));
             $profile = $profiles[array_rand($profiles)];
             $type_user = rand(0, 1) ? 'CUSTOMER' : 'PEMILIK_GEDUNG';
 
