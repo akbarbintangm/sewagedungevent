@@ -20,7 +20,7 @@ class HomeController extends Controller
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
-        return view("user.home", compact('data'));
+        return view("pages.user.home", compact('data'));
     }
 
     public function indexWithoutLoginPageUser()
@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
-        return view("user.home", compact('data'));
+        return view("pages.user.home", compact('data'));
     }
 
     public function buildingWithoutLoginPageUser() {
@@ -44,7 +44,7 @@ class HomeController extends Controller
             ->where('buildings.status', 1)
             ->orderBy('buildings.created_at', 'desc')
             ->get();
-        return view("user.building", compact('data'));
+        return view("pages.user.building", compact('data'));
     }
 
     public function buildingDetailWithoutLoginPageUser($id) {
@@ -60,7 +60,7 @@ class HomeController extends Controller
             'status_order' => 0,
             'status_transaction' => 0,
         ];
-        return view("user.building-detail", compact('data', 'dataBooking'));
+        return view("pages.user.building-detail", compact('data', 'dataBooking'));
     }
 
     public function getBookingDateUser(Request $request, $id) {
@@ -96,7 +96,7 @@ class HomeController extends Controller
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
-        return view("user.home", compact('data'));
+        return view("pages.user.home", compact('data'));
     }
 
     public function buildingPageUser() {
@@ -108,7 +108,7 @@ class HomeController extends Controller
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
             ->get();
-        return view("user.building", compact('data'));
+        return view("pages.user.building", compact('data'));
     }
 
     public function buildingDetailPageUser($id) {
@@ -125,56 +125,74 @@ class HomeController extends Controller
                 ->select('transactions.*')
                 ->latest('transactions.updated_at')
                 ->first();
-        return view("user.building-detail", compact('data', 'dataBooking'));
+        return view("pages.user.building-detail", compact('data', 'dataBooking'));
     }
 
-    public function dashboardCounterAdmin() {
+    public function dashboardCounter() {
         try {
-            $countUser = DB::table('users')->where('status', 1)->count();
-            $countBuilding = DB::table('buildings')->where('status', 1)->count();
-            $data = [
-                'user_count' => $countUser,
-                'room_count' => $countBuilding,
-            ];
+            if(Auth::user()->type_user === 'ADMINISTRATOR') {
+                $countUser = DB::table('users')->where('status', 1)->count();
+                $countBuilding = DB::table('buildings')->where('status', 1)->count();
+                $data = [
+                    'user_count' => $countUser,
+                    'room_count' => $countBuilding,
+                ];
+            } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+                $countUser = DB::table('users')->where('status', 1)->count();
+                $countBuilding = DB::table('buildings')->where('status', 1)->where('id_owner', Auth::user()->id)->count();
+                $data = [
+                    'user_count' => $countUser,
+                    'room_count' => $countBuilding,
+                ];
+            } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+                $countUser = DB::table('users')->where('status', 1)->count();
+                $countBuilding = DB::table('buildings')->where('status', 1)->where('id_owner', Auth::user()->id)->count();
+                $data = [
+                    'user_count' => $countUser,
+                    'room_count' => $countBuilding,
+                ];
+            } else {
+                $data = [
+                    'user_count' => 0,
+                    'room_count' => 0,
+                ];
+            }
             return $this->arrayResponse(200, 'success', null, $data);
         } catch (\Throwable $th) {
             return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data dashboard! Alasan: '.$th, null);
         }
     }
 
-    public function dashboardCounterOwner() {
-        try {
-            $countUser = DB::table('users')->where('status', 1)->count();
-            $countBuilding = DB::table('buildings')->where('status', 1)->where('id_owner', Auth::user()->id)->count();
-            $data = [
-                'user_count' => $countUser,
-                'room_count' => $countBuilding,
-            ];
-            return $this->arrayResponse(200, 'success', null, $data);
-        } catch (\Throwable $th) {
-            return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data dashboard! Alasan: '.$th, null);
+    public function dashboardPage() {
+        if(Auth::user()->type_user === 'ADMINISTRATOR') {
+            $data = DB::table('buildings')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->where('buildings.status', 1)
+                ->select('buildings.*', 'user_owner.name as owner_name')
+                ->limit(10)
+                ->get();
+            return view("pages.admin.dashboard", compact('data'));
+        } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+            $data = DB::table('buildings')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->where('buildings.status', 1)
+                ->where('buildings.id_owner', Auth::user()->id)
+                ->select('buildings.*', 'user_owner.name as owner_name')
+                ->limit(10)
+                ->get();
+            return view("pages.admin-entry.dashboard", compact('data'));
+        } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+            $data = DB::table('buildings')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->where('buildings.status', 1)
+                ->where('buildings.id_owner', Auth::user()->id)
+                ->select('buildings.*', 'user_owner.name as owner_name')
+                ->limit(10)
+                ->get();
+            return view("pages.owner.dashboard", compact('data'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diijinkan!');
         }
-    }
-
-    public function dashboardPageAdmin() {
-        $data = DB::table('buildings')
-            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->where('buildings.status', 1)
-            ->select('buildings.*', 'user_owner.name as owner_name')
-            ->limit(10)
-            ->get();
-        return view("admin.dashboard", compact('data'));
-    }
-
-    public function dashboardPageOwner() {
-        $data = DB::table('buildings')
-            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->where('buildings.status', 1)
-            ->where('buildings.id_owner', Auth::user()->id)
-            ->select('buildings.*', 'user_owner.name as owner_name')
-            ->limit(10)
-            ->get();
-        return view("owner.dashboard", compact('data'));
     }
 
     public function arrayResponse($status, $message, $detailMessage, $data) {

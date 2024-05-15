@@ -66,20 +66,6 @@
 									<label class="form-control-label" for="phoneTenant">No Telp<span class="text-danger"> *</span></label>
 									<input class="form-control" id="phoneTenant" name="tenant_phone" placeholder="Masukkan Telepon" type="number" value="{{ $dataUser->phone }}">
 								</div>
-								<div class="row d-none">
-									<div class="col-4">
-										<div class="form-group">
-											<label class="form-control-label" for="bankTenant">Nama Bank<span class="text-danger"> *</span></label>
-											<input class="form-control" id="bankTenant" name="tenant_bank" placeholder="Masukkan Nama Bank" type="name" value="{{ $dataUser->bank_name }}">
-										</div>
-									</div>
-									<div class="col-8">
-										<div class="form-group">
-											<label class="form-control-label" for="bankNumberTenant">Nomor Rekening Bank<span class="text-danger"> *</span></label>
-											<input class="form-control" id="bankNumberTenant" name="tenant_bank_number" placeholder="Masukkan Nomor Bank" type="number" value="{{ $dataUser->bank_number }}">
-										</div>
-									</div>
-								</div>
 							</div>
 							<div class="col">
 								<div class="form-group">
@@ -117,7 +103,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="table-responsive p-0">
-						<table class="table-history-transaction table">
+						<table class="table-history-transaction w-100 table">
 							<thead>
 								<tr>
 									<th>Kode Transaksi</th>

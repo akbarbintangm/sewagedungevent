@@ -162,11 +162,19 @@ class TransactionController extends Controller
         }
     }
 
-    public function orderPageAdmin() {
-        return view("admin.order.index");
+    public function orderPage() {
+        if(Auth::user()->type_user === 'ADMINISTRATOR') {
+            return view("pages.admin.order.index");
+        } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+            return view("pages.admin-entry.order.index");
+        } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+            return view("pages.owner.order.index");
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diijinkan!');
+        }
     }
 
-    public function listOrderAdmin(Request $request) {
+    public function listOrder(Request $request) {
         if ($request->ajax()) {
             $data = DB::table('transactions')
                 ->join('users as user_created', 'user_created.id', 'transactions.created_by')
@@ -214,7 +222,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function updateOrderAdmin(Request $request, $id) {
+    public function updateOrder(Request $request, $id) {
         $verifyData = [
             'status_order' => 3,
             'status_transaction' => 1,
@@ -230,7 +238,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function detailTransactionAdmin(Request $request, $id) {
+    public function detailTransaction(Request $request, $id) {
         try {
             $transactionData = DB::table('transactions')
                 ->join('users as user_created', 'user_created.id', 'transactions.created_by')
@@ -245,7 +253,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function listTransactionAdmin(Request $request) {
+    public function listTransaction(Request $request) {
         if ($request->ajax()) {
             $data = DB::table('transactions')
                 ->join('users as user_created', 'user_created.id', 'transactions.created_by')
@@ -295,7 +303,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function updateTransactionAdmin(Request $request, $id) {
+    public function updateTransaction(Request $request, $id) {
         $verifyData = [
             'status_order' => 3,
             'status_transaction' => 2,
@@ -311,7 +319,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function updateCancelTransactionAdmin(Request $request, $id) {
+    public function updateCancelTransaction(Request $request, $id) {
         $verifyData = [
             'status_order' => 0,
             'status_transaction' => 0,
@@ -327,16 +335,17 @@ class TransactionController extends Controller
         }
     }
 
-    public function orderPageOwner() {
-        return view("owner.order.index");
-    }
+    public function transactionPage() {
 
-    public function transactionPageAdmin() {
-        return view("admin.transaction.index");
-    }
-
-    public function transactionPageOwner() {
-        return view("owner.transaction.index");
+        if(Auth::user()->type_user === 'ADMINISTRATOR') {
+            return view("pages.admin.transaction.index");
+        } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+            return view("pages.admin-entry.transaction.index");
+        } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+            return view("pages.owner.transaction.index");
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diijinkan!');
+        }
     }
 
     public function createFolder($fullPath) {

@@ -15,11 +15,19 @@ use DataTables;
 
 class BuildingController extends Controller
 {
-    public function buildingPageAdmin() {
-        return view("admin.building.index");
+    public function buildingPage() {
+        if(Auth::user()->type_user === 'ADMINISTRATOR') {
+            return view("pages.admin.building.index");
+        } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+            return view("pages.admin-entry.building.index");
+        } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+            return view("pages.owner.building.index");
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diijinkan!');
+        }
     }
 
-    public function listBuildingAdminVerified(Request $request) {
+    public function listBuildingVerified(Request $request) {
         if ($request->ajax()) {
             $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
@@ -54,7 +62,7 @@ class BuildingController extends Controller
         }
     }
 
-    public function listBuildingAdminUnverified(Request $request) {
+    public function listBuildingUnverified(Request $request) {
         if ($request->ajax()) {
             $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
@@ -93,25 +101,25 @@ class BuildingController extends Controller
         }
     }
 
-    public function buildingPageOwner() {
-        return view("owner.building.index");
-    }
-
-    public function detailPageBuildingAdmin($id) {
+    public function detailPageBuilding($id) {
         $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
                 ->where('buildings.id', $id)
                 ->first();
-        return view("admin.building.detail", compact('data'));
+        if(Auth::user()->type_user === 'ADMINISTRATOR') {
+            return view("pages.admin.building.detail", compact('data'));
+        } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+            return view("pages.admin-entry.building.detail", compact('data'));
+        } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+            return view("pages.owner.building.detail", compact('data'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diijinkan!');
+        }
     }
 
-    public function detailPageBuildingOwner($id) {
-        return view("owner.building.detail");
-    }
-
-    public function updateBuildingAdmin(Request $request, $id) {
+    public function updateBuilding(Request $request, $id) {
         $roomDataRequest = $request->validate([
             'room_name' => 'required',
             'room_price' => 'required',
@@ -151,7 +159,7 @@ class BuildingController extends Controller
         // update versi ke 2, todo Try Catch, dan tambahkan Response JSON, bukan redirect halaman lagi
     }
 
-    public function verifyBuildingAdmin(Request $request, $id) {
+    public function verifyBuilding(Request $request, $id) {
         $verifyData = [
             'status' => 1,
             'updated_by' => Auth::user()->id,
@@ -166,7 +174,7 @@ class BuildingController extends Controller
         }
     }
 
-    public function deleteBuildingAdmin(Request $request, $id) {
+    public function deleteBuilding(Request $request, $id) {
         $getOwnerAndBuildingData = DB::table('buildings')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.id', 'buildings.name', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.id as owner_id')
@@ -182,11 +190,19 @@ class BuildingController extends Controller
         }
     }
 
-    public function addPageBuildingAdmin() {
-        return view("admin.building.add");
+    public function addPageBuilding() {
+        if(Auth::user()->type_user === 'ADMINISTRATOR') {
+            return view("pages.admin.building.add");
+        } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+            return view("pages.admin-entry.building.add");
+        } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+            return view("pages.owner.building.add");
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diijinkan!');
+        }
     }
 
-    public function addBuildingAdmin(Request $request) {
+    public function addBuilding(Request $request) {
         $roomDataRequest = $request->validate([
             'owner_name' => 'required',
             'owner_email' => 'required',
@@ -247,10 +263,6 @@ class BuildingController extends Controller
         }
         return redirect()->route('buildingPage:admin')->with('success', 'Ruangan ' . $roomDataRequest['room_name'] . ' berhasil disimpan.');
         // update versi ke 2, todo Try Catch, dan tambahkan Response JSON, bukan redirect halaman lagi
-    }
-
-    public function addPageBuildingOwner() {
-        return view("owner.building.add");
     }
 
     public function createFolder($fullPath) {
