@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
         });
         /* Master Building */
         Route::controller(BuildingController::class)->group(function () {
-            Route::get('/building', 'buildingPageAdmin', function() {
+            Route::get('/building', 'buildingPage', function() {
                 clearOrRunSchedule();
             })->name('buildingPage:admin');
             Route::get('/building/dashboard', 'dashboardBuilding')->name('dashboardBuilding:admin');
@@ -115,7 +115,7 @@ Route::middleware(['auth'])->group(function () {
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {
             /* Order */
-            Route::get('/order', 'orderPageAdmin', function() {
+            Route::get('/order', 'orderPage', function() {
                 clearOrRunSchedule();
             })->name('orderPage:admin');
             Route::get('/order/dashboard', 'dashboardOrder')->name('dashboardOrder:admin');
@@ -144,7 +144,7 @@ Route::middleware(['auth'])->group(function () {
         });
         /* Profiling */
         Route::controller(UserController::class)->group(function () {
-            Route::get('/profile', 'profilePageAdmin', function() {
+            Route::get('/profile', 'profilePage', function() {
                 clearOrRunSchedule();
             })->name('profilePage:admin');
             Route::post('/profile/update', 'updateProfile')->name('updateProfile:admin');
