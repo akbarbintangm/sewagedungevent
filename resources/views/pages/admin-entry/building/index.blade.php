@@ -32,9 +32,6 @@
 									</a>
 								</p>
 							</div>
-							<div class="col text-end">
-								<a class="btn bg-gradient-dark active mb-0" href="{{ Auth::user()->type_user === 'ADMINISTRATOR' ? route('addPageBuilding:admin-entry') : route('addPageBuilding:owner') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a>
-							</div>
 						</div>
 					</div>
 				</div>

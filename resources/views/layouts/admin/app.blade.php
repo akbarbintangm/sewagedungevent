@@ -117,6 +117,19 @@
 			});
 		</script>
 	@endif
+	<script>
+		async function logout() {
+			var url = "{{ route('auth-logout') }}";
+			const result = await showNotification('Apakah Anda yakin?', 'Anda nanti bisa login kembali.', 'info');
+			if (result.isConfirmed) {
+				showLoadingNotification();
+				window.location.href = url;
+				hideLoadingNotification();
+			} else {
+				hideLoadingNotification();
+			}
+		}
+	</script>
 </body>
 
 </html>
