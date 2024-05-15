@@ -131,21 +131,21 @@ class HomeController extends Controller
     public function dashboardCounter() {
         try {
             if(Auth::user()->type_user === 'ADMINISTRATOR') {
-                $countUser = DB::table('users')->where('status', 1)->count();
+                $countUser = DB::table('users')->where('status', 1)->whereNot('id', Auth::user()->id)->count();
                 $countBuilding = DB::table('buildings')->where('status', 1)->count();
                 $data = [
                     'user_count' => $countUser,
                     'room_count' => $countBuilding,
                 ];
             } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
-                $countUser = DB::table('users')->where('status', 1)->count();
+                $countUser = DB::table('users')->where('status', 1)->whereNot('id', Auth::user()->id)->where('type_user', 'CUSTOMER')->count();
                 $countBuilding = DB::table('buildings')->where('status', 1)->where('id_owner', Auth::user()->id)->count();
                 $data = [
                     'user_count' => $countUser,
                     'room_count' => $countBuilding,
                 ];
             } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
-                $countUser = DB::table('users')->where('status', 1)->count();
+                $countUser = DB::table('users')->where('status', 1)->whereNot('id', Auth::user()->id)->where('type_user', 'CUSTOMER')->count();
                 $countBuilding = DB::table('buildings')->where('status', 1)->where('id_owner', Auth::user()->id)->count();
                 $data = [
                     'user_count' => $countUser,

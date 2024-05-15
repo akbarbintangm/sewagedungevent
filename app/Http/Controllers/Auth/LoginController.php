@@ -31,9 +31,9 @@ class LoginController extends Controller
             return redirect()
                 ->route('homePage:user')
                 ->with('info', 'Anda Sudah Login! '.Auth::user()->name);
-        } else if (Auth::check() && Auth::user()->type_user == 'ENTRY') {
+        } else if (Auth::check() && Auth::user()->type_user == 'ADMIN_ENTRY') {
             return redirect()
-                ->route('dashboardPage:entry')
+                ->route('dashboardPage:admin-entry')
                 ->with('info', 'Anda Sudah Login! '.Auth::user()->name);
         } else if (!Auth::check() || !Auth::user()) {
             return view('auth.login');
@@ -99,7 +99,7 @@ class LoginController extends Controller
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         } else if (Auth::user()->type_user == 'ADMIN_ENTRY') {
                             return redirect()
-                                ->route('dashboardPage:entry')
+                                ->route('dashboardPage:admin-entry')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } elseif (Auth::attempt($credentials)) {
@@ -126,7 +126,7 @@ class LoginController extends Controller
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         } else if (Auth::user()->type_user == 'ADMIN_ENTRY') {
                             return redirect()
-                                ->route('dashboardPage:entry')
+                                ->route('dashboardPage:admin-entry')
                                 ->with('success', 'Selamat Datang! '.Auth::user()->name);
                         }
                     } else {

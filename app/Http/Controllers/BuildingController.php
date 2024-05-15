@@ -29,11 +29,28 @@ class BuildingController extends Controller
 
     public function listBuildingVerified(Request $request) {
         if ($request->ajax()) {
-            $data = DB::table('buildings')
+            if(Auth::user()->type_user === 'ADMINISTRATOR') {
+                $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'user_created.name as created_by', 'user_owner.name as owner_name')
                 ->where('buildings.status', 1);
+            } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 1);
+            } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 1)
+                ->where('buildings.id_owner', Auth::user()->id);
+            } else {
+                $data = [];
+            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('name', function ($row) {
@@ -64,11 +81,28 @@ class BuildingController extends Controller
 
     public function listBuildingUnverified(Request $request) {
         if ($request->ajax()) {
-            $data = DB::table('buildings')
+            if(Auth::user()->type_user === 'ADMINISTRATOR') {
+                $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'buildings.status', 'user_created.name as created_by', 'user_owner.name as owner_name')
                 ->where('buildings.status', 0);
+            } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'buildings.status', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 0);
+            } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 0)
+                ->where('buildings.id_owner', Auth::user()->id);
+            } else {
+                $data = [];
+            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('name', function ($row) {

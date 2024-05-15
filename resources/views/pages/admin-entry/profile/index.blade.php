@@ -85,7 +85,7 @@
 											<p class="text-uppercase text-md" style="margin:0;"><b>Informasi Pengguna</b></p>
 										</div>
 									</div>
-									<form action="{{ route('updateProfile:admin') }}" class="card-body" enctype="multipart/form-data" id="forms" method="POST">
+									<form action="{{ route('updateProfile:admin-entry') }}" class="card-body" enctype="multipart/form-data" id="forms" method="POST">
 										@csrf
 										<div class="row">
 											<div class="col">

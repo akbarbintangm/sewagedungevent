@@ -35,9 +35,9 @@ class RegisterController extends Controller
             return redirect()
                 ->route('homePage:user')
                 ->with('info', 'Anda Sudah Register! '.Auth::user()->name);
-        } else if (Auth::check() && Auth::user()->type_user == 'ENTRY') {
+        } else if (Auth::check() && Auth::user()->type_user == 'ADMIN_ENTRY') {
             return redirect()
-                ->route('dashboardPage:entry')
+                ->route('dashboardPage:admin-entry')
                 ->with('info', 'Anda Sudah Register! '.Auth::user()->name);
         } else if (!Auth::check() || !Auth::user()) {
             return view('auth.register');

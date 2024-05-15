@@ -88,7 +88,6 @@
 								<h6 class="mt-2">Ruangan Yang Dimiliki</h6>
 							</div>
 							<div class="col-6 text-end">
-								<a class="btn bg-gradient-dark active mb-0" href="{{ route('addPageBuilding:admin') }}"><i class="fas fa-plus"></i> Tambah Ruangan</a>
 							</div>
 						</div>
 					</div>
@@ -112,7 +111,7 @@
 											<span class="text-xs">Alamat: <span class="text-dark ms-sm-2 font-weight-bold">{{ $item->address }}</span></span>
 										</div>
 										<div class="ms-auto text-end">
-											<a class="btn btn-link text-dark mb-0 px-3" href="{{ route('detailPageBuilding:admin', ['id' => $item->id]) }}"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
+											<a class="btn btn-link text-dark mb-0 px-3" href="{{ route('detailPageBuilding:admin-entry', ['id' => $item->id]) }}"><i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit</a>
 										</div>
 									</li>
 								@endforeach
@@ -135,7 +134,7 @@
 		async function getAllCountDashboard() {
 			showLoadingNotification();
 			try {
-				var url = '{{ route('counterDashboard:admin') }}';
+				var url = '{{ route('counterDashboard:admin-entry') }}';
 				const response = await axios.get(url);
 				if (response.data.status === 200) {
 					$('#userCount').html(response.data.data.user_count);

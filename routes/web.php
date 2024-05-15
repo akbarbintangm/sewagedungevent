@@ -151,9 +151,141 @@ Route::middleware(['auth'])->group(function () {
         });
     });
     /* Admin Entry Page */
-
+    Route::group(['prefix' => 'admin-entry'], function () {
+        Route::get('/reset', function () {
+            clearOrRunSchedule();
+            return redirect()
+                ->route('dashboardPage:admin-entry')
+                ->with('info', 'Data Cache telah dibersihkan.');
+        })->name('admin-reset');
+        /* Dashboard */
+        Route::controller(HomeController::class)->group(function () {
+            Route::get('/', 'dashboardPage')->name('dashboardPage:admin-entry');
+            Route::get('/counter-dashboard', 'dashboardCounter')->name('counterDashboard:admin-entry');
+        });
+        /* Master Building */
+        Route::controller(BuildingController::class)->group(function () {
+            Route::get('/building', 'buildingPage', function() {
+                clearOrRunSchedule();
+            })->name('buildingPage:admin-entry');
+            Route::get('/building/dashboard', 'dashboardBuilding')->name('dashboardBuilding:admin-entry');
+            Route::get('/building/list-verified', 'listBuildingVerified')->name('listBuildingVerified:admin-entry');
+            Route::get('/building/list-unverified', 'listBuildingUnverified')->name('listBuildingUnverified:admin-entry');
+            Route::get('/building/detail-building/{id}', 'detailPageBuilding', function() {
+                clearOrRunSchedule();
+            })->name('detailPageBuilding:admin-entry');
+            Route::get('/building/add-building', 'addPageBuilding')->name('addPageBuilding:admin-entry');
+            Route::post('/building/add', 'addBuilding')->name('addBuilding:admin-entry');
+            Route::post('/building/update/{id}', 'updateBuilding')->name('updateBuilding:admin-entry');
+            Route::get('/building/delete/{id}', 'deleteBuilding')->name('deleteBuilding:admin-entry');
+            Route::get('/building/verify/{id}', 'verifyBuilding')->name('verifyBuilding:admin-entry');
+        });
+        /* Transaction */
+        Route::controller(TransactionController::class)->group(function () {
+            /* Order */
+            Route::get('/order', 'orderPage', function() {
+                clearOrRunSchedule();
+            })->name('orderPage:admin-entry');
+            Route::get('/order/dashboard', 'dashboardOrder')->name('dashboardOrder:admin-entry');
+            Route::get('/order/list', 'listOrder')->name('listOrder:admin-entry');
+            Route::get('/order/update/{id}', 'updateOrder')->name('updateOrder:admin-entry');
+            /* Transaction History */
+            Route::get('/transaction', 'transactionPage', function() {
+                clearOrRunSchedule();
+            })->name('transactionPage:admin-entry');
+            Route::get('/transaction/dashboard', 'dashboardTransaction')->name('dashboardTransaction:admin-entry');
+            Route::get('/transaction/list', 'listTransaction')->name('listTransaction:admin-entry');
+            Route::get('/transaction/detail/{id}', 'detailTransaction')->name('detailTransaction:admin-entry');
+            Route::get('/transaction/update/{id}', 'updateTransaction')->name('updateTransaction:admin-entry');
+        });
+        /* Master User */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/user', 'userPage', function() {
+                clearOrRunSchedule();
+            })->name('userPage:admin-entry');
+            Route::get('/user/dashboard', 'dashboardUser')->name('dashboardUser:admin-entry');
+            Route::get('/user/list', 'listUser')->name('listUser:admin-entry');
+            Route::get('/user/detail/{id}', 'detailUser')->name('detailUser:admin-entry');
+            Route::get('/user/delete/{id}', 'deleteUser')->name('deleteUser:admin-entry');
+            Route::get('/user/verify/{id}', 'verifyUser')->name('verifyUser:admin-entry');
+            Route::get('/user/unverify/{id}', 'unverifyUser')->name('unverifyUser:admin-entry');
+        });
+        /* Profiling */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile', 'profilePage', function() {
+                clearOrRunSchedule();
+            })->name('profilePage:admin-entry');
+            Route::post('/profile/update', 'updateProfile')->name('updateProfile:admin-entry');
+        });
+    });
     /* Owner Page */
-
+    Route::group(['prefix' => 'owner'], function () {
+        Route::get('/reset', function () {
+            clearOrRunSchedule();
+            return redirect()
+                ->route('dashboardPage:owner')
+                ->with('info', 'Data Cache telah dibersihkan.');
+        })->name('admin-reset');
+        /* Dashboard */
+        Route::controller(HomeController::class)->group(function () {
+            Route::get('/', 'dashboardPage')->name('dashboardPage:owner');
+            Route::get('/counter-dashboard', 'dashboardCounter')->name('counterDashboard:owner');
+        });
+        /* Master Building */
+        Route::controller(BuildingController::class)->group(function () {
+            Route::get('/building', 'buildingPage', function() {
+                clearOrRunSchedule();
+            })->name('buildingPage:owner');
+            Route::get('/building/dashboard', 'dashboardBuilding')->name('dashboardBuilding:owner');
+            Route::get('/building/list-verified', 'listBuildingVerified')->name('listBuildingVerified:owner');
+            Route::get('/building/list-unverified', 'listBuildingUnverified')->name('listBuildingUnverified:owner');
+            Route::get('/building/detail-building/{id}', 'detailPageBuilding', function() {
+                clearOrRunSchedule();
+            })->name('detailPageBuilding:owner');
+            Route::get('/building/add-building', 'addPageBuilding')->name('addPageBuilding:owner');
+            Route::post('/building/add', 'addBuilding')->name('addBuilding:owner');
+            Route::post('/building/update/{id}', 'updateBuilding')->name('updateBuilding:owner');
+            Route::get('/building/delete/{id}', 'deleteBuilding')->name('deleteBuilding:owner');
+            Route::get('/building/verify/{id}', 'verifyBuilding')->name('verifyBuilding:owner');
+        });
+        /* Transaction */
+        Route::controller(TransactionController::class)->group(function () {
+            /* Order */
+            Route::get('/order', 'orderPage', function() {
+                clearOrRunSchedule();
+            })->name('orderPage:owner');
+            Route::get('/order/dashboard', 'dashboardOrder')->name('dashboardOrder:owner');
+            Route::get('/order/list', 'listOrder')->name('listOrder:owner');
+            Route::get('/order/update/{id}', 'updateOrder')->name('updateOrder:owner');
+            /* Transaction History */
+            Route::get('/transaction', 'transactionPage', function() {
+                clearOrRunSchedule();
+            })->name('transactionPage:owner');
+            Route::get('/transaction/dashboard', 'dashboardTransaction')->name('dashboardTransaction:owner');
+            Route::get('/transaction/list', 'listTransaction')->name('listTransaction:owner');
+            Route::get('/transaction/detail/{id}', 'detailTransaction')->name('detailTransaction:owner');
+            Route::get('/transaction/update/{id}', 'updateTransaction')->name('updateTransaction:owner');
+        });
+        /* Master User */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/user', 'userPage', function() {
+                clearOrRunSchedule();
+            })->name('userPage:owner');
+            Route::get('/user/dashboard', 'dashboardUser')->name('dashboardUser:owner');
+            Route::get('/user/list', 'listUser')->name('listUser:owner');
+            Route::get('/user/detail/{id}', 'detailUser')->name('detailUser:owner');
+            Route::get('/user/delete/{id}', 'deleteUser')->name('deleteUser:owner');
+            Route::get('/user/verify/{id}', 'verifyUser')->name('verifyUser:owner');
+            Route::get('/user/unverify/{id}', 'unverifyUser')->name('unverifyUser:owner');
+        });
+        /* Profiling */
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile', 'profilePage', function() {
+                clearOrRunSchedule();
+            })->name('profilePage:owner');
+            Route::post('/profile/update', 'updateProfile')->name('updateProfile:owner');
+        });
+    });
     /* User Page */
     Route::group(['prefix' => 'user'], function () {
         Route::get('/reset', function () {
