@@ -98,7 +98,7 @@ class BuildingController extends Controller
                 $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'buildings.status', 'user_created.name as created_by', 'user_owner.name as owner_name')
                 ->where('buildings.status', 0)
                 ->where('buildings.id_owner', Auth::user()->id);
             } else {
