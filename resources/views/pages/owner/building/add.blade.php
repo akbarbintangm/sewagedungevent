@@ -38,7 +38,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="form-control-label" for="ownerName">Nama Pemilik <span class="text-danger">*</span></label>
-												<input class="form-control" disabled id="ownerName" name="owner_name" placeholder="Johnson" required type="name" value="{{ Auth::user()->name }}">
+												<input class="form-control" id="ownerName" name="owner_name" placeholder="Johnson" readonly="readonly" required type="name" value="{{ Auth::user()->name }}">
 											</div>
 										</div>
 									@else
@@ -55,7 +55,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="form-control-label" for="emailOwner">Email <span class="text-danger">*</span></label>
-												<input class="form-control" disabled id="emailOwner" name="owner_email" placeholder="johnson@gmail.com" required type="email" value="{{ Auth::user()->email }}">
+												<input class="form-control" id="emailOwner" name="owner_email" placeholder="johnson@gmail.com" readonly="readonly" required type="email" value="{{ Auth::user()->email }}">
 											</div>
 										</div>
 									@else
