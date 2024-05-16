@@ -146,7 +146,7 @@
 								<button class="btn btn-primary btn-block" data-bs-target="#bookingModal" data-bs-toggle="modal" id="bookingButton" onclick="getAllBookingDate()" style="display: none;" type="button">
 									Sewa Sekarang
 								</button>
-								<button class="btn btn-primary btn-block" data-bs-target="#checkoutModal" data-bs-toggle="modal" id="checkoutButton" style="display: none;" type="button">
+								<button class="btn btn-primary btn-block" data-bs-target="#checkoutModal" data-bs-toggle="modal" id="checkoutButton" onclick="getOwnerBank()" style="display: none;" type="button">
 									Checkout Sekarang
 								</button>
 								<button class="btn btn-primary btn-block" data-bs-target="#confirmationModal" data-bs-toggle="modal" id="bookedButton" onclick="confirmationData()" style="display: none;" type="button">
@@ -250,6 +250,14 @@
 				<form enctype="multipart/form-data" id="checkoutData">
 					@csrf
 					<div class="modal-body">
+						<div class="row">
+							<div class="col">
+								Nama Owner: <span class="font-weight-bold" id="ownerNameForBank"></span><br>
+								Nama Bank: <span class="font-weight-bold" id="ownerForBankName"></span><br>
+								Nomor Rekening: <span class="font-weight-bold" id="ownerForBankNumber"></span><br>
+							</div>
+						</div>
+						<div class="dropdown-divider"></div>
 						<div class="row">
 							<div class="col">
 								<div class="form-group">
@@ -397,6 +405,7 @@
 		async function checkAuth() {
 			showLoadingNotification();
 			try {
+				getOwnerBank();
 				var url = '{{ route('check-login') }}';
 				const response = await axios.get(url);
 				if (response.data.authenticated === true) {
@@ -634,6 +643,29 @@
 						li.textContent = formattedDate;
 						bookingDatesElement.appendChild(li);
 					});
+				}
+				hideLoadingNotification();
+			} catch (error) {
+				hideLoadingNotification();
+				const failedCheckout = await alertNotification('Server Error!', 'Server sedang dalam perbaikan!', 'warning');
+				if (failedCheckout.isConfirmed) {}
+			}
+		}
+
+		async function getOwnerBank() {
+			showLoadingNotification();
+			try {
+				var url = '{{ route('getBankNumberOwner:user', ['id' => ':id']) }}';
+				url = url.replace(':id', idRoom);
+				const response = await axios.get(url, {
+					headers: headers,
+					processData: false,
+					contentType: false,
+				});
+				if (response.data.status === 200 && response.data.data) {
+					document.getElementById('ownerNameForBank').innerHTML = response.data.data.owner_name;
+					document.getElementById('ownerForBankName').innerHTML = response.data.data.owner_bank_name ? response.data.data.owner_bank_name : 'Belum ada nama bank';
+					document.getElementById('ownerForBankNumber').innerHTML = response.data.data.owner_bank_number ? response.data.data.owner_bank_number : 'Belum ada nomor rekening';
 				}
 				hideLoadingNotification();
 			} catch (error) {

@@ -68,6 +68,7 @@ Route::controller(HomeController::class)->group(function () {
         clearOrRunSchedule();
     })->name('buildingDetailWithoutLoginPage:user');
     Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');
+    Route::get('/get-bank-number/{id}', 'getBankNumberOwner')->name('getBankNumberOwner:user');
 });
 /* Transaction No Login */
 Route::controller(TransactionController::class)->group(function () {
@@ -299,9 +300,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'indexPageUser', function() {
                 clearOrRunSchedule();
             })->name('homePage:user');
-        });
-        /* Building List */
-        Route::controller(HomeController::class)->group(function () {
+            Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');
+            Route::get('/get-bank-number/{id}', 'getBankNumberOwner')->name('getBankNumberOwner:user');
+            /* Building List */
             /* Page, Detail, and Lists */
             Route::get('/building', 'buildingPageUser', function() {
                 clearOrRunSchedule();

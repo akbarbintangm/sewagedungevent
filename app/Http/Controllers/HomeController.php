@@ -87,6 +87,19 @@ class HomeController extends Controller
         }
     }
 
+    public function getBankNumberOwner(Request $request, $id) {
+        try {
+            $getBankOwner = DB::table('buildings')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->where('buildings.id', $id)
+                ->select('buildings.*', 'user_owner.name as owner_name', 'user_owner.bank_name as owner_bank_name', 'user_owner.bank_number as owner_bank_number',)
+                ->first();
+            return $this->arrayResponse(200, 'success', null, $getBankOwner);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'failed', 'Gagal untuk mengambil data Bank dari Owner! Alasan: '.$th, null);
+        }
+    }
+
     public function indexPageUser() {
         $data = DB::table('buildings')
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
