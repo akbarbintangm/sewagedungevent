@@ -216,9 +216,9 @@
 						statusOrder.html('Booking Terkonfirmasi');
 					}
 					if (data.status_transaction === 0) {
-						statusTransaction.html('Belum Transfer');
+						statusTransaction.html('Belum Diverifikasi');
 					} else if (data.status_transaction === 1) {
-						statusTransaction.html('Sudah Transfer');
+						statusTransaction.html('Sudah Transfer / Diverifikasi');
 					} else if (data.status_transaction === 2) {
 						statusTransaction.html('Sudah Kadaluarsa / Tanggal Booking Berakhir');
 					}
