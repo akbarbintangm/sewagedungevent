@@ -6,6 +6,6 @@
 @elseif ($status_order === 3 && $status_transaction === 1)
 	<button class="btn btn-success btn-sm mb-0" data-id="{{ $id }}" onclick="verifyTransaction({{ $id }})" type="button">Konfirmasi</button>
 @elseif ($status_order === 0 && $status_transaction === 0)
-	<button class="btn btn-waning btn-sm btn-disabled mb-0" disabled type="button">Dibatalkan</button>
+	<button class="btn btn-danger btn-sm btn-disabled mb-0" disabled type="button">Dibatalkan</button>
 @else
 @endif

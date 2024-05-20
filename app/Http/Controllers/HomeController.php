@@ -136,6 +136,8 @@ class HomeController extends Controller
                 ->where('transactions.id_customer', Auth::user()->id)
                 ->where('transactions.id_building', $id)
                 ->select('transactions.*')
+                ->whereNot('transactions.status_order', 0);
+                ->whereNot('transactions.status_transaction', 0);
                 ->latest('transactions.updated_at')
                 ->first();
         return view("pages.user.building-detail", compact('data', 'dataBooking'));

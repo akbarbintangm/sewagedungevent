@@ -603,6 +603,11 @@
 							$('#statusConfirmed').hide();
 							$('#statusUnconfirmed').show();
 							clearInterval(intervalId);
+						} else if (response.data.data.status_order === 0 && response.data.data.status_payment === 0) {
+							$('#awaitConfirmation').hide();
+							$('#statusConfirmed').hide();
+							$('#statusUnconfirmed').show();
+							clearInterval(intervalId);
 						} else {
 							$('#awaitConfirmation').show();
 							$('#statusConfirmed').hide();

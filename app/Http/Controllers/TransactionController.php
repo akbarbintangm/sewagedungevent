@@ -248,10 +248,99 @@ class TransactionController extends Controller
         }
     }
 
+    public function listOrderCanceled(Request $request) {
+        if ($request->ajax()) {
+            if(Auth::user()->type_user === 'ADMINISTRATOR') {
+                $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                // ->join('users as user_owner', 'user_owner.id', 'transactions.id_owner')
+                ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
+                // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.name as building_name')
+                ->whereIn('transactions.status_order', [0])
+                ->whereIn('transactions.status_transaction', [0]);
+            } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+                $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                // ->join('users as user_owner', 'user_owner.id', 'transactions.id_owner')
+                ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
+                // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.name as building_name')
+                ->whereIn('transactions.status_order', [0])
+                ->whereIn('transactions.status_transaction', [0]);
+            } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+                $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                // ->join('users as user_owner', 'user_owner.id', 'transactions.id_owner')
+                ->join('users as user_tenant', 'user_tenant.id', 'transactions.id_customer')
+                // ->join('users as user_admin', 'user_admin.id', 'transactions.id_admin')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', /* 'user_owner.name as owner_name', */ 'user_tenant.name as tenant_name', /* 'user_admin.name as admin_name', */ 'building_list.id_owner as id_owner', 'building_list.name as building_name')
+                ->whereIn('transactions.status_order', [0])
+                ->whereIn('transactions.status_transaction', [0])
+                ->where('id_owner', Auth::user()->id);
+            } else {
+                $data = [];
+            }
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('tenant_name', function ($row) {
+                    $data['tenant_name'] = $row->tenant_name;
+                    return view('components.admin.order.tenant_name', $data);
+                })
+                ->addColumn('building_name', function ($row) {
+                    $data['building_name'] = $row->building_name;
+                    return view('components.admin.order.building_name', $data);
+                })
+                ->addColumn('date_start', function ($row) {
+                    $data['date_start'] = $row->date_start;
+                    return view('components.admin.order.date_start', $data);
+                })
+                ->addColumn('total_day', function ($row) {
+                    $data['total_day'] = $row->total_day;
+                    return view('components.admin.order.total_day', $data);
+                })
+                ->addColumn('date_end', function ($row) {
+                    $data['date_end'] = $row->date_end;
+                    return view('components.admin.order.date_end', $data);
+                })
+                ->addColumn('total_pay', function ($row) {
+                    $data['total_pay'] = $row->total_pay;
+                    return view('components.admin.order.total_pay', $data);
+                })
+                ->addColumn('action', function ($row) {
+                    $data['id'] = $row->id;
+                    $data['status_order'] = $row->status_order;
+                    return view('components.admin.order.action', $data);
+                })
+                ->rawColumns(['tenant_name', 'building_name', 'date_start', 'total_day', 'date_end', 'total_pay', 'action'])
+                ->escapeColumns([])
+                ->make();
+        }
+    }
+
     public function updateOrder(Request $request, $id) {
         $verifyData = [
             'status_order' => 3,
             'status_transaction' => 1,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        try {
+            $buildingId = DB::table('transactions')->where('transactions.id', $id)->update($verifyData);
+            $getData = DB::table('transactions')->where('transactions.id', $id)->select('transactions.*')->first();
+            return $this->arrayResponse(200, 'success', 'Order ' . $getData->code . ' berhasil di verifikasi.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
+    }
+
+    public function cancelOrder(Request $request, $id) {
+        $verifyData = [
+            'status_order' => 0,
+            'status_transaction' => 0,
             'updated_by' => Auth::user()->id,
             'updated_at' => Carbon::now(),
         ];
@@ -370,7 +459,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function updateCancelTransaction(Request $request, $id) {
+    public function cancelTransaction(Request $request, $id) {
         $verifyData = [
             'status_order' => 0,
             'status_transaction' => 0,

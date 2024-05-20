@@ -123,7 +123,9 @@ Route::middleware(['auth'])->group(function () {
             })->name('orderPage:admin');
             Route::get('/order/dashboard', 'dashboardOrder')->name('dashboardOrder:admin');
             Route::get('/order/list', 'listOrder')->name('listOrder:admin');
+            Route::get('/order/list-canceled', 'listOrderCanceled')->name('listOrderCanceled:admin');
             Route::get('/order/update/{id}', 'updateOrder')->name('updateOrder:admin');
+            Route::get('/order/cancel/{id}', 'cancelOrder')->name('cancelOrder:admin');
             /* Transaction History */
             Route::get('/transaction', 'transactionPage', function() {
                 clearOrRunSchedule();
@@ -132,6 +134,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/transaction/list', 'listTransaction')->name('listTransaction:admin');
             Route::get('/transaction/detail/{id}', 'detailTransaction')->name('detailTransaction:admin');
             Route::get('/transaction/update/{id}', 'updateTransaction')->name('updateTransaction:admin');
+            Route::get('/transaction/cancel/{id}', 'cancelTransaction')->name('cancelTransaction:admin');
         });
         /* Master User */
         Route::controller(UserController::class)->group(function () {
@@ -193,7 +196,9 @@ Route::middleware(['auth'])->group(function () {
             })->name('orderPage:admin-entry');
             Route::get('/order/dashboard', 'dashboardOrder')->name('dashboardOrder:admin-entry');
             Route::get('/order/list', 'listOrder')->name('listOrder:admin-entry');
+            Route::get('/order/list-canceled', 'listOrderCanceled')->name('listOrderCanceled:admin-entry');
             Route::get('/order/update/{id}', 'updateOrder')->name('updateOrder:admin-entry');
+            Route::get('/order/cancel/{id}', 'cancelOrder')->name('cancelOrder:admin-entry');
             /* Transaction History */
             Route::get('/transaction', 'transactionPage', function() {
                 clearOrRunSchedule();
@@ -202,6 +207,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/transaction/list', 'listTransaction')->name('listTransaction:admin-entry');
             Route::get('/transaction/detail/{id}', 'detailTransaction')->name('detailTransaction:admin-entry');
             Route::get('/transaction/update/{id}', 'updateTransaction')->name('updateTransaction:admin-entry');
+            Route::get('/transaction/cancel/{id}', 'cancelTransaction')->name('cancelTransaction:admin-entry');
         });
         /* Master User */
         Route::controller(UserController::class)->group(function () {
@@ -263,7 +269,9 @@ Route::middleware(['auth'])->group(function () {
             })->name('orderPage:owner');
             Route::get('/order/dashboard', 'dashboardOrder')->name('dashboardOrder:owner');
             Route::get('/order/list', 'listOrder')->name('listOrder:owner');
+            Route::get('/order/list-canceled', 'listOrderCanceled')->name('listOrderCanceled:owner');
             Route::get('/order/update/{id}', 'updateOrder')->name('updateOrder:owner');
+            Route::get('/order/cancel/{id}', 'cancelOrder')->name('cancelOrder:owner');
             /* Transaction History */
             Route::get('/transaction', 'transactionPage', function() {
                 clearOrRunSchedule();
@@ -272,6 +280,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/transaction/list', 'listTransaction')->name('listTransaction:owner');
             Route::get('/transaction/detail/{id}', 'detailTransaction')->name('detailTransaction:owner');
             Route::get('/transaction/update/{id}', 'updateTransaction')->name('updateTransaction:owner');
+            Route::get('/transaction/cancel/{id}', 'cancelTransaction')->name('cancelTransaction:owner');
         });
         /* Master User */
         Route::controller(UserController::class)->group(function () {
