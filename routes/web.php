@@ -104,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/building/dashboard', 'dashboardBuilding')->name('dashboardBuilding:admin');
             Route::get('/building/list-verified', 'listBuildingVerified')->name('listBuildingVerified:admin');
             Route::get('/building/list-unverified', 'listBuildingUnverified')->name('listBuildingUnverified:admin');
+            Route::get('/building/list-canceled', 'listBuildingCanceled')->name('listBuildingCanceled:admin');
             Route::get('/building/detail-building/{id}', 'detailPageBuilding', function() {
                 clearOrRunSchedule();
             })->name('detailPageBuilding:admin');
@@ -112,6 +113,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/building/update/{id}', 'updateBuilding')->name('updateBuilding:admin');
             Route::get('/building/delete/{id}', 'deleteBuilding')->name('deleteBuilding:admin');
             Route::get('/building/verify/{id}', 'verifyBuilding')->name('verifyBuilding:admin');
+            Route::get('/building/cancel/{id}', 'cancelBuilding')->name('cancelBuilding:admin');
         });
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {
@@ -172,6 +174,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/building/dashboard', 'dashboardBuilding')->name('dashboardBuilding:admin-entry');
             Route::get('/building/list-verified', 'listBuildingVerified')->name('listBuildingVerified:admin-entry');
             Route::get('/building/list-unverified', 'listBuildingUnverified')->name('listBuildingUnverified:admin-entry');
+            Route::get('/building/list-canceled', 'listBuildingCanceled')->name('listBuildingCanceled:admin-entry');
             Route::get('/building/detail-building/{id}', 'detailPageBuilding', function() {
                 clearOrRunSchedule();
             })->name('detailPageBuilding:admin-entry');
@@ -180,6 +183,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/building/update/{id}', 'updateBuilding')->name('updateBuilding:admin-entry');
             Route::get('/building/delete/{id}', 'deleteBuilding')->name('deleteBuilding:admin-entry');
             Route::get('/building/verify/{id}', 'verifyBuilding')->name('verifyBuilding:admin-entry');
+            Route::get('/building/cancel/{id}', 'cancelBuilding')->name('cancelBuilding:admin-entry');
         });
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {
@@ -240,6 +244,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/building/dashboard', 'dashboardBuilding')->name('dashboardBuilding:owner');
             Route::get('/building/list-verified', 'listBuildingVerified')->name('listBuildingVerified:owner');
             Route::get('/building/list-unverified', 'listBuildingUnverified')->name('listBuildingUnverified:owner');
+            Route::get('/building/list-canceled', 'listBuildingCanceled')->name('listBuildingCanceled:owner');
             Route::get('/building/detail-building/{id}', 'detailPageBuilding', function() {
                 clearOrRunSchedule();
             })->name('detailPageBuilding:owner');
@@ -248,6 +253,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/building/update/{id}', 'updateBuilding')->name('updateBuilding:owner');
             Route::get('/building/delete/{id}', 'deleteBuilding')->name('deleteBuilding:owner');
             Route::get('/building/verify/{id}', 'verifyBuilding')->name('verifyBuilding:owner');
+            Route::get('/building/cancel/{id}', 'cancelBuilding')->name('cancelBuilding:owner');
         });
         /* Transaction */
         Route::controller(TransactionController::class)->group(function () {

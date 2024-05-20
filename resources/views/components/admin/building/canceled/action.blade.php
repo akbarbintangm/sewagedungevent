@@ -7,6 +7,5 @@
 @endif
 @if (Auth::user()->type_user !== 'PEMILIK_GEDUNG')
 	<button class="btn btn-outline-success btn-sm mb-0" data-id="{{ $id }}" onclick="verifyRoom({{ $id }})" type="button">Verifikasi</button>
-	<button class="btn btn-outline-warning btn-sm mb-0" data-id="{{ $id }}" onclick="cancelRoom({{ $id }})" type="button">Tolak</button>
 @endif
-{{-- <button class="btn btn-outline-danger btn-sm mb-0" data-id="{{ $id }}" onclick="deleteRoom({{ $id }})" type="button">Hapus</button> --}}
+<button class="btn btn-outline-danger btn-sm mb-0" data-id="{{ $id }}" onclick="deleteRoom({{ $id }})" type="button">Hapus</button>

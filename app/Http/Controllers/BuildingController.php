@@ -137,6 +137,63 @@ class BuildingController extends Controller
         }
     }
 
+    public function listBuildingCanceled(Request $request) {
+        if ($request->ajax()) {
+            if(Auth::user()->type_user === 'ADMINISTRATOR') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'buildings.status', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 2);
+            } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'buildings.status', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 2);
+            } else if(Auth::user()->type_user === 'PEMILIK_GEDUNG') {
+                $data = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.id', 'buildings.name', 'buildings.address', 'buildings.price', 'buildings.status', 'user_created.name as created_by', 'user_owner.name as owner_name')
+                ->where('buildings.status', 2)
+                ->where('buildings.id_owner', Auth::user()->id);
+            } else {
+                $data = [];
+            }
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('name', function ($row) {
+                    $data['name'] = $row->name;
+                    return view('components.admin.building.canceled.name', $data);
+                })
+                ->addColumn('owner_name', function ($row) {
+                    $data['owner_name'] = $row->owner_name;
+                    return view('components.admin.building.canceled.owner_name', $data);
+                })
+                ->addColumn('address', function ($row) {
+                    $data['address'] = $row->address;
+                    return view('components.admin.building.canceled.address', $data);
+                })
+                ->addColumn('price', function ($row) {
+                    $data['price'] = $row->price;
+                    return view('components.admin.building.canceled.price', $data);
+                })
+                ->addColumn('status', function ($row) {
+                    $data['status'] = $row->status;
+                    return view('components.admin.building.canceled.status', $data);
+                })
+                ->addColumn('action', function ($row) {
+                    $data['id'] = $row->id;
+                    $data['status'] = $row->status;
+                    return view('components.admin.building.canceled.action', $data);
+                })
+                ->rawColumns(['name', 'owner_name', 'address', 'price', 'status', 'action'])
+                ->escapeColumns([])
+                ->make();
+        }
+    }
+
     public function detailPageBuilding($id) {
         $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
@@ -205,6 +262,21 @@ class BuildingController extends Controller
             $buildingId = DB::table('buildings')->where('buildings.id', $id)->update($verifyData);
             $getData = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->first();
             return $this->arrayResponse(200, 'success', 'Ruangan ' . $getData->name . ' berhasil di verifikasi.', null);
+        } catch (\Throwable $th) {
+            return $this->arrayResponse(400, 'error', $th, null);
+        }
+    }
+
+    public function cancelBuilding(Request $request, $id) {
+        $verifyData = [
+            'status' => 2,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ];
+        try {
+            $buildingId = DB::table('buildings')->where('buildings.id', $id)->update($verifyData);
+            $getData = DB::table('buildings')->where('buildings.id', $id)->select('buildings.*')->first();
+            return $this->arrayResponse(200, 'success', 'Ruangan ' . $getData->name . ' berhasil di tolak.', null);
         } catch (\Throwable $th) {
             return $this->arrayResponse(400, 'error', $th, null);
         }
