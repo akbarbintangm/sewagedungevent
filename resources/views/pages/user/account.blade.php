@@ -119,7 +119,7 @@
 				</div>
 				<div class="modal-footer">
 					{{-- onclick="downloadAllInvoice()" --}}
-					<button class="btn btn-primary" id="downloadAllInvoice" type="button">Download Semua Invoice</button>
+					<button class="btn btn-primary" id="downloadAllInvoicePDF" type="button">Download Semua Invoice</button>
 					<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
 				</div>
 			</div>
@@ -133,7 +133,7 @@
 
 		modalTransaction.modal('hide');
 
-		document.getElementById('downloadAllInvoice').addEventListener('click', async function(e) {
+		document.getElementById('downloadAllInvoicePDF').addEventListener('click', async function(e) {
 			e.preventDefault();
 			modalTransaction.modal('hide');
 			const result = await showNotification('Apakah Anda yakin?', 'Semua histori transaksi akan didownload berformat PDF.', 'info')
@@ -141,7 +141,7 @@
 				modalTransaction.modal('show');
 			} else {
 				try {
-					var url = '{{ route('transactionAllInvoiceDownload:user') }}';
+					var url = '{{ route('transactionAllInvoice:user') }}';
 					window.location.href = url;
 					showAlertToast('Download Berhasil!', 'Semua invoice berhasil didownload!', 'success');
 					$('.table-history-transaction').DataTable().ajax.reload(null, false);
@@ -161,7 +161,7 @@
 				modalTransaction.modal('show');
 			} else {
 				try {
-					var url = '{{ route('transactionInvoiceDownload:user', ['id' => ':id']) }}';
+					var url = '{{ route('transactionInvoice:user', ['id' => ':id']) }}';
 					url = url.replace(':id', data);
 					window.location.href = url;
 					showAlertToast('Download Berhasil!', 'Semua invoice berhasil didownload!', 'success');

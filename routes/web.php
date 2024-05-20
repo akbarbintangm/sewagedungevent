@@ -337,8 +337,8 @@ Route::middleware(['auth'])->group(function () {
             //     clearOrRunSchedule();
             // })->name('transactionPage:user');
             // Route::get('/transaction/{id}', 'transactionPageUser')->name('transactionDetailPage:user');
-            Route::get('/transaction/{id}/invoice', 'transactionInvoiceDownloadUser')->name('transactionInvoiceDownload:user');
-            Route::get('/transaction/all/invoice', 'transactionAllInvoiceDownloadUser')->name('transactionAllInvoiceDownload:user');
+            Route::get('/transaction/invoice/{id}', 'transactionInvoice')->name('transactionInvoice:user');
+            Route::get('/transaction/invoice-all', 'transactionAllInvoice')->name('transactionAllInvoice:user');
         });
         /* Profiling */
         Route::controller(UserController::class)->group(function () {

@@ -476,7 +476,20 @@ class TransactionController extends Controller
         }
     }
 
-    public function transactionInvoiceDownloadUser($id) {
+    public function transactionAllInvoice() {
+        $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', 'building_list.name as building_name')
+                ->where('transactions.id_customer', Auth::user()->id)
+                ->get();
+        $userName = Auth::user()->name;
+        $allData = ['data' => $data, 'userName' => $userName];
+        $allHistoryTransaction = Pdf::loadView('/pages/user/invoiceall', $allData);
+        return $allHistoryTransaction->download('Semua Invoice '.$userName.'.pdf');
+    }
+
+    public function transactionInvoice($id) {
         $data = DB::table('transactions')
                 ->join('users as user_created', 'user_created.id', 'transactions.created_by')
                 ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
@@ -486,21 +499,8 @@ class TransactionController extends Controller
                 ->first();
         $userName = Auth::user()->name;
         $allData = ['data' => $data, 'userName' => $userName];
-        $pdf = Pdf::loadView('/pages/user/invoice', $allData);
-        return $pdf->download('Invoice '.$userName. ' '.$data->code.'.pdf');
-    }
-
-    public function transactionAllInvoiceDownloadUser() {
-        $data = DB::table('transactions')
-                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
-                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
-                ->select('transactions.*', 'building_list.name as building_name')
-                ->where('transactions.id_customer', Auth::user()->id)
-                ->get();
-        $userName = Auth::user()->name;
-        $allData = ['data' => $data, 'userName' => $userName];
-        $pdf = Pdf::loadView('/pages/user/invoice-all', $allData);
-        return $pdf->download('Semua Invoice '.$userName.'.pdf');
+        $selectedHistoryTransaction = Pdf::loadView('/pages/user/invoice', $allData);
+        return $selectedHistoryTransaction->download('Invoice '.$userName. ' '.$data->code.'.pdf');
     }
 
     public function transactionPage() {
