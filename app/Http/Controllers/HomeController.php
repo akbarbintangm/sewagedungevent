@@ -92,7 +92,7 @@ class HomeController extends Controller
             $getBankOwner = DB::table('buildings')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->where('buildings.id', $id)
-                ->select('buildings.*', 'user_owner.name as owner_name', 'user_owner.bank_name as owner_bank_name', 'user_owner.bank_number as owner_bank_number',)
+                ->select('buildings.*', 'user_owner.name as owner_name', 'user_owner.bank_name as owner_bank_name', 'user_owner.bank_number as owner_bank_number')
                 ->first();
             return $this->arrayResponse(200, 'success', null, $getBankOwner);
         } catch (\Throwable $th) {
@@ -104,7 +104,7 @@ class HomeController extends Controller
         $data = DB::table('buildings')
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
             ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
             ->where('buildings.status', 1)
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
@@ -116,7 +116,7 @@ class HomeController extends Controller
         $data = DB::table('buildings')
             ->join('users as user_created', 'user_created.id', 'buildings.created_by')
             ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
             ->where('buildings.status', 1)
             ->orderBy('buildings.created_at', 'desc')
             ->limit(10)
@@ -128,7 +128,7 @@ class HomeController extends Controller
         $data = DB::table('buildings')
                 ->join('users as user_created', 'user_created.id', 'buildings.created_by')
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
+                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
                 ->where('buildings.id' ,$id)
                 ->where('buildings.status', 1)
                 ->first();

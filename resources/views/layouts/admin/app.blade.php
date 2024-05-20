@@ -10,10 +10,11 @@
 		@yield('title') - Sewa Gedung Dashboard
 	</title>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="{{ asset('/css/fontawesome5.all.css') }}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 	<link href="{{ asset('/css/nucleo-icons.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/font-awesome.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/argon-dashboard.css?v=2.0.4') }}" id="pagestyle" rel="stylesheet" />
 	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/plugins/tagsinput.min.css') }}" rel="stylesheet">
@@ -29,17 +30,20 @@
 		@yield('content')
 	</main>
 	@include('layouts.admin.plugin')
-	<script src="{{ asset('/js/core/jquery.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/core/jquery.min.js') }}"></script>
 	<script src="{{ asset('/js/core/popper.min.js') }}"></script>
 	<script src="{{ asset('/js/core/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/fontawesome5.all.js') }}"></script>
 	<script src="{{ asset('/js/plugins/perfect-scrollbar.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/smooth-scrollbar.min.js') }}"></script>
-	<script src="{{ asset('/js/plugins/datetimepicker.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/datetimepicker.js') }}"></script>
 	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/sweetalert2.all.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/tagsinput.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/dataTables.bootstrap4.min.js') }}"></script>
+	<script src="{{ asset('/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+	<script src="{{ asset('/js/plugins/axios.min.js') }}"></script>
 	<script>
 		var win = navigator.platform.indexOf('Win') > -1;
 		if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -49,9 +53,6 @@
 			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
 		}
 	</script>
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-	<script src="{{ asset('/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-	<script src="{{ asset('/js/plugins/axios.min.js') }}"></script>
 	@include('layouts.utils')
 	@yield('script')
 	@if ($message = Session::get('success'))
@@ -70,7 +71,7 @@
 		</script>
 	@endif
 
-	@if ($message = Session::get('error') || ($message = Session::get('danger')))
+	@if (($message = Session::get('error')) || ($message = Session::get('danger')))
 		<script>
 			$(document).ready(function() {
 				Swal.fire({

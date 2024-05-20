@@ -140,7 +140,15 @@
 							<h2 id="namaHotel">{{ $data->name }}</h2>
 							<p><strong>Lokasi :</strong> <span id="lokasi"> {{ $data->address }} </span></p>
 							<p><strong>Email :</strong> <span id="email"> {{ $data->owner_email }} </span></p>
-							<p><strong>Rating :</strong> <span id="rating">??/10</span></p>
+							<p><strong>Telepon :</strong>
+								<span id="phone">
+									@isset($data->owner_phone)
+										{{ $data->owner_phone }}
+									@else
+										<b>Login Untuk Melihat Nomor Telepon!</b>
+									@endisset
+								</span>
+							</p>
 							<p><strong>Harga per Hari :</strong> <span id="harga">Rp. {{ number_format($data->price, 0, ',', '.') }}</span></p>
 							@if (Auth::check())
 								<button class="btn btn-primary btn-block" data-bs-target="#bookingModal" data-bs-toggle="modal" id="bookingButton" onclick="getAllBookingDate()" style="display: none;" type="button">

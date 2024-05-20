@@ -10,11 +10,11 @@
 		@yield('title') - Sewa Gedung
 	</title>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<link href="{{ asset('/css/fontawesome5.all.css') }}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 	<link href="{{ asset('/css/nucleo-icons.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/font-awesome.css') }}" rel="stylesheet" />
-	<link href="{{ asset('/css/nucleo-svg.css') }}" rel="stylesheet" />
 	<link href="{{ asset('/css/plugins/sweetalert2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/plugins/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/argon-design-system.css?v=1.2.2') }}" rel="stylesheet" />
@@ -28,20 +28,21 @@
 		@yield('content')
 		@include('layouts.user.footer')
 	</div>
-	<script src="{{ asset('/js/core/jquery.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('/js/core/popper.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/core/jquery.min.js') }}"></script>
+	<script src="{{ asset('/js/core/popper.min.js') }}"></script>
+	<script src="{{ asset('/js/core/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('/js/plugins/fontawesome5.all.js') }}"></script>
 	<script src="{{ asset('/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/bootstrap-switch.js') }}"></script>
-	<script src="{{ asset('/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/nouislider.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/moment.min.js') }}"></script>
-	<script src="{{ asset('/js/plugins/datetimepicker.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('/js/plugins/datetimepicker.js') }}"></script>
 	<script src="{{ asset('/js/plugins/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/sweetalert2.all.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/datatables/datatables.min.js') }}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}" type="text/javascript"></script>
-	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+	{{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
+	<script src="{{ asset('/js/argon-design-system.min.js?v=1.2.2') }}"></script>
+	{{-- <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script> --}}
 	<script src="{{ asset('/vendor/lightgallery/lightgallery.min.js') }}"></script>
 	<script src="{{ asset('/js/plugins/axios.min.js') }}"></script>
 	@include('layouts.utils')
@@ -62,7 +63,7 @@
 		</script>
 	@endif
 
-	@if ($message = Session::get('error') || ($message = Session::get('danger')))
+	@if (($message = Session::get('error')) || ($message = Session::get('danger')))
 		<script>
 			$(document).ready(function() {
 				Swal.fire({
