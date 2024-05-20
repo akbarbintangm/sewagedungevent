@@ -248,11 +248,63 @@
 				}
 			});
 			var token = '{{ Session::token() }}';
-			var tableVerified = $('.table-order').DataTable({
+			var tableOrder = $('.table-order').DataTable({
 				autoWidth: true,
 				processing: true,
 				serverSide: true,
 				ajax: "{{ route('listOrder:owner') }}",
+				headers: {
+					'CSRFToken': token
+				},
+				columns: [{
+						data: 'tenant_name',
+						name: 'tenant_name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'building_name',
+						name: 'building_name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'date_start',
+						name: 'transactions.date_start',
+						orderable: true,
+						searchable: true
+					},
+					// {
+					// 	data: 'total_day',
+					// 	name: 'transactions.total_day',
+					// 	orderable: true,
+					// 	searchable: true
+					// },
+					// {
+					// 	data: 'date_end',
+					// 	name: 'transactions.date_end',
+					// 	orderable: true,
+					// 	searchable: true
+					// },
+					{
+						data: 'total_pay',
+						name: 'transactions.total_pay',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: false,
+						searchable: false
+					}
+				]
+			});
+			var tableOrderCanceled = $('.table-order-canceled').DataTable({
+				autoWidth: true,
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('listOrderCanceled:owner') }}",
 				headers: {
 					'CSRFToken': token
 				},
