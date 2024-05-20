@@ -13,6 +13,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Str;
 use DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransactionController extends Controller
 {
@@ -475,8 +476,34 @@ class TransactionController extends Controller
         }
     }
 
-    public function transactionPage() {
+    public function transactionInvoiceDownloadUser($id) {
+        $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', 'building_list.name as building_name')
+                ->where('transactions.id_customer', Auth::user()->id)
+                ->where('transactions.id', $id)
+                ->first();
+        $userName = Auth::user()->name;
+        $allData = ['data' => $data, 'userName' => $userName];
+        $pdf = Pdf::loadView('/pages/user/invoice', $allData);
+        return $pdf->download('Invoice '.$userName. ' '.$data->code.'.pdf');
+    }
 
+    public function transactionAllInvoiceDownloadUser() {
+        $data = DB::table('transactions')
+                ->join('users as user_created', 'user_created.id', 'transactions.created_by')
+                ->join('buildings as building_list', 'building_list.id', 'transactions.id_building')
+                ->select('transactions.*', 'building_list.name as building_name')
+                ->where('transactions.id_customer', Auth::user()->id)
+                ->get();
+        $userName = Auth::user()->name;
+        $allData = ['data' => $data, 'userName' => $userName];
+        $pdf = Pdf::loadView('/pages/user/invoice-all', $allData);
+        return $pdf->download('Semua Invoice '.$userName.'.pdf');
+    }
+
+    public function transactionPage() {
         if(Auth::user()->type_user === 'ADMINISTRATOR') {
             return view("pages.admin.transaction.index");
         } else if(Auth::user()->type_user === 'ADMIN_ENTRY') {

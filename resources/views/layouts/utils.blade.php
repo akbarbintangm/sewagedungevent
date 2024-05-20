@@ -187,4 +187,16 @@
 			//
 		}
 	}
+
+	function showAlertToast(title, text, icon) {
+		return Swal.fire({
+			icon: icon,
+			title: title,
+			text: text,
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 5000
+		});
+	}
 </script>

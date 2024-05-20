@@ -29,7 +29,7 @@
 							<button class="btn btn-info btn-sm" disabled type="button">
 								Pilih Foto
 							</button>
-							<button class="btn btn-dark btn-sm" data-target="#historyTransaction" data-toggle="modal" onclick="reloadTable()" type="button">
+							<button class="btn btn-dark btn-sm" data-target="#historyTransactionModal" data-toggle="modal" onclick="reloadTable()" type="button">
 								Riwayat Transaksi
 							</button>
 						</div>
@@ -92,7 +92,7 @@
 		</div>
 	</div>
 
-	<div aria-hidden="true" aria-labelledby="historyTransactionLabel" class="modal fade" id="historyTransaction" role="dialog">
+	<div aria-hidden="true" aria-labelledby="historyTransactionLabel" class="modal fade" id="historyTransactionModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -110,6 +110,7 @@
 									<th>Tanggal</th>
 									<th>Nama Ruangan</th>
 									<th>Total Bayar</th>
+									<th>Invoice</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -117,6 +118,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
+					{{-- onclick="downloadAllInvoice()" --}}
+					<button class="btn btn-primary" id="downloadAllInvoice" type="button">Download Semua Invoice</button>
 					<button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
 				</div>
 			</div>
@@ -126,6 +129,52 @@
 
 @section('script')
 	<script>
+		var modalTransaction = $('#historyTransactionModal');
+
+		modalTransaction.modal('hide');
+
+		document.getElementById('downloadAllInvoice').addEventListener('click', async function(e) {
+			e.preventDefault();
+			modalTransaction.modal('hide');
+			const result = await showNotification('Apakah Anda yakin?', 'Semua histori transaksi akan didownload berformat PDF.', 'info')
+			if (!result.isConfirmed) {
+				modalTransaction.modal('show');
+			} else {
+				try {
+					var url = '{{ route('transactionAllInvoiceDownload:user') }}';
+					window.location.href = url;
+					showAlertToast('Download Berhasil!', 'Semua invoice berhasil didownload!', 'success');
+					$('.table-history-transaction').DataTable().ajax.reload(null, false);
+					modalTransaction.modal('show');
+				} catch (error) {
+					showAlertToast('Download Gagal!', 'Semua invoice gagal didownload!', 'error');
+					$('.table-history-transaction').DataTable().ajax.reload(null, false);
+					modalTransaction.modal('show');
+				}
+			}
+		});
+
+		async function downloadInvoice(data) {
+			modalTransaction.modal('hide');
+			const result = await showNotification('Apakah Anda yakin?', 'Histori transaksi yang dipilih akan didownload berformat PDF.', 'info')
+			if (!result.isConfirmed) {
+				modalTransaction.modal('show');
+			} else {
+				try {
+					var url = '{{ route('transactionInvoiceDownload:user', ['id' => ':id']) }}';
+					url = url.replace(':id', data);
+					window.location.href = url;
+					showAlertToast('Download Berhasil!', 'Semua invoice berhasil didownload!', 'success');
+					$('.table-history-transaction').DataTable().ajax.reload(null, false);
+					modalTransaction.modal('show');
+				} catch (error) {
+					showAlertToast('Download Gagal!', 'Semua invoice gagal didownload!', 'error');
+					$('.table-history-transaction').DataTable().ajax.reload(null, false);
+					modalTransaction.modal('show');
+				}
+			}
+		}
+
 		async function blurPasswordTenant(repassword, password) {
 			if (password.val() === repassword.val()) {
 				repassword.addClass('is-valid').removeClass('is-invalid');
@@ -189,6 +238,12 @@
 						name: 'transactions.total_pay',
 						orderable: true,
 						searchable: true
+					},
+					{
+						data: 'download',
+						name: 'download',
+						orderable: false,
+						searchable: false
 					},
 				]
 			});

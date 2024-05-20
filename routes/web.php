@@ -333,11 +333,12 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/building/detail/{id}/transaction/payment', 'paymentBuildingUser')->name('paymentBuilding:user');
             Route::post('/building/detail/{id}/transaction/await-confirmation', 'confirmationBuildingUser')->name('confirmationBuilding:user');
             /* Transaction History */
-            Route::post('/transaction', 'transactionPageUser', function() {
-                clearOrRunSchedule();
-            })->name('transactionPage:user');
-            Route::get('/transaction/{id}', 'transactionPageUser')->name('transactionDetailPage:user');
+            // Route::post('/transaction', 'transactionPageUser', function() {
+            //     clearOrRunSchedule();
+            // })->name('transactionPage:user');
+            // Route::get('/transaction/{id}', 'transactionPageUser')->name('transactionDetailPage:user');
             Route::get('/transaction/{id}/invoice', 'transactionInvoiceDownloadUser')->name('transactionInvoiceDownload:user');
+            Route::get('/transaction/all/invoice', 'transactionAllInvoiceDownloadUser')->name('transactionAllInvoiceDownload:user');
         });
         /* Profiling */
         Route::controller(UserController::class)->group(function () {

@@ -59,7 +59,7 @@
 				<div class="modal-body">
 					<ul>
 						<li class="font-weight-bold">Code: <span class="font-weight-normal" id="codeBook"></span></li>
-						<li class="font-weight-bold">Room Name: <span class="font-weight-normal" id="roomName"></span></li>
+						<li class="font-weight-bold">Nama Ruangan: <span class="font-weight-normal" id="roomName"></span></li>
 						<li class="font-weight-bold">Date Booking: <span class="font-weight-normal" id="dateBook"></span></li>
 						<li class="font-weight-bold">Total Bayar: <span class="font-weight-normal" id="totalPay"></span></li>
 						<li class="font-weight-bold">Status Order: <span class="font-weight-normal" id="statusOrder"></span></li>

@@ -154,7 +154,10 @@ class UserController extends Controller
                 ->addColumn('total_pay', function ($row) {
                     return $row->total_pay;
                 })
-                ->rawColumns(['code', 'date_start', 'building_name', 'total_pay'])
+                ->addColumn('download', function ($row) {
+                    return '<button class="btn btn-success" onclick="downloadInvoice('.$row->id.')" type="button">Download</button>';
+                })
+                ->rawColumns(['code', 'date_start', 'building_name', 'total_pay', 'download'])
                 ->escapeColumns([])
                 ->make();
         }
