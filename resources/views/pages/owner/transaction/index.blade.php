@@ -123,6 +123,20 @@
 				});
 		}
 
+		function cancelOrder(data) {
+			var url = '{{ route('cancelOrder:owner', ['id' => ':data']) }}';
+			url = url.replace(':data', data);
+			submitNotification(null, 'Apakah Anda yakin', 'Batalkan Order Booking Ini?', 'info', url)
+				.then(replyResponse => {
+					if (replyResponse) {
+						$('.table-transaction').DataTable().ajax.reload(null, false);
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
 		function verifyTransaction(data) {
 			var url = '{{ route('updateTransaction:owner', ['id' => ':data']) }}';
 			url = url.replace(':data', data);

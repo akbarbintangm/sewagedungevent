@@ -24,11 +24,14 @@
 						<div class="row">
 							<div class="col">
 								<p class="mb-0">
-									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganterdaftar" role="button">
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganTerdaftar" role="button">
 										Ruangan Terdaftar
 									</a>
-									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganbelumterdaftar" role="button">
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganBelumTerdaftar" role="button">
 										Ruangan Belum Terdaftar
+									</a>
+									<a aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-primary mb-0" href="#ruanganDitolak" role="button">
+										Ruangan Ditolak/Dibatalkan
 									</a>
 								</p>
 							</div>
@@ -39,7 +42,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md">
-				<div id="ruanganterdaftar">
+				<div id="ruanganTerdaftar">
 					<div class="card mb-4">
 						<div class="card-header pb-0">
 							<h6>Daftar Ruangan Terdaftar</h6>
@@ -66,7 +69,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md">
-				<div id="ruanganbelumterdaftar">
+				<div id="ruanganBelumTerdaftar">
 					<div class="card mb-4">
 						<div class="card-header pb-0">
 							<h6>Daftar Ruang Yang Didaftarkan</h6>
@@ -74,6 +77,34 @@
 						<div class="card-body pb-3 pt-2">
 							<div class="table-responsive-lg p-0">
 								<table class="w-100 align-items-center table-unverified mb-0 table">
+									<thead>
+										<tr>
+											<th>Nama Ruangan</th>
+											<th>Nama Pemilik</th>
+											<th>Alamat</th>
+											<th>Range Harga</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md">
+				<div id="ruanganDitolak">
+					<div class="card mb-4">
+						<div class="card-header pb-0">
+							<h6>Daftar Ruang Yang Ditolak / Dibatalkan</h6>
+						</div>
+						<div class="card-body pb-3 pt-2">
+							<div class="table-responsive-lg p-0">
+								<table class="w-100 align-items-center table-canceled mb-0 table">
 									<thead>
 										<tr>
 											<th>Nama Ruangan</th>
@@ -191,6 +222,52 @@
 					}
 				]
 			});
+			var tableCanceled = $('.table-canceled').DataTable({
+				autoWidth: true,
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('listBuildingCanceled:admin-entry') }}",
+				headers: {
+					'CSRFToken': token
+				},
+				columns: [{
+						data: 'name',
+						name: 'buildings.name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'owner_name',
+						name: 'owner_name',
+						orderable: true,
+						searchable: true
+					},
+					{
+						data: 'address',
+						name: 'buildings.address',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'price',
+						name: 'buildings.price',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'status',
+						name: 'buildings.status',
+						orderable: true,
+						searchable: false
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: false,
+						searchable: false
+					}
+				]
+			});
 		});
 
 		function deleteRoom(data) {
@@ -201,6 +278,7 @@
 					if (replyResponse) {
 						$('.table-verified').DataTable().ajax.reload(null, false);
 						$('.table-unverified').DataTable().ajax.reload(null, false);
+						$('.table-canceled').DataTable().ajax.reload(null, false);
 					}
 				})
 				.catch(error => {
@@ -216,6 +294,23 @@
 					if (replyResponse) {
 						$('.table-verified').DataTable().ajax.reload(null, false);
 						$('.table-unverified').DataTable().ajax.reload(null, false);
+						$('.table-canceled').DataTable().ajax.reload(null, false);
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+		function cancelRoom(data) {
+			var url = '{{ route('cancelBuilding:admin-entry', ['id' => ':data']) }}';
+			url = url.replace(':data', data);
+			submitNotification(null, 'Apakah Anda yakin', 'Data Ruangan akan dibatalkan, Yakin?', 'info', url)
+				.then(replyResponse => {
+					if (replyResponse) {
+						$('.table-verified').DataTable().ajax.reload(null, false);
+						$('.table-unverified').DataTable().ajax.reload(null, false);
+						$('.table-canceled').DataTable().ajax.reload(null, false);
 					}
 				})
 				.catch(error => {

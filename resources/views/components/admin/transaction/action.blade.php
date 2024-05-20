@@ -3,6 +3,7 @@
 	<button class="btn btn-outline-warning btn-sm btn-disabled mb-0" disabled type="button">Belum Bayar</button>
 @elseif ($status_order === 2 && $status_transaction === 0)
 	<button class="btn btn-success btn-sm mb-0" data-id="{{ $id }}" onclick="verifyOrder({{ $id }})" type="button">Validasi</button>
+	<button class="btn btn-success btn-sm mb-0" data-id="{{ $id }}" onclick="cancelOrder({{ $id }})" type="button">Tolak</button>
 @elseif ($status_order === 3 && $status_transaction === 1)
 	<button class="btn btn-success btn-sm mb-0" data-id="{{ $id }}" onclick="verifyTransaction({{ $id }})" type="button">Konfirmasi</button>
 @elseif ($status_order === 0 && $status_transaction === 0)
