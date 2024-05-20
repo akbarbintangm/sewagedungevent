@@ -347,7 +347,7 @@ class TransactionController extends Controller
         try {
             $buildingId = DB::table('transactions')->where('transactions.id', $id)->update($verifyData);
             $getData = DB::table('transactions')->where('transactions.id', $id)->select('transactions.*')->first();
-            return $this->arrayResponse(200, 'success', 'Order ' . $getData->code . ' berhasil di verifikasi.', null);
+            return $this->arrayResponse(200, 'success', 'Order ' . $getData->code . ' berhasil di batalkan.', null);
         } catch (\Throwable $th) {
             return $this->arrayResponse(400, 'error', $th, null);
         }
