@@ -79,12 +79,12 @@ class HomeController extends Controller
                 ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
                 ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
                 ->where('buildings.status', 1);
-                if($request->price_start && $request->price_end) {
-                    $dataBuildings->whereBetween('buildings.price', [$request->price_start, $request->price_end]);
-                } elseif ($request->price_start) {
+                if ($request->price_start) {
                     $dataBuildings->where('buildings.price', '>=', $request->price_start);
                 } elseif ($request->price_end) {
                     $dataBuildings->where('buildings.price', '<=', $request->price_end);
+                } elseif($request->price_start && $request->price_end) {
+                    $dataBuildings->whereBetween('buildings.price', [$request->price_start, $request->price_end]);
                 }
                 if($request->name) {
                     $dataBuildings->where(function($query) use ($request) {
