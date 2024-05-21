@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BuildingSeeder::class);
         $this->call(HistorySeeder::class);
         $this->call(HomeSeeder::class);
-        $this->call(TransactionDetailSeeder::class);
         $this->call(TransactionSeeder::class);
     }
 }

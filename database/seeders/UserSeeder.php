@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -105,7 +106,7 @@ class UserSeeder extends Seeder
         $names = ['Hendra', 'Budi', 'Siti', 'Joko', 'Lina', 'Rina', 'Adi', 'Dewi', 'Agus', 'Eka', 'Rudi', 'Citra', 'Dian', 'Putri', 'Ani', 'Arif', 'Rita', 'Andi', 'Sinta', 'Yudi', 'Nita', 'Dina', 'Dini', 'Fajar', 'Indra', 'Rani', 'Wati', 'Tono', 'Wawan', 'Doni']; // Daftar nama yang akan diacak dengan banyak variasi
         $profiles = ['hendra.jpg', 'budi.jpg', 'siti.jpg', 'joko.jpg', 'lina.jpg', 'rina.jpg', 'adi.jpg', 'dewi.jpg', 'agus.jpg', 'eka.jpg', 'rudi.jpg', 'citra.jpg', 'dian.jpg', 'putri.jpg', 'ani.jpg', 'arif.jpg', 'rita.jpg', 'andi.jpg', 'sinta.jpg', 'yudi.jpg', 'nita.jpg', 'dina.jpg', 'dini.jpg', 'fajar.jpg', 'indra.jpg', 'rani.jpg', 'wati.jpg', 'tono.jpg', 'wawan.jpg', 'doni.jpg']; // Daftar profil yang akan diacak dengan banyak variasi
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $name = $this->shuffleAndConsistent($names[array_rand($names)]);
             $email = strtolower($name) . $i . '@gmail.com';
             $password = Hash::make(strtolower($name));

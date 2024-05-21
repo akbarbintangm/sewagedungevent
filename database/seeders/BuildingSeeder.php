@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class BuildingSeeder extends Seeder
 {
@@ -18,14 +19,14 @@ class BuildingSeeder extends Seeder
     {
         $data = [];
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $data[] = [
                 'id_owner' => rand(2, 4),
                 'name' => $this->generateRandomString(),
-                'price' => rand(100000, 1000000),
+                'price' => rand(100000, 10000000),
                 'address' => $this->generateRandomString(20),
                 'description' => $this->generateRandomString(50),
-                'facilities' => 'Fasilitas Gedung ' . ($i + 1),
+                'facilities' => 'Fasilitas Gedung ' . ($i + 1) . ',Fasilitas Gedung ' . ($i + 2),
                 'picture_1' => 'room_1.png',
                 'picture_2' => 'room_2.png',
                 'picture_3' => 'room_3.png',
