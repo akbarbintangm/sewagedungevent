@@ -19,7 +19,7 @@ class TransactionSeeder extends Seeder
         $adminId = 1;
         $currentDate = now()->format('Ymd');
 
-        for ($i = 0; $i < 50000; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             $idCustomer = $faker->numberBetween(1, 200);
             $idBuilding = $faker->numberBetween(1, 1000);
             $dateStart = $faker->dateTimeBetween('2024-01-01', 'now')->format('Y-m-d');
