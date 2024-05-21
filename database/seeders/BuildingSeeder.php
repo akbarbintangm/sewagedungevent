@@ -19,7 +19,7 @@ class BuildingSeeder extends Seeder
     {
         $data = [];
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 5000; $i++) {
             $data[] = [
                 'id_owner' => array_rand([2, 4, 6]),
                 'name' => $this->generateRandomString(),
