@@ -61,10 +61,10 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'indexWithoutLoginPageUser', function() {
         clearOrRunSchedule();
     })->name('landingWithoutLoginPage:user');
-    Route::get('/building', 'buildingWithoutLoginPageUser', function() {
+    Route::get('/building', 'buildingPageUser', function() {
         clearOrRunSchedule();
     })->name('buildingWithoutLoginPage:user');
-    Route::get('/building/detail/{id}', 'buildingDetailWithoutLoginPageUser', function() {
+    Route::get('/building/detail/{id}', 'buildingDetailPageUser', function() {
         clearOrRunSchedule();
     })->name('buildingDetailWithoutLoginPage:user');
     Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');

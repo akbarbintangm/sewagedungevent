@@ -23,46 +23,6 @@ class HomeController extends Controller
         return view("pages.user.home", compact('data'));
     }
 
-    public function indexWithoutLoginPageUser()
-    {
-        $data = DB::table('buildings')
-            ->join('users as user_created', 'user_created.id', 'buildings.created_by')
-            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
-            ->where('buildings.status', 1)
-            ->orderBy('buildings.created_at', 'desc')
-            ->limit(10)
-            ->get();
-        return view("pages.user.home", compact('data'));
-    }
-
-    public function buildingWithoutLoginPageUser() {
-        $data = DB::table('buildings')
-            ->join('users as user_created', 'user_created.id', 'buildings.created_by')
-            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
-            ->where('buildings.status', 1)
-            ->orderBy('buildings.created_at', 'desc')
-            ->get();
-        return view("pages.user.building", compact('data'));
-    }
-
-    public function buildingDetailWithoutLoginPageUser($id) {
-        $data = DB::table('buildings')
-                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
-                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email')
-                ->where('buildings.id' ,$id)
-                ->where('buildings.status', 1)
-                ->first();
-        $dataBooking = (object) [
-            'code' => '',
-            'status_order' => 0,
-            'status_transaction' => 0,
-        ];
-        return view("pages.user.building-detail", compact('data', 'dataBooking'));
-    }
-
     public function getBookingDateUser(Request $request, $id) {
         try {
             $getBookingData = DB::table('transactions')
@@ -112,16 +72,47 @@ class HomeController extends Controller
         return view("pages.user.home", compact('data'));
     }
 
-    public function buildingPageUser() {
-        $data = DB::table('buildings')
-            ->join('users as user_created', 'user_created.id', 'buildings.created_by')
-            ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
-            ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
-            ->where('buildings.status', 1)
-            ->orderBy('buildings.created_at', 'desc')
-            ->limit(10)
-            ->get();
-        return view("pages.user.building", compact('data'));
+    public function buildingPageUser(Request $request) {
+        if ($request) {
+            $dataBuildings = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
+                ->where('buildings.status', 1);
+                if($request->price_start && $request->price_end) {
+                    $dataBuildings->whereBetween('buildings.price', [$request->price_start, $request->price_end]);
+                } elseif ($request->price_start) {
+                    $dataBuildings->where('buildings.price', '>=', $request->price_start);
+                } elseif ($request->price_end) {
+                    $dataBuildings->where('buildings.price', '<=', $request->price_end);
+                }
+                if($request->name) {
+                    $dataBuildings->where(function($query) use ($request) {
+                        $query->where('buildings.name', 'LIKE', '%' . $request->name . '%')
+                            ->orWhere('user_owner.name', 'LIKE', '%' . $request->name . '%')
+                            ->orWhere('user_owner.email', 'LIKE', '%' . $request->name . '%');
+                    });
+                }
+                if($request->name_sort) {
+                    $dataBuildings->orderBy('buildings.name', $request->name_sort);
+                }
+                if($request->price_sort) {
+                    $dataBuildings->orderBy('buildings.price', $request->price_sort);
+                }
+                $dataBuildings->orderBy('buildings.created_at', 'desc');
+            $data = $dataBuildings->get();
+            $getCountData = $dataBuildings->count();
+        } else {
+            $dataBuildings = DB::table('buildings')
+                ->join('users as user_created', 'user_created.id', 'buildings.created_by')
+                ->join('users as user_owner', 'user_owner.id', 'buildings.id_owner')
+                ->select('buildings.*', 'user_created.name as created_by', 'user_owner.name as owner_name', 'user_owner.email as owner_email', 'user_owner.phone as owner_phone')
+                ->where('buildings.status', 1)
+                ->orderBy('buildings.created_at', 'desc');
+            $data = $dataBuildings->get();
+            $getCountData = $dataBuildings->count();
+        }
+        return view("pages.user.building", compact('data', 'getCountData'));
     }
 
     public function buildingDetailPageUser($id) {
@@ -132,7 +123,8 @@ class HomeController extends Controller
                 ->where('buildings.id' ,$id)
                 ->where('buildings.status', 1)
                 ->first();
-        $dataBooking = DB::table('transactions')
+        if (Auth::check()) {
+            $dataBooking = DB::table('transactions')
                 ->where('transactions.id_customer', Auth::user()->id)
                 ->where('transactions.id_building', $id)
                 ->select('transactions.*')
@@ -140,6 +132,16 @@ class HomeController extends Controller
                 ->whereNot('transactions.status_transaction', 0)
                 ->latest('transactions.updated_at')
                 ->first();
+        } else {
+            $dataBooking = DB::table('transactions')
+                // ->where('transactions.id_customer', Auth::user()->id)
+                ->where('transactions.id_building', $id)
+                ->select('transactions.*')
+                ->whereNot('transactions.status_order', 0)
+                ->whereNot('transactions.status_transaction', 0)
+                ->latest('transactions.updated_at')
+                ->first();
+        }
         return view("pages.user.building-detail", compact('data', 'dataBooking'));
     }
 
