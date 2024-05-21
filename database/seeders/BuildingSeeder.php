@@ -21,7 +21,7 @@ class BuildingSeeder extends Seeder
 
         for ($i = 0; $i < 1000; $i++) {
             $data[] = [
-                'id_owner' => rand(2, 4),
+                'id_owner' => array_rand(2, 4, 6),
                 'name' => $this->generateRandomString(),
                 'price' => rand(100000, 10000000),
                 'address' => $this->generateRandomString(20),
@@ -37,7 +37,7 @@ class BuildingSeeder extends Seeder
                 'picture_8' => 'room_8.png',
                 'picture_9' => 'room_9.png',
                 'picture_10' => 'room_10.png',
-                'status' => rand(0, 1, 2),
+                'status' => array_rand([0, 1, 2]),
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => now(),
