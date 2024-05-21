@@ -21,7 +21,7 @@ class BuildingSeeder extends Seeder
 
         for ($i = 0; $i < 1000; $i++) {
             $data[] = [
-                'id_owner' => array_rand(2, 4, 6),
+                'id_owner' => array_rand([2, 4, 6]),
                 'name' => $this->generateRandomString(),
                 'price' => rand(100000, 10000000),
                 'address' => $this->generateRandomString(20),
