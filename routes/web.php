@@ -58,7 +58,7 @@ Route::controller(RegisterController::class)->group(function () {
 
 /* User Page without Login */
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'indexWithoutLoginPageUser', function() {
+    Route::get('/', 'indexPageUser', function() {
         clearOrRunSchedule();
     })->name('landingWithoutLoginPage:user');
     Route::get('/building', 'buildingPageUser', function() {
