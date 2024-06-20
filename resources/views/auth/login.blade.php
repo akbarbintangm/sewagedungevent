@@ -11,14 +11,14 @@
 	<section class="section section-shaped section-lg">
 		<div class="shape shape-style-1 bg-gradient-default">
 		</div>
-		<div class="pt-lg-7 container">
+		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-5">
 					<div class="card bg-secondary border-0 shadow">
-						<div class="card-header bg-white pb-5">
-						</div>
-						<div class="card-body px-lg-5 py-lg-5">
-							<div class="text-muted mb-4 text-center">
+						{{-- <div class="card-header bg-white pb-5">
+						</div> --}}
+						<div class="card-body px-lg-5 py-lg-4">
+							<div class="text-muted mb-4 mt-2 text-center">
 								<small>Sign in with credentials</small>
 							</div>
 							@if ($message = Session::get('success'))
@@ -68,7 +68,7 @@
 									<label class="custom-control-label" for=" customCheckLogin"><span>Remember me</span></label>
 								</div>
 								<div class="text-center">
-									<button class="btn btn-primary my-4" type="submit">Sign in</button>
+									<button class="btn btn-primary my-4" type="submit">Login</button>
 								</div>
 							</form>
 						</div>
@@ -78,7 +78,7 @@
 							<a class="text-light" href="#"><small>Forgot password?</small></a>
 						</div>
 						<div class="col-6 text-right">
-							<a class="text-light" href="{{ route('register') }}"><small>Ga punya akun? Ya buat lah bang!</small></a>
+							<a class="text-light" href="{{ route('register') }}"><small>Tidak punya akun? Buat akun sekarang</small></a>
 						</div>
 					</div>
 				</div>

@@ -15,8 +15,8 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="card bg-secondary border-0 shadow">
-						<div class="card-header bg-white pb-5">
-						</div>
+						{{-- <div class="card-header bg-white pb-5">
+						</div> --}}
 						<div class="card-body px-lg-5 py-lg-5">
 							<div class="text-muted mb-4 text-center">
 								<small>Sign up with credentials</small>
@@ -93,7 +93,7 @@
 							<a class="text-light" href="#"><small>Forgot password?</small></a>
 						</div>
 						<div class="col-6 text-right">
-							<a class="text-light" href="{{ route('login') }}"><small>Punya akun? Ya login lah bang!</small></a>
+							<a class="text-light" href="{{ route('login') }}"><small>Sudah punya akun? Login sekarang</small></a>
 						</div>
 					</div>
 				</div>
@@ -160,4 +160,4 @@
 		});
 	</script>
 @endsection
-) ?> ?> ?>
+

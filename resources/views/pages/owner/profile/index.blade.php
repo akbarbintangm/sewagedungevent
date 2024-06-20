@@ -59,7 +59,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="card-header pt-lg-2 pb-lg-2 mt-3 border-0 text-center">
+									{{-- <div class="card-header pt-lg-2 pb-lg-2 mt-3 border-0 text-center">
 										<div class="d-flex justify-content-between">
 											<button class="btn btn-primary" disabled type="button">
 												Ubah Profile
@@ -68,7 +68,7 @@
 												Pilih Foto
 											</button>
 										</div>
-									</div>
+									</div> --}}
 									<div class="card-body pt-0">
 										<div class="mt-4 text-center">
 											<h5>

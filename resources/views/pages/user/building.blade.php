@@ -83,9 +83,9 @@
 								<p class="card-text"><b>Harga: Rp. {{ number_format($item->price, 0, ',', '.') }}</b></p>
 								<div class="d-flex justify-content-center">
 									@if (Auth::check())
-										<a class="btn btn-primary" href="{{ route('buildingDetailPage:user', ['id' => $item->id]) }}">Booking</a>
+										<a class="btn btn-primary" href="{{ route('buildingDetailPage:user', ['id' => $item->id]) }}">Detail</a>
 									@else
-										<a class="btn btn-primary" href="{{ route('buildingDetailWithoutLoginPage:user', ['id' => $item->id]) }}">Booking</a>
+										<a class="btn btn-primary" href="{{ route('buildingDetailWithoutLoginPage:user', ['id' => $item->id]) }}">Detail</a>
 									@endif
 								</div>
 							</div>

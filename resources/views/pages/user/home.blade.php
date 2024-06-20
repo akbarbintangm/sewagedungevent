@@ -8,24 +8,24 @@
 @endsection
 
 @section('content')
-	<div class="section section-hero section-shaped">
+	<div class="section section-shaped">
 		<div class="shape shape-style-3 shape-default">
 		</div>
 		<div class="page-header">
-			<div class="shape-container d-flex align-items-center py-lg container">
+			<div class="shape-container d-flex align-items-center py-md container">
 				<div class="col px-0">
 					<div class="row align-items-center justify-content-center">
 						<div class="col-lg-6 text-center">
-							<h1 class="display-1 text-white">People stories</h1>
-							<h2 class="display-4 font-weight-normal text-white">The time is right now!</h2>
+							<h1 class="display-1 text-white">Majestic Venue</h1>
+							<h6 class="display-5 font-weight-normal text-white">Dari pernikahan megah hingga konferensi bisnis bergengsi, kami menghadirkan ruang yang ideal untuk setiap acara. Dilengkapi dengan fasilitas mutakhir dan layanan profesional kelas dunia, kami berkomitmen menjadikan setiap momen Anda luar biasa dan tak terlupakan.</h6>
 							<div class="btn-wrapper mt-4">
 								@if (Auth::check())
 									<a class="btn btn-warning btn-icon mb-sm-0 mt-3" href="{{ route('buildingPage:user') }}">
 									@else
 										<a class="btn btn-warning btn-icon mb-sm-0 mt-3" href="{{ route('buildingWithoutLoginPage:user') }}">
 								@endif
-								<span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-								<span class="btn-inner--text">Book Now</span>
+								<span class="btn-inner--icon"><i class="fas fa-search"></i></span>
+								<span class="btn-inner--text">Cari Ruangan</span>
 								</a>
 							</div>
 						</div>
@@ -47,9 +47,9 @@
 								<p class="card-text"><b>Harga: Rp. {{ number_format($item->price, 0, ',', '.') }}</b></p>
 								<div class="d-flex justify-content-center">
 									@if (Auth::check())
-										<a class="btn btn-primary" href="{{ route('buildingDetailPage:user', ['id' => $item->id]) }}">Booking</a>
+										<a class="btn btn-primary" href="{{ route('buildingDetailPage:user', ['id' => $item->id]) }}">Detail</a>
 									@else
-										<a class="btn btn-primary" href="{{ route('buildingDetailWithoutLoginPage:user', ['id' => $item->id]) }}">Booking</a>
+										<a class="btn btn-primary" href="{{ route('buildingDetailWithoutLoginPage:user', ['id' => $item->id]) }}">Detail</a>
 									@endif
 								</div>
 							</div>

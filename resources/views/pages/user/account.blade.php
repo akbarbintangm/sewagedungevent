@@ -22,13 +22,13 @@
 						</div>
 					</div>
 					<div class="card-header pt-lg-2 pb-lg-2 mt-3 border-0 text-center">
-						<div class="d-flex justify-content-between">
-							<button class="btn btn-primary btn-sm" disabled type="button">
+						<div class="d-flex justify-content-between" style="margin-left: 33%">
+							{{-- <button class="btn btn-primary btn-sm" disabled type="button">
 								Ubah Profile
 							</button>
 							<button class="btn btn-info btn-sm" disabled type="button">
 								Pilih Foto
-							</button>
+							</button> --}}
 							<button class="btn btn-dark btn-sm" data-target="#historyTransactionModal" data-toggle="modal" onclick="reloadTable()" type="button">
 								Riwayat Transaksi
 							</button>
