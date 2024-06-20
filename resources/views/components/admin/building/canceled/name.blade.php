@@ -1,1 +1,1 @@
-<p class="text-dark font-weight-bold text mb-0 text-sm">{{ $name }}</p>
+<p class="text-dark font-weight-bold text wrap-long-words mb-0 text-sm">{{ $name }}</p>

@@ -13,18 +13,19 @@
 @endsection
 
 @section('meta-link')
+	<link href="{{ asset('/css/slick.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/slick-theme.css') }}" rel="stylesheet" />
 	<style>
-		.scrollable-images {
-			width: 100%;
-			overflow-x: auto;
-			white-space: warp;
-		}
-
+		/* .scrollable-images {
+				width: 100%;
+				overflow-x: auto;
+				white-space: warp;
+			} */
 		.scrollable-images img {
 			width: 200px;
 			height: auto;
 			display: inline-block;
-			margin-right: 10px;
+			margin-right: 0px;
 		}
 	</style>
 @endsection
@@ -144,9 +145,7 @@
 @endsection
 
 @section('script')
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+	<script type="text/javascript" src="{{ asset('/js/slick.js') }}"></script>
 	<script type="text/javascript">
 		$('.scrollable-images').slick({
 			infinite: true,

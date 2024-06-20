@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Str;
 use DataTables;
 
 class BuildingController extends Controller

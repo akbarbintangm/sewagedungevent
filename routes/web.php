@@ -67,8 +67,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/building/detail/{id}', 'buildingDetailPageUser', function() {
         clearOrRunSchedule();
     })->name('buildingDetailWithoutLoginPage:user');
-    Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDate:user');
-    Route::get('/get-bank-number/{id}', 'getBankNumberOwner')->name('getBankNumberOwner:user');
+    Route::get('/get-booking-date/{id}', 'getBookingDateUser')->name('getBookingDateNoLogin:user');
+    Route::get('/get-bank-number/{id}', 'getBankNumberOwner')->name('getBankNumberOwnerNoLogin:user');
 });
 /* Transaction No Login */
 Route::controller(TransactionController::class)->group(function () {

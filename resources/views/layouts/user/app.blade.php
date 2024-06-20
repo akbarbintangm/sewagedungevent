@@ -20,6 +20,12 @@
 	<link href="{{ asset('/css/argon-design-system.css?v=1.2.2') }}" rel="stylesheet" />
 	<link href="{{ asset('/vendor/lightgallery/css/lightgallery-bundle.min.css') }}" rel="stylesheet">
 	@yield('meta-link')
+	<style>
+		.wrap-long-words {
+			word-wrap: break-word;
+			white-space: pre-wrap;
+		}
+	</style>
 </head>
 
 <body class="landing-page">

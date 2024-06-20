@@ -20,6 +20,12 @@
 	<link href="{{ asset('/css/plugins/tagsinput.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/plugins/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 	@yield('meta-link')
+	<style>
+		.wrap-long-words {
+			word-wrap: break-word;
+			white-space: pre-wrap;
+		}
+	</style>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">

@@ -5,6 +5,21 @@
 @endsection
 
 @section('meta-link')
+	<link href="{{ asset('/css/slick.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/css/slick-theme.css') }}" rel="stylesheet" />
+	<style>
+		/* .scrollable-images {
+						width: 100%;
+						overflow-x: auto;
+						white-space: warp;
+					} */
+		.scrollable-images img {
+			width: 200px;
+			height: auto;
+			display: inline-block;
+			margin-right: 10px;
+		}
+	</style>
 @endsection
 
 @section('content')
@@ -15,33 +30,33 @@
 					<div class="col-md-8">
 						<div class="m-4">
 							<div class="scrollable-images m-4">
-								<img alt="{{ $data->picture_1 }}" id="{{ $data->picture_1 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_1) }}">
+								<img alt="{{ $data->picture_1 }}" class="pl-2 pr-2" id="{{ $data->picture_1 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_1) }}">
 								@if ($data->picture_2)
-									<img alt="{{ $data->picture_2 }}" id="{{ $data->picture_2 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_2) }}">
+									<img alt="{{ $data->picture_2 }}" class="pl-2 pr-2" id="{{ $data->picture_2 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_2) }}">
 								@endif
 								@if ($data->picture_3)
-									<img alt="{{ $data->picture_3 }}" id="{{ $data->picture_3 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_3) }}">
+									<img alt="{{ $data->picture_3 }}" class="pl-2 pr-2" id="{{ $data->picture_3 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_3) }}">
 								@endif
 								@if ($data->picture_4)
-									<img alt="{{ $data->picture_4 }}" id="{{ $data->picture_4 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_4) }}">
+									<img alt="{{ $data->picture_4 }}" class="pl-2 pr-2" id="{{ $data->picture_4 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_4) }}">
 								@endif
 								@if ($data->picture_5)
-									<img alt="{{ $data->picture_5 }}" id="{{ $data->picture_5 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_5) }}">
+									<img alt="{{ $data->picture_5 }}" class="pl-2 pr-2" id="{{ $data->picture_5 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_5) }}">
 								@endif
 								@if ($data->picture_6)
-									<img alt="{{ $data->picture_6 }}" id="{{ $data->picture_6 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_6) }}">
+									<img alt="{{ $data->picture_6 }}" class="pl-2 pr-2" id="{{ $data->picture_6 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_6) }}">
 								@endif
 								@if ($data->picture_7)
-									<img alt="{{ $data->picture_7 }}" id="{{ $data->picture_7 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_7) }}">
+									<img alt="{{ $data->picture_7 }}" class="pl-2 pr-2" id="{{ $data->picture_7 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_7) }}">
 								@endif
 								@if ($data->picture_8)
-									<img alt="{{ $data->picture_8 }}" id="{{ $data->picture_8 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_8) }}">
+									<img alt="{{ $data->picture_8 }}" class="pl-2 pr-2" id="{{ $data->picture_8 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_8) }}">
 								@endif
 								@if ($data->picture_9)
-									<img alt="{{ $data->picture_9 }}" id="{{ $data->picture_9 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_9) }}">
+									<img alt="{{ $data->picture_9 }}" class="pl-2 pr-2" id="{{ $data->picture_9 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_9) }}">
 								@endif
 								@if ($data->picture_10)
-									<img alt="{{ $data->picture_10 }}" id="{{ $data->picture_10 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_10) }}">
+									<img alt="{{ $data->picture_10 }}" class="pl-2 pr-2" id="{{ $data->picture_10 }}" src="{{ asset('rooms/' . $data->owner_email . '/' . $data->name . '/' . $data->picture_10) }}">
 								@endif
 							</div>
 						</div>
@@ -325,13 +340,11 @@
 @endsection
 
 @section('script')
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+	<script type="text/javascript" src="{{ asset('/js/slick.js') }}"></script>
 	<script type="text/javascript">
 		$('.scrollable-images').slick({
 			infinite: true,
-			slidesToShow: 3,
+			slidesToShow: 2,
 			slidesToScroll: 1
 		});
 
@@ -634,7 +647,13 @@
 		async function getAllBookingDate() {
 			showLoadingNotification();
 			try {
-				var url = '{{ route('getBookingDate:user', ['id' => ':id']) }}';
+				var url = '';
+				if (loginCheck) {
+					url = "{{ route('getBookingDate:user', ['id' => ':id']) }}";
+				} else {
+					url = "{{ route('getBookingDateNoLogin:user', ['id' => ':id']) }}";
+				}
+
 				url = url.replace(':id', idRoom);
 				const response = await axios.get(url, {
 					headers: headers,
@@ -668,7 +687,12 @@
 		async function getOwnerBank() {
 			showLoadingNotification();
 			try {
-				var url = '{{ route('getBankNumberOwner:user', ['id' => ':id']) }}';
+				var url = '';
+				if (loginCheck) {
+					url = "{{ route('getBankNumberOwner:user', ['id' => ':id']) }}";
+				} else {
+					url = "{{ route('getBankNumberOwnerNoLogin:user', ['id' => ':id']) }}";
+				}
 				url = url.replace(':id', idRoom);
 				const response = await axios.get(url, {
 					headers: headers,
